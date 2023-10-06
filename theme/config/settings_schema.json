@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "H1 Demo Store",
+    "theme_name": "Floor Tuinstra",
     "theme_version": "1.0.0",
-    "theme_author": "H1 Webdevelopment",
+    "theme_author": "PinkPaisley Designs",
     "theme_documentation_url": "https://shopify.dev/themes",
-    "theme_support_url": "https://www.h1.nl"
+    "theme_support_url": "https://www.pinkpaisleydesigns.com"
   },
   {
     "name": "Branding",
@@ -15,7 +15,7 @@
         "id": "shop_name",
         "label": "Shop name",
         "info": "The shop name is used in various visible and invisible (SEO) places.",
-        "default": "H1 Demo Store"
+        "default": "Floor Tuinstra"
       },
       {
         "type": "header",
@@ -24,14 +24,14 @@
       {
         "type": "font_picker",
         "id": "font_body",
-        "default": "poppins_n4",
+        "default": "raleway_n4",
         "label": "Body font family"
       },
       {
         "type": "font_picker",
-        "id": "font_heading",
-        "default": "poppins_n7",
-        "label": "Heading font family"
+        "id": "font_secondary",
+        "default": "lora_n4",
+        "label": "Secondary font family"
       }
     ]
   },

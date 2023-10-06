@@ -3,7 +3,7 @@
 -%}
 
 {%- capture container_content -%}
-  <div class="styleguide grid grid-cols-12 gap-base">
+  <div class="styleguide gap-base grid grid-cols-12">
 
     {% comment %} Menu {% endcomment %}
     <div class="styleguide__index sticky top-10 hidden max-h-90vh self-start overflow-auto rounded border border-dashed border-primary p-4 text-sm group-[.header-sticky:not(.header-hidden)]/body:top-20 group-[.header-sticky:not(.header-hidden)]/body:max-h-80vh
@@ -13,7 +13,7 @@
         {%- for section in style_guide_sections -%}
           {%- assign heading = section | replace: '-', ' ' | capitalize -%}
 
-          <li class="transition-all hover:pl-1">
+          <li class="hover:pl-1 transition-all">
             <a class="block" href="#styleguide-{{- section -}}">{{- heading -}}</a>
           </li>
         {%- endfor -%}
@@ -21,11 +21,11 @@
     </div>
 
     {% comment %} Content {% endcomment %}
-    <div class="styleguide__content col-span-12 divide-y lg:col-span-9">
-      <div id="intro" class="pb-10 lg:pb-16">
+    <div class="styleguide__content lg:col-span-9 col-span-12 divide-y">
+      <div id="intro" class="lg:pb-16 pb-10">
         <h1>
           {{- page.title | default: 'Styles' }}
-          | <span class="text-color-gradient">&lt;H1&gt;</span>
+          | Floor Tuinstra</span>
         </h1>
         <p>
           This page is here to show off styles and components for standard page elements such as typography, form
@@ -44,11 +44,11 @@
             assign heading = "RTE (Rich text editor)"
           endif
           if section == 'color-schemes'
-            assign instructions = "Add classs 'color-scheme color-scheme--type' to your element, where 'type' is any of the ones listed below (gradient, black, white, primary, secondary, accent, gray)"
+            assign instructions = "Add classs 'color-scheme color-scheme--type' to your element, where 'type' is any of the ones listed below (black, white, primary, secondary, accent, gray)"
           endif
         -%}
 
-        <div id="styleguide-{{- section -}}" class="style-guide__section py-10 lg:py-16">
+        <div id="styleguide-{{- section -}}" class="style-guide__section lg:py-16 py-10">
 
           <h2 class="">
             {{- heading -}}

@@ -44,14 +44,7 @@
     &--primary {
       --color-scheme-background-color: theme('colors.primary.DEFAULT');
       --color-scheme-text-color: theme('colors.primary.text');
-      --color-scheme-text-active-color: theme('colors.secondary.DEFAULT');
-    }
-    // .color-scheme--gradient
-    &--gradient {
-      --color-scheme-background-color: theme('colors.primary-gradient.DEFAULT');
-      --color-scheme-text-color: theme('colors.primary.text');
-      background-image: var(--color-scheme-background-color);
-      --color-scheme-text-active-color: theme('colors.secondary.DEFAULT');
+      --color-scheme-text-active-color: theme('colors.black');
     }
     // .color-scheme--secondary
     &--secondary {
@@ -67,7 +60,7 @@
     }
     // .color-scheme--gray
     &--gray {
-      --color-scheme-background-color: theme('colors.gray.50');
+      --color-scheme-background-color: theme('colors.gray.100');
       --color-scheme-text-color: theme('colors.black');
       --color-scheme-text-active-color: theme('colors.primary.DEFAULT');
     }
@@ -75,7 +68,6 @@
     // .color-scheme--white
     // .color-scheme--black
     // .color-scheme--secondary
-    // These use the gradient button by default
     &--white,
     &--black,
     &--secondary {
@@ -84,8 +76,23 @@
         --button-hover-text: theme('colors.primary.text');
         --button-border-color: transparent;
         --button-hover-border-color: transparent;
-        --button-background: theme('colors.primary-gradient.bg');
-        --button-hover-background: theme('colors.primary-gradient.bg-hover');
+        --button-background: theme('colors.primary.DEFAULT');
+        --button-hover-background: theme('colors.primary.600');
+        &.mobile-menu__toggle-button,
+        &.button--outline {
+          --button-background: transparent;
+          --button-hover-background: var(--color-scheme-text-active-color);
+        }
+      }
+    }
+    &--primary {
+      .button {
+        --button-text: theme('colors.white');
+        --button-hover-text: theme('colors.primary.300');
+        --button-border-color: transparent;
+        --button-hover-border-color: transparent;
+        --button-background: theme('colors.black');
+        --button-hover-background: theme('colors.black');
         &.mobile-menu__toggle-button,
         &.button--outline {
           --button-background: transparent;
@@ -106,6 +113,12 @@
       &.header-transparent-text--text-white {
         .template-index:not(.header-sticky):not(.desktop-submenu-is-open) & {
           --color-scheme-text-color: theme('colors.white');
+        }
+        .logo-text {
+          @apply fill-white;
+        }
+        .logo-line {
+          @apply stroke-white;
         }
       }
     }

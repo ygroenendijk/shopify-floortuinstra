@@ -47,7 +47,7 @@ const config = {
         inputFull: './dev/scss/main/main-base.scss',
         dest: './theme/snippets',
         rename: 'main-base-css.liquid',
-        wrapper: '@layer h1-styles-base { [[ styles ]] }',
+        wrapper: '@layer ft-styles-base { [[ styles ]] }',
         watch: ['./tailwind.config.js', './dev/scss/main/base/**/*.scss'],
         watchLiquid: false,
         watchJs: false,
@@ -57,7 +57,7 @@ const config = {
         inputFull: './dev/scss/main/main-components.scss',
         dest: './theme/snippets',
         rename: 'main-components-css.liquid',
-        wrapper: '@layer h1-styles-components { [[ styles ]] }',
+        wrapper: '@layer ft-styles-components { [[ styles ]] }',
         watch: ['./tailwind.config.js', './dev/scss/main/components/**/*.scss'],
         watchLiquid: true,
         watchJs: true,
@@ -67,7 +67,7 @@ const config = {
         inputFull: './dev/scss/main/main-utilities.scss',
         dest: './theme/snippets',
         rename: 'main-utilities-css.liquid',
-        wrapper: '@layer h1-styles-utilities { [[ styles ]] }',
+        wrapper: '@layer ft-styles-utilities { [[ styles ]] }',
         watch: ['./tailwind.config.js', './dev/scss/main/utilities/**/*.scss'],
         watchLiquid: true,
         watchJs: true,
@@ -207,7 +207,8 @@ async function bundle(type, inputOptions, outputOptions) {
         targets: `${config.dest}/**/*`,
       }),
       copy({
-        targets: [{ src: `${config.assets}/**/*`, dest: config.dest }],
+        targets: [ { src: `${config.assets}/**/*`,
+          dest: config.dest } ],
       }),
       ...inputOptions.plugins,
     ];
@@ -218,7 +219,8 @@ async function bundle(type, inputOptions, outputOptions) {
   if (config.mode == 'development') {
     // Notify when a new file is added to the assets folder
     outputOptions.plugins = [...outputOptions.plugins, notifyUpdates(type)];
-  } else {
+  }
+  else {
     // Notify when build
     notify(`Bundling ${type} assets...`);
   }
@@ -238,7 +240,8 @@ async function bundle(type, inputOptions, outputOptions) {
     if (config.mode == 'production') {
       notify(`Built ${type} assets`);
     }
-  } catch (err) {
+  }
+  catch (err) {
     // Log CSS/JS error
     notify(err);
   }
@@ -282,7 +285,7 @@ async function processCss(input) {
   // Check if one of the main stylesheets needs to be updated
   let processMain = [];
   config.scss.main.map((mainItem) => {
-    let processFile = input.map((file) => !!file.includes(mainItem.input)).filter(Boolean)[0];
+    let processFile = input.map(file => !!file.includes(mainItem.input)).filter(Boolean)[0];
     if (!processFile) {
       return;
     }
@@ -313,7 +316,7 @@ async function processCss(input) {
             },
           },
         ],
-      })
+      }),
     );
   });
 
@@ -337,10 +340,10 @@ async function processCss(input) {
 
   // Update output plugins
   (_outputOptions.sourcemap = false),
-    (_outputOptions.entryFileNames = '[name].old.js'),
-    (_outputOptions.chunkFileNames = '[name]-[hash].old.js'),
-    // Create the bundle
-    await bundle('CSS', _inputOptions, _outputOptions);
+  (_outputOptions.entryFileNames = '[name].old.js'),
+  (_outputOptions.chunkFileNames = '[name]-[hash].old.js'),
+  // Create the bundle
+  await bundle('CSS', _inputOptions, _outputOptions);
 }
 
 /*
@@ -418,7 +421,7 @@ class Watcher {
     chokidar.watch([config.liquid.files]).on('change', (file) => {
       if (this.freeze) return false;
       this.timer();
-      const isMainFile = config.scss.main.find((mainItem) => file.includes(mainItem.input));
+      const isMainFile = config.scss.main.find(mainItem => file.includes(mainItem.input));
       const mainFiles = config.scss.main.reduce((mainFiles, mainItem) => {
         if (mainItem.watchLiquid) {
           mainFiles.push(globify(mainItem.inputFull));
@@ -484,17 +487,18 @@ class Watcher {
 if (config.mode == 'development') {
   // If development mode only watch files
   const watcher = new Watcher();
-} else {
+}
+else {
   // If production mode build assets
   switch (true) {
-    case process.argv.includes('--js'):
-      processJs(globify(config.js.files));
-      break;
-    case process.argv.includes('--css'):
-      processCss(globify(config.scss.files));
-      break;
-    default:
-      processJs(globify(config.js.files));
-      processCss(globify(config.scss.files));
+  case process.argv.includes('--js'):
+    processJs(globify(config.js.files));
+    break;
+  case process.argv.includes('--css'):
+    processCss(globify(config.scss.files));
+    break;
+  default:
+    processJs(globify(config.js.files));
+    processCss(globify(config.scss.files));
   }
 }

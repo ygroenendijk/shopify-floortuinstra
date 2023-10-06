@@ -1,9 +1,4 @@
 @layer base {
-  .text-color-gradient {
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-  }
-
   class-toggle-component {
     @apply block;
   }

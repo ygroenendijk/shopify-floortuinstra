@@ -17,7 +17,6 @@
     --button-hover-background: theme('colors.secondary.400');
     --button-hover-border-color: theme('colors.secondary.400');
     --button-hover-text: theme('colors.secondary.text');
-    background: var(--button-background); // hack is needed because tailwind only outputs background-image and that doesn't work with gradients
 
     @apply relative
     inline-flex
@@ -29,6 +28,7 @@
     rounded-md
     border-2
     border-[var(--button-border-color)]
+    bg-[var(--button-background)]
     px-4
     py-3
     text-sm
@@ -73,25 +73,13 @@
   }
 
   /* Button styles */
-  .button--primary,
-  .button--gradient {
-    --button-text: theme('colors.primary.text');
-    --button-hover-text: theme('colors.primary.text');
-  }
-
   .button--primary {
-    --button-background: theme('colors.primary.600');
-    --button-border-color: theme('colors.primary.600');
-    --button-hover-border-color: theme('colors.primary.700');
-    --button-hover-background: theme('colors.primary.700');
-  }
-
-  .button--gradient {
-    @apply duration-500 ease-in;
-    --button-border-color: transparent;
-    --button-hover-border-color: transparent;
-    --button-background: theme('colors.primary-gradient.bg');
-    --button-hover-background: theme('colors.primary-gradient.bg-hover');
+    --button-background: theme('colors.primary.500');
+    --button-border-color: theme('colors.primary.500');
+    --button-text: theme('colors.primary.text');
+    --button-hover-border-color: theme('colors.primary.600');
+    --button-hover-text: theme('colors.primary.text');
+    --button-hover-background: theme('colors.primary.600');
   }
 
   .button--secondary {

@@ -1,8 +1,8 @@
 {
-  "name": "shopify-h1-demo-store",
+  "name": "floor-tuinstra",
   "version": "1.0.0",
-  "description": "H1 demo store",
-  "author": "<h1> Web development",
+  "description": "Floor Tuinstra",
+  "author": "PinkPaisley Designs",
   "license": "ISC",
   "scripts": {
     "copytemplates": "copyfiles -f dev/default_templates/templates/*.json theme/templates && copyfiles -f dev/default_templates/templates/customers/*.json theme/templates/customers && copyfiles -f dev/default_templates/sections/*.json theme/sections",
