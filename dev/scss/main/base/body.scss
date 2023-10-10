@@ -7,7 +7,8 @@
       font-body
       text-base
       not-italic
-      leading-normal;
+      leading-normal
+      text-text-default;
   }
   .content-for-layout {
     @apply flex-auto;

@@ -114,12 +114,6 @@
         .template-index:not(.header-sticky):not(.desktop-submenu-is-open) & {
           --color-scheme-text-color: theme('colors.white');
         }
-        .logo-text {
-          @apply fill-white;
-        }
-        .logo-line {
-          @apply stroke-white;
-        }
       }
     }
   }

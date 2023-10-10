@@ -21,8 +21,8 @@
       }
     '>
     {%- comment -%} Level 1 {%- endcomment -%}
-    <nav aria-label="{%- render 'render-translation', namespace: 'accessibility', key: 'desktop_menu', fallback: 'Desktop menu' -%}">
-      <ul class="header__menu-list header__menu-list--level-1 flex items-center justify-center">
+    <nav class="h-full" aria-label="{%- render 'render-translation', namespace: 'accessibility', key: 'desktop_menu', fallback: 'Desktop menu' -%}">
+      <ul class="header__menu-list header__menu-list--level-1 flex h-full items-center justify-center group-[.header-sticky]/body:justify-start">
         {%- for level_1 in menu_list.links -%}
           {%- liquid
             # Get link and fix deep link to native filters
@@ -158,11 +158,11 @@
 
             {%- comment -%} Level 1 trigger with submenu {%- endcomment -%}
             <li
-              class="header__menu-item header__menu-item--multi level-1 group/menu-item"
+              class="header__menu-item header__menu-item--multi level-1 group/menu-item h-full"
               data-collapsible-group>
               <a
                 href="{{ level_1_url }}"
-                class="{{- header_menu_link_classes }} level-1 {{ link_classes }} {% if level_1_active -%}{{ header_link_active_class }}{%- endif %}"
+                class="{{- header_menu_link_classes }} level-1 h-full {{ link_classes }} {% if level_1_active -%}{{ header_link_active_class }}{%- endif %}"
                 {%- if level_1.current %}
                   aria-current="page"
                 {% endif %}

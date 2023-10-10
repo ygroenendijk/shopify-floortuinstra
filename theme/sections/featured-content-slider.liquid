@@ -47,16 +47,22 @@
 
 {%- capture container_footer -%}
   {%- if section.settings.button_text != blank -%}
+    {%- if section.settings.button_color_scheme == 'button--pink' -%}
+      <div class="button-divider group">
+    {%- endif -%}
     <a
       {% if section.settings.button_url != blank or object.url != blank %}
         href="{{ section.settings.button_url | default: object.url }}"
       {% else %}
         disabled
       {% endif %}
-      class="button {{ section.settings.button_size }} {{ section.settings.button_color_scheme }}"
+      class="button button--lg {{ section.settings.button_size }} {{ section.settings.button_color_scheme }}"
     >
       {{- section.settings.button_text -}}
     </a>
+    {%- if section.settings.button_color_scheme == 'button--pink' -%}
+      </div>
+    {%- endif -%}
   {%- endif -%}
 {%- endcapture -%}
 
@@ -68,7 +74,7 @@
   endif
 
   # Title Class
-  assign title_class = section.settings.heading_size | append: ' ' | append: section.settings.heading_align
+  assign title_class = section.settings.heading_size | append: ' ' | append: section.settings.heading_align | append: ' ' | append: section.settings.heading_color
 -%}
 
 {%- comment -%} Render the content {%- endcomment -%}
@@ -230,6 +236,22 @@
       },
       {
         "type": "select",
+        "id": "heading_color",
+        "default": "",
+        "label": "Heading color",
+        "options": [
+          {
+            "value": "",
+            "label": "Default"
+          },
+          {
+            "value": "text-primary",
+            "label": "Primary"
+          }
+        ]
+      },
+      {
+        "type": "select",
         "id": "heading_size",
         "label": "Heading size",
         "default": "h4",
@@ -303,6 +325,10 @@
           {
             "value": "button--outline-white",
             "label": "Outline white"
+          },
+          {
+            "value": "button--pink",
+            "label": "Outline pink"
           },
           {
             "value": "button--link",
@@ -400,7 +426,7 @@
     ],
     "presets": [
       {
-        "name": "Featured collection slider"
+        "name": "Featured content slider"
       }
     ],
     "disabled_on": {

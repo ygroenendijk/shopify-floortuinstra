@@ -70,17 +70,19 @@
     endif
   -%}
 
-  <div class="{{- class -}}__image absolute inset-0">
-    {%- liquid
-      # Desktop image
-      render 'responsive-image', image_object: object.settings.image_desktop, class: image_class_desktop, max_width: max_width, lazy: lazy
+  {%- if object.settings.image_desktop -%}
+    <div class="{{- class -}}__image absolute inset-0">
+      {%- liquid
+        # Desktop image
+        render 'responsive-image', image_object: object.settings.image_desktop, class: image_class_desktop, max_width: max_width, lazy: lazy
 
-      # Mobile image
-      if image_mobile != blank
-        render 'responsive-image', image_object: image_mobile, class: image_class_mobile, max_width: 768, lazy: lazy
-      endif
-    -%}
-  </div>
+        # Mobile image
+        if image_mobile != blank
+          render 'responsive-image', image_object: image_mobile, class: image_class_mobile, max_width: 768, lazy: lazy
+        endif
+      -%}
+    </div>
+  {%- endif -%}
 
   {% comment %} Banner content {% endcomment %}
   <div

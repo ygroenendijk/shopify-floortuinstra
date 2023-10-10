@@ -58,24 +58,14 @@
           {%- liquid
             # First button
             assign button_1 = false
-            if block.settings.button_label_1 == blank or block.settings.button_url_1 == blank
+            if block.settings.button_label_1 != blank and block.settings.button_url_1 != blank
               assign button_1 = true
             endif
 
             # Second button
             assign button_2 = false
-            if block.settings.button_label_2 == blank or block.settings.button_url_2 == blank
+            if block.settings.button_label_2 != blank and block.settings.button_url_2 != blank
               assign button_2 = true
-            endif
-
-            # Desktop image
-            if block.settings.image != blank
-              render 'responsive-image', image_object: block.settings.image, aspect_ratio: block.settings.image_ratio, class: 'multi-columns__image hidden md:block object-cover', max_width: '680px', sizes: sizes
-            endif
-
-            # Mobile Image
-            if image_mobile != blank
-              render 'responsive-image', image_object: image_mobile, aspect_ratio: block.settings.image_ratio_mobile, class: 'multi-columns__image md:hidden w-full object-cover', max_width: '735px'
             endif
           -%}
 
@@ -92,6 +82,18 @@
               {{- block.settings.text -}}
             </div>
           {%- endif -%}
+
+          {%- liquid
+            # Desktop image
+            if block.settings.image != blank
+              render 'responsive-image', image_object: block.settings.image, aspect_ratio: block.settings.image_ratio, class: 'multi-columns__image hidden md:block object-cover', max_width: '680px', sizes: sizes
+            endif
+
+            # Mobile Image
+            if image_mobile != blank
+              render 'responsive-image', image_object: image_mobile, aspect_ratio: block.settings.image_ratio_mobile, class: 'multi-columns__image md:hidden w-full object-cover', max_width: '735px'
+            endif
+          -%}
 
           {%- comment -%} Buttons {%- endcomment -%}
           {%- if button_1 or button_2 -%}

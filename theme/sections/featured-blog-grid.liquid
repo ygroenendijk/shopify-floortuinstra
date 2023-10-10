@@ -99,7 +99,7 @@
   endif
 
   # Title Class
-  assign title_class = section.settings.heading_size | append: ' ' | append: section.settings.heading_align
+  assign title_class = section.settings.heading_size | append: ' ' | append: section.settings.heading_align | append: ' ' | append: section.settings.heading_color
 -%}
 
 {%- comment -%} Render the content {%- endcomment -%}
@@ -257,6 +257,22 @@
           {
             "value": "h6",
             "label": "H6"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "heading_color",
+        "default": "",
+        "label": "Heading color",
+        "options": [
+          {
+            "value": "",
+            "label": "Default"
+          },
+          {
+            "value": "text-primary",
+            "label": "Primary"
           }
         ]
       },

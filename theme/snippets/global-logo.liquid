@@ -1,14 +1,14 @@
 {% liquid
   unless text_color
-    assign text_color = 'fill-black'
+    assign text_color = 'fill-black group-[.color-scheme--primary]/header-component:fill-white group-[.desktop-submenu-is-open]/body:fill-black group-[.header-transparent-text--text-white]/header-component:fill-white'
   endunless
 
   unless line_color
-    assign line_color = 'stroke-black'
+    assign line_color = 'stroke-black group-[.desktop-submenu-is-open]/body:stroke-black group-[.header-transparent-text--text-white]/header-component:stroke-white'
   endunless
 
   unless bg_color
-    assign bg_color = 'fill-primary'
+    assign bg_color = 'fill-primary group-[.header-transparent-text--text-white]/header-component:fill-primary'
   endunless
 -%}
 

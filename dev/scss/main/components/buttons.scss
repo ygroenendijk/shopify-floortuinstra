@@ -100,6 +100,22 @@
     --button-hover-text: theme('colors.white');
   }
 
+  .button--pink {
+    --button-background: theme('colors.white');
+    --button-border-color: theme('colors.accent.DEFAULT');
+    --button-text: theme('colors.accent.DEFAULT');
+    --button-hover-background: theme('colors.white');
+    --button-hover-border-color: theme('colors.primary.DEFAULT');
+    --button-hover-text: theme('colors.primary.DEFAULT');
+    @apply mx-auto block w-fit rounded-full;
+  }
+  .button-divider {
+    @apply relative my-10;
+    &:after {
+      @apply absolute left-0 top-[50%] -z-10 w-full -translate-y-[50%] border-b border-accent content-empty;
+    }
+  }
+
   .button--outline-white {
     --button-background: transparent;
     --button-border-color: theme('colors.white');

@@ -1,0 +1,401 @@
+<style>
+  .quote:before {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 57.6 39.7' xml:space='preserve'%3E%3Cpath d='M24.5 11.8c-3.6.8-6.8 2.3-9.4 4.9 5.3.3 9.6 4.4 9.6 9.9 0 6.5-4.7 11.2-11.2 11.2-7.1 0-11.8-6.3-11.8-13.1 0-11.9 12.3-20 22.8-22.3v9.4zm31.5 0c-3.6.8-6.8 2.3-9.4 4.9 5.3.3 9.6 4.4 9.6 9.9 0 6.5-4.7 11.2-11.2 11.2-7.1 0-11.8-6.3-11.8-13.1-.1-11.9 12.2-20 22.8-22.3v9.4z' fill='%23e8a6a6'/%3E%3C/svg%3E")
+      no-repeat center;
+  }
+  .quote:after {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 57.6 39.7' xml:space='preserve'%3E%3Cpath d='M2.2 28.4c3.6-.8 6.8-2.3 9.4-4.9-5.4-.3-9.6-4.3-9.6-9.8C2 7.2 6.7 2.5 13.2 2.5 20.3 2.5 25 8.8 25 15.6c0 11.8-12.3 19.9-22.8 22.2v-9.4zm31.4 0c3.6-.8 6.8-2.3 9.4-4.9-5.3-.3-9.6-4.4-9.6-9.9 0-6.5 4.7-11.2 11.2-11.2 7.1 0 11.8 6.3 11.8 13.1 0 11.8-12.3 19.9-22.8 22.2v-9.3z' fill='%23e8a6a6'/%3E%3C/svg%3E")
+      no-repeat center;
+  }
+</style>
+
+{%- liquid
+  # Check if this section should be a swiper
+  assign is_slider = false
+  if section.blocks.size > 1
+    assign is_slider = true
+  endif
+
+  # Import styles and set indicator class
+  if is_slider
+    render 'import-styles', file_name: 'component-swiper.css'
+  endif
+
+  # Image assigns
+  assign max_width = null
+  if section.settings.container_width == ''
+    assign max_width = 1360
+  endif
+-%}
+
+{%- capture swiper_options -%}
+  data-options='{
+    "sectionID": "{{ section.id }}",
+    "loop": true,
+    "pauseOnMouseEnter": true,
+    "speed": 1000,
+    {%- if section.settings.swiper_autoplay %}
+      "autoplay": {
+        "delay": {{ section.settings.swiper_autoplay_delay | default: 7500 }}
+      },
+    {%- endif %}
+    {%- if section.settings.swiper_navigation %}
+      "navigation": {
+        "nextEl": ".swiper-button-next-{{ section.id }}",
+        "prevEl": ".swiper-button-prev-{{ section.id }}"
+      },
+    {%- endif %}
+    {%- if section.settings.swiper_pagination %}
+      "pagination": {
+        "el": ".swiper-pagination-{{ section.id }}",
+        "type": "bullets", "clickable": true
+      },
+    {%- endif %}
+    "slidesPerView": 1
+  }'
+{%- endcapture -%}
+
+{%- comment -%} Capture container content {%- endcomment -%}
+{%- capture container_content -%}
+  <swiper-slider {% if is_slider -%}{{ swiper_options }}{%- endif -%}>
+    {% comment %} Background image {% endcomment %}
+    {%- liquid
+      assign image_class = 'h-full w-full object-cover'
+      assign image_class_desktop = image_class | append: ' hidden md:block'
+      assign image_class_mobile = image_class | append: ' md:hidden'
+
+      # Assign mobile image
+      assign image_mobile = section.settings.image_desktop
+      if section.settings.image_mobile != blank
+        assign image_mobile = section.settings.image_mobile
+      endif
+    -%}
+
+    {%- if section.settings.image_desktop -%}
+      <div class="quote-slider__image inset-0 md:absolute {{ section.settings.min_ratio_mobile }} {{ section.settings.min_ratio_tablet }}">
+        {%- liquid
+          # Desktop image
+          render 'responsive-image', image_object: section.settings.image_desktop, class: image_class_desktop, max_width: max_width, lazy: lazy
+
+          # Mobile image
+          if image_mobile != blank
+            render 'responsive-image', image_object: image_mobile, class: image_class_mobile, max_width: 768, lazy: lazy
+          endif
+        -%}
+      </div>
+    {%- endif -%}
+
+    <div class="swiper relative max-w-screen" data-swiper>
+      <div class="swiper-wrapper flex">
+        {%- liquid
+          assign lazy = true
+          if section.index == 1
+            assign lazy = false
+          endif
+        -%}
+
+        {%- for block in section.blocks -%}
+          {%- if forloop.index >= 2 -%}
+            {%- assign lazy = true -%}
+          {%- endif -%}
+
+          {%- assign quote_class = 'before:content-empty before:block before:w-6 before:h-6 before:absolute after:content-empty after:block after:w-6 after:h-6 after:absolute before:-left-6 before:-top-6 after:-right-6 after:-bottom-6' -%}
+
+          {%- if block.settings.text != blank -%}
+            <div class="swiper-slide flex items-center justify-center {{ section.settings.min_ratio_tablet }}" {{ block.shopify_attributes }}>
+              <div class="quote relative h-max w-full max-w-screen md:max-w-xl {{ quote_class }} {{ block.settings.text_align }} {{ block.settings.text_color }} w-full bg-white/80">
+                <div class="quote__text p-4">
+                  {{ block.settings.text }}
+                </div>
+                {%- if block.settings.quote_name != blank -%}
+                  <div class="quote__name p-4 text-end">
+                    {{ block.settings.quote_name }}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {% comment %} Navigation and pagination {% endcomment %}
+      {%- if is_slider -%}
+        {% comment %} Navigation {% endcomment %}
+        {%- if section.settings.swiper_navigation %}
+          <button
+            class="swiper-button-prev swiper-button-prev-{{ section.id }} "
+            aria-label="{% render "render-translation", namespace: "accessibility", key: "previous_slide", fallback: "Previous slide" %}"
+          >
+            {%- render 'icons', icon: 'chevron-left', icon_class: 'w-5' -%}
+          </button>
+          <button
+            class="swiper-button-next swiper-button-next-{{ section.id }} "
+            aria-label="{% render "render-translation", namespace: "accessibility", key: "next_slide", fallback: "Next slide" %}"
+          >
+            {%- render 'icons', icon: 'chevron-right', icon_class: 'w-5' -%}
+          </button>
+        {%- endif %}
+
+        {% comment %} Pagination {% endcomment %}
+        {%- if section.settings.swiper_pagination %}
+          <div class="swiper-pagination swiper-pagination-{{ section.id }} flex justify-center"></div>
+        {%- endif %}
+      {%- endif -%}
+    </div>
+  </swiper-slider>
+{%- endcapture -%}
+
+{%- comment -%} Import javascript {%- endcomment -%}
+{%- if is_slider -%}
+  <script src="{{ 'swiper-slider.js' | asset_url }}" type="module"></script>
+{%- endif -%}
+
+{%- liquid
+  # Container width
+  assign container_class = 'quote-slider ' | append: section.settings.container_width | append: ' ' | append: section.settings.min_ratio_tablet
+
+  # Remove y margin if section is full width
+  if section.settings.container_width == 'container--full'
+    assign container_class = container_class | append: ' my-0'
+  endif
+-%}
+
+{%- comment -%} Render the content {%- endcomment -%}
+{%- render 'render-container-content', content: container_content, class: container_class, content_class: 'relative flex place-content-center' -%}
+
+{% schema %}
+  {
+    "name": "Quote slider",
+    "tag": "section",
+    "class": "quote-slider-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Layout settings"
+      },
+      {
+        "type": "select",
+        "id": "container_width",
+        "label": "Section width",
+        "default": "",
+        "options": [
+          {
+            "value": "",
+            "label": "Default"
+          },
+          {
+            "value": "container--wide",
+            "label": "Wide"
+          },
+          {
+            "value": "container--full",
+            "label": "Full"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Image settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_desktop",
+        "label": "Desktop image",
+        "info": "Screens larger than 768px. Max. size: 4472 x 4472 px (20MB)."
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Mobile image",
+        "info": "Screens smaller than 768px. Max. size: 4472 x 4472 px (20MB)."
+      },
+      {
+        "type": "checkbox",
+        "id": "image_lazy",
+        "label": "Lazyload image",
+        "default": true,
+        "info": "Disable this only if the image is part of the [Largest Contentful Paint](https://web.dev/lcp/)"
+      },
+      {
+        "type": "header",
+        "content": "Image aspect ratio"
+      },
+      {
+        "type": "select",
+        "id": "min_ratio_tablet",
+        "label": "Tablet and up",
+        "info": "Only applies to devices larger than 768 pixels.",
+        "default": "md:aspect-[16/9]",
+        "options": [
+          {
+            "value": "",
+            "label": "Default (same as mobile)"
+          },
+          {
+            "value": "md:aspect-[1/1]",
+            "label": "Square"
+          },
+          {
+            "value": "md:aspect-[2/1]",
+            "label": "2x1",
+            "group": "Landscape"
+          },
+          {
+            "value": "md:aspect-[4/3]",
+            "label": "4x3",
+            "group": "Landscape"
+          },
+          {
+            "value": "md:aspect-[5/2]",
+            "label": "5x2",
+            "group": "Landscape"
+          },
+          {
+            "value": "md:aspect-[16/9]",
+            "label": "16x9",
+            "group": "Landscape"
+          },
+          {
+            "value": "md:aspect-[3/4]",
+            "label": "3x4",
+            "group": "Portrait"
+          },
+          {
+            "value": "md:aspect-[9/16]",
+            "label": "9x16",
+            "group": "Portrait"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Swiper settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "swiper_navigation",
+        "label": "Navigation",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "swiper_pagination",
+        "label": "Pagination",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "swiper_autoplay",
+        "label": "Enable autoplay",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "swiper_autoplay_delay",
+        "label": "Autoplay delay",
+        "default": 7500,
+        "info": "Delay between transitions (in ms)"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "quote",
+        "name": "Quote",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Content settings"
+          },
+          {
+            "type": "select",
+            "id": "content_color_scheme",
+            "label": "Text background",
+            "default": "",
+            "options": [
+              {
+                "value": "",
+                "label": "Default"
+              },
+              {
+                "value": "color-scheme color-scheme--primary",
+                "label": "Primary",
+                "group": "Theme"
+              },
+              {
+                "value": "color-scheme color-scheme--secondary",
+                "label": "Secondary",
+                "group": "Theme"
+              },
+              {
+                "value": "color-scheme color-scheme--accent",
+                "label": "Accent",
+                "group": "Theme"
+              },
+              {
+                "value": "color-scheme color-scheme--gray",
+                "label": "Gray",
+                "group": "Standard"
+              },
+              {
+                "value": "color-scheme color-scheme--black",
+                "label": "Black",
+                "group": "Standard"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "text_align",
+            "label": "Text align",
+            "default": "text-center",
+            "options": [
+              {
+                "value": "text-start",
+                "label": "Left"
+              },
+              {
+                "value": "text-center",
+                "label": "Center"
+              },
+              {
+                "value": "text-end",
+                "label": "Right"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Quote settings"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>The quote.</p>"
+          },
+          {
+            "type": "richtext",
+            "id": "quote_name",
+            "label": "Name"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Quote slider",
+        "blocks": [
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+      "groups": ["header"]
+    }
+  }
+{% endschema %}

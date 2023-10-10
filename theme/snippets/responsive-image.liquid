@@ -48,12 +48,14 @@
     assign custom_aspect_ratio = true
   endunless
 
-  if class
-    unless class contains 'object-cover'
-      assign class = class | append: ' object-contain'
-    endunless
-  else
-    assign class = 'object-contain'
+  unless figcaption == true
+    assign figcaption = false
+  endunless
+
+  assign image_fit = 'object-contain'
+  if class contains 'object-cover'
+    assign image_fit = 'object-cover' | append: ' h-full'
+    assign class = class | remove: 'object-cover'
   endif
 -%}
 
@@ -181,7 +183,7 @@
 {%- if lazy != blank -%}
   {{ image_url | image_tag:
       alt: alt,
-      class: class,
+      class: image_fit,
       crop: crop,
       loading: lazy_load,
       height: height,
@@ -196,7 +198,7 @@
   {% comment %} Let Shopify determine lazy loading {% endcomment %}
   {{ image_url | image_tag:
       alt: alt,
-      class: class,
+      class: image_fit,
       crop: crop,
       height: height,
       sizes: sizes,
@@ -209,16 +211,14 @@
   {%- endif -%}
 {%- endcapture -%}
 
-{%- if figcaption == blank -%}
+<figure
+  {% if class != blank %}
+    class="{{- class -}}"
+  {% endif %}>
   {{ image_element }}
-{%- else -%}
-  <figure
-    {% if figure_class != blank %}
-      class="{{- figure_class -}}"
-    {% endif %}>
-    {{ image_element }}
-    <figcaption>
-      {{- figcaption -}}
+  {%- if figcaption -%}
+    <figcaption class="pt-1 text-sm italic ">
+      {{- image_object.alt -}}
     </figcaption>
-  </figure>
-{%- endif -%}
+  {%- endif -%}
+</figure>
