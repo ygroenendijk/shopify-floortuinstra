@@ -83,9 +83,11 @@ class SwiperSlider extends HTMLElement {
     // Default to improve user experience
     this.swiperOptions = {
       observer: true,
+      threshold: 10,
       isRecommendations: false,
       modules: [A11y, Navigation, Pagination, Scrollbar, Autoplay],
       destroyAfter: false,
+      hasVideo: false,
     };
 
     // Check if we have extra options on the HTML
@@ -125,6 +127,33 @@ class SwiperSlider extends HTMLElement {
       this.init();
     }
 
+    // When the swiper has video
+    if (this.swiperOptions.hasVideo) {
+      this.debouncedOnLoad = debounce((event) => {
+        this.swiperObserver(event.type);
+      }, 100);
+
+      // check if the swiper is visible
+      window.addEventListener('load', this.debouncedOnLoad.bind(this));
+
+      window.addEventListener('scroll', this.debouncedOnLoad.bind(this));
+
+      // when the swiper contains a video, pause it when it's swiped out and play it if it's swiped into view and has autoplay enabled
+      this.swiperInstance.on('slideChangeTransitionEnd', (swiper) => {
+        console.log('slideChangeTransitionEnd');
+        const previousSlide = swiper.slides[swiper.previousIndex];
+        const previousSlideType = previousSlide.dataset.swiperVideoType;
+        const previousVideo = previousSlide.querySelector(previousSlideType);
+
+        const currentSlide = swiper.slides[swiper.activeIndex];
+        const currentSlideType = currentSlide.dataset.swiperVideoType;
+        const currentVideo = currentSlide.querySelector(currentSlideType);
+
+        if (previousVideo && !this.getPausedState(previousVideo, previousSlideType)) previousVideo.pauseVideo();
+        if (currentVideo && currentVideo.options.autoplay && this.getPausedState(currentVideo, currentSlideType) && currentVideo.dataset.videoIsPaused !== 'true') currentVideo.playVideo();
+      });
+    }
+
     // Listen to extra events when in Shopify editor
     if (Shopify.designMode) {
       // Update the swiper when the section event is triggered
@@ -136,6 +165,41 @@ class SwiperSlider extends HTMLElement {
       // When on block deselect go to the slide in front-end
       window.addEventListener('shopify:block:deselect', event => this.handleBlockSelect(event));
     }
+  }
+
+  getPausedState(video, type) {
+    switch (type) {
+    case 'youtube-video':
+      return video.player.getPlayerState() !== 1;
+    case 'vimeo-video':
+      return video.paused;
+    case 'custom-video':
+      return video.videoElement.paused;
+    }
+  };
+
+  swiperObserver() {
+    if (!this.swiperInstance) return;
+
+    // Register IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const elementBounds = entry.boundingClientRect;
+        const isBottomVisible = !!(elementBounds.bottom < window.innerHeight) && elementBounds.bottom;
+        const isTopVisible = !!(elementBounds.top > 0) && elementBounds.top;
+
+        const swiper = this.swiperInstance;
+        const currentSlide = swiper.slides[swiper.activeIndex];
+        const currentSlideType = currentSlide.dataset.swiperVideoType;
+        const currentVideo = currentSlide.querySelector(currentSlideType);
+
+        if (isBottomVisible && isTopVisible || entry.isIntersecting && entry.intersectionRatio > 0.9) {
+          if (currentVideo && currentVideo.options.autoplay) currentVideo.playVideo();
+        }
+        else if (!this.getPausedState(currentVideo, currentSlideType)) currentVideo.pauseVideo();
+      });
+    });
+    observer.observe(this);
   }
 
   init(event = null, updateSwiper = false) {

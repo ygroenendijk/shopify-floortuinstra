@@ -2,45 +2,37 @@ class CartDrawer extends HTMLElement {
   constructor() {
     super();
 
-    this.drawer = this;
     this.body = document.querySelector('body');
     this.activeClass = window.drawerToggleClasses.cartDrawer;
     this.cartIconBubble = document.querySelectorAll('[aria-controls="cartDrawer"]');
-
-    this.drawer.addEventListener('keyup', event => event.code === 'Escape' && this.close());
-
-    // Listen for the class-toggle-component close event, since this triggers the cart drawer to close
-    document.addEventListener('toggle-closed', (event) => {
-      if (event.detail.id === 'cartDrawer') {
-
-        // Close all quick shops in the cartDrawer
-        if (this.querySelector('quick-shop')) {
-          this.querySelector('quick-shop').closePopups();
-        }
-      }
-    });
   }
 
   /**
-   * open the drawer, called after an item is added to the cart from the product-form-component.js and the settings say to open the drawer
+   * called after an item is added to the cart from the product-form-component.js and the settings say to open the drawer
+   * @param {Object} trigger, is passed on from product-form-component, in case there was an add from quickshop
    */
-  open() {
+  open(trigger = null) {
+    const drawer = this.querySelector('#cartDrawer');
     this.body.classList.add(this.activeClass);
     this.cartIconBubble.forEach(button => button.setAttribute('aria-expanded', true));
 
-    trapFocus(this.drawer);
+    // add the eventListener to close on ESC key
+    drawer.addEventListener('keyup', event => event.code === 'Escape' && this.close(trigger));
+
+    addPreventScroll();
+    trapFocus(drawer);
   }
 
-  close() {
+  /**
+   * called after an item is added to the cart from the product-form-component.js and the ESC key was used to close the drawer
+   * @param {Object} trigger, is passed on from product-form-component, in case there was an add from quickshop
+   */
+  close(trigger = null) {
     this.body.classList.remove(this.activeClass);
     this.cartIconBubble.forEach(button => button.setAttribute('aria-expanded', false));
 
-    // Close all quick shops in the cartDrawer
-    if (this.querySelector('quick-shop')) {
-      this.querySelector('quick-shop').closePopups();
-    }
-
-    removeTrapFocus();
+    removePreventScroll();
+    removeTrapFocus(trigger);
   }
 
   /**
@@ -48,7 +40,9 @@ class CartDrawer extends HTMLElement {
    * @param {Object} parsedState, passed after an item is added to the cart from the product-form-component.js
    */
   renderContents(parsedState) {
-    this.getSectionsToRenderForCartNotification().forEach((section) => {
+    if (!('sections' in parsedState)) return;
+
+    this.getSectionsToRender().forEach((section) => {
       if (section?.selector) {
         const selector = document.querySelector(section.selector);
 
@@ -65,36 +59,24 @@ class CartDrawer extends HTMLElement {
    * When there is an error for the quantity that is being added, the max quantity still gets added, so we have to update the sections.
    */
   async renderCartDrawer() {
-    const cartDrawerContent = `${window.location.pathname}?section_id=cart-drawer`;
-    const cartIconBubbleContent = `${window.location.pathname}?section_id=theme-cart-icon-bubble`;
+    const body = JSON.stringify( {
+      sections: this.getSectionsToRender().map(section => section.section),
+      sections_url: window.location.pathname,
+    });
+    const response = await fetch(routes.cart_update_url, {
+      ...fetchConfig('javascript'),
+      ...{ body },
+    });
 
-    fetch(cartDrawerContent)
-      .then(response => response.text())
-      .then((responseText) => {
-        const html = responseText;
-
-        document.querySelector('#cartDrawer').innerHTML = this.getSectionInnerHTML(html, '#cartDrawer');
-      })
-      .catch((error) => {
-        throw error;
-      });;
-
-    fetch(cartIconBubbleContent)
-      .then(response => response.text())
-      .then((responseText) => {
-        const html = responseText;
-        document.querySelector('#cart-icon-bubble').innerHTML= this.getSectionInnerHTML(html, '#cart-icon-bubble');
-      })
-      .catch((error) => {
-        throw error;
-      });
+    const parsedState = await response.json();
+    this.renderContents(parsedState);
   }
 
   /**
-   * getSectionsToRenderForCartNotification:
+   * getSectionsToRender:
    * @returns the sections to be rendered after an item is added to the cart from the product-form-component.js.
    */
-  getSectionsToRenderForCartNotification() {
+  getSectionsToRender() {
     return [
       {
         id: 'cart-drawer',

@@ -113,9 +113,9 @@
             {%- endfor -%}
 
             {% comment %} Recommendations slider {% endcomment %}
-            <div class="js-cart-drawer-recommendations-swiper">
+            <div class="js-cart-related-items-swiper">
               {%- capture recommendations -%}
-                {%- render 'cart-drawer-recommendations', section: section, is_swiper: true -%}
+                {%- render 'cart-related-items', section: section, is_swiper: true -%}
               {%- endcapture -%}
 
               {% comment %} Items {% endcomment %}
@@ -215,11 +215,6 @@
                   id="CartDrawer-Form"
                   class="cart__contents cart-drawer__form"
                   method="post">
-                  <noscript>
-                    <button type="submit" class="button button--primary w-full">
-                      {%- render 'render-translation', namespace: 'sections.cart', key: 'update', fallback: 'Update' -%}
-                    </button>
-                  </noscript>
                   <button
                     type="submit"
                     class="button button--primary button--lg w-full"
@@ -249,10 +244,10 @@
       <div
         id="main-cart-recommendations"
         data-id="{{ section.id }}">
-        <div class="js-cart-drawer-recommendations">
+        <div class="js-cart-related-items">
           {% comment %} Recommendations {% endcomment %}
           {%- capture recommendations -%}
-            {%- render 'cart-drawer-recommendations', section: section -%}
+            {%- render 'cart-related-items', section: section -%}
           {%- endcapture -%}
 
           <div class="cart-recommendations sticky top-0 hidden h-screen overflow-y-auto overflow-x-hidden {% if recommendations == blank -%}hidden{% else %}sm:block{%- endif %}">
@@ -276,7 +271,7 @@
 
   {%- comment -%} Import javascript {%- endcomment -%}
   <script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
-  <script src="{{ 'cart.js' | asset_url }}" defer></script>
+  <script src="{{ 'cart-items.js' | asset_url }}" defer></script>
   {%- if section.settings.show_recommendations -%}
     <script src="{{ 'swiper-slider.js' | asset_url }}" type="module"></script>
   {%- endif -%}

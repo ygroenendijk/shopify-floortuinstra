@@ -14,7 +14,8 @@
 <div
   id="mobileMenu"
   class="mobile-menu lg:hidden {{ section.settings.color_scheme }}"
-  role="dialog">
+  role="dialog"
+  aria-label="{%- render 'render-translation', namespace: 'accessibility', key: 'mobile_menu', fallback: 'Mobile menu' -%}">
   <collapsible-component
     class="
       mobile-menu__inner
@@ -59,7 +60,7 @@
           '>
           <button
             type="button"
-            class="mobile-menu__toggle-button button relative cursor-pointer rounded-full border-0 p-3 text-inherit bg-transparent">
+            class="mobile-menu__toggle-button button relative cursor-pointer rounded-full border-0 p-3 bg-transparent">
             {%- render 'icons', icon: 'close', icon_class: 'w-6' -%}
           </button>
         </class-toggle-component>

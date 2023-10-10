@@ -123,16 +123,9 @@
     {{ product_object.title -}}
   </a>
 
-  <header>
+  <header class="product-card__header">
     {%- comment -%} Product images {%- endcomment -%}
     <div class="product-card__images relative px-4 group-[.color-scheme]/color-scheme:pt-4">
-      {%- liquid
-        # Render quick shop
-        if show_quick_shop
-          render 'quick-shop', product: product_object, quick_shop_render_second_option: quick_shop_render_second_option
-        endif
-      -%}
-
       {%- comment -%} Render image with hover {%- endcomment -%}
       <a
         class="product-card__image relative block {% unless product_object.available -%}opacity-50 saturate-50{%- endunless %} {% unless show_secondary_image %}transition-all states:scale-105{%- endunless -%}"
@@ -200,30 +193,22 @@
     </a>
   </header>
 
-  <footer class="flex h-full flex-col items-center justify-end gap-2 text-center">
+  <footer class="product-card__footer flex h-full flex-col items-center justify-end gap-2 text-center">
     {% comment %} Render formatted price {% endcomment %}
     {% render 'render-price', product: product_object %}
 
-    <div class="flex gap-base">
+    <div class="product-card__quickshop flex gap-4">
       {% comment %} ATC button to display the options {% endcomment %}
       {%- if show_quick_shop -%}
-        {% comment %} Show quick_shop button {% endcomment %}
-        {%- liquid
-          assign quick_shop_button_classes = 'hidden'
-          if view == 'alt'
-            assign quick_shop_button_classes = 'block no-touch:md:hidden'
-          endif
-        -%}
-        <button
-          type="button"
-          class="button button--primary quick-shop__btn-add relative z-20 mx-auto {{ quick_shop_button_classes }}"
-          data-quick-shop-toggle>
-          {%- render 'render-translation', namespace: 'products.product', key: 'add_to_cart', fallback: 'Add to cart' -%}
-        </button>
+        {% comment %} Render quick shop {% endcomment %}
+        {%- render 'quick-shop', product: product_object, quick_shop_render_second_option: quick_shop_render_second_option, unique_identifier: product.handle -%}
       {% endif %}
 
       {% comment %} Link to PDP {% endcomment %}
-      <a href="{{ product_object.url }}" class="button button--outline mx-auto rounded-full p-2 touch:p-3" tabindex="-1">
+      <a
+        href="{{ product_object.url }}"
+        class="product-card__link button button--secondary button--outline mx-auto rounded-full touch:h-12 touch:w-12 touch:p-3 no-touch:h-10 no-touch:w-10 no-touch:p-2"
+        tabindex="-1">
         {%- render 'icons', icon: 'arrow', icon_class: 'w-5' -%}
         <span class="sr-only">
           {%- render 'render-translation', namespace: 'products.product', key: 'go_to_product', fallback: 'Go to product page' -%}

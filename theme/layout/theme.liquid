@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js no-touch" lang="{{ request.locale.iso_code }}" dir="ltr">
+<html class="no-js no-touch group/html" lang="{{ request.locale.iso_code }}" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,7 +32,10 @@
 
     {%- sections 'header-group' %}
 
-    {%- render 'cart-notification' -%}
+    {%- liquid
+      # always render the cart notification, because it will display the quantity error
+      render 'cart-notification'
+    -%}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}

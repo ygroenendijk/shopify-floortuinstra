@@ -62,7 +62,7 @@ if (!customElements.get('class-toggle-component')) {
       }
 
       // prevent scroll for any of the modals
-      if (this.targetID !== null) this.preventBackgroundScroll = true;
+      if (this.targetID) this.preventBackgroundScroll = true;
 
       // All toggle components should have a button for accessibility purposes
       this.button = document.querySelector(`[aria-controls="${this.targetID}"`) || this.querySelector('button') || null;
@@ -136,7 +136,11 @@ if (!customElements.get('class-toggle-component')) {
 
     keyUpCloseEvent(event) {
       if (event?.code?.toUpperCase() !== 'ESCAPE') return;
-      this.remove();
+
+      // don't close when a fancybox is open
+      if (!document.documentElement.classList.contains('with-fancybox')) {
+        this.remove();
+      }
 
       removeTrapFocus(this.button);
     }

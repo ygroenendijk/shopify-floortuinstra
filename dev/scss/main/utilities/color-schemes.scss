@@ -24,9 +24,6 @@
     *::marker {
       @apply text-[var(--color-scheme-text-active-color)];
     }
-    .button--outline {
-      @apply states:bg-[var(--color-scheme-text-active-color)];
-    }
 
     // .color-scheme--black
     &--black {
@@ -72,7 +69,6 @@
     &--black,
     &--secondary {
       .button {
-        --button-text: theme('colors.primary.text');
         --button-hover-text: theme('colors.primary.text');
         --button-border-color: transparent;
         --button-hover-border-color: transparent;
