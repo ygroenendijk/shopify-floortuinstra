@@ -1,7 +1,6 @@
 {% # prettier-ignore %}
 
 <script>
-
   window.routes = {
     cart_url: '{{ routes.cart_url }}',
     cart_add_url: '{{ routes.cart_add_url }}',
@@ -26,9 +25,8 @@
     moneyFormat: "{{ shop.money_format }}",
     moneyWithCurrencyFormat: "{{ shop.money_with_currency_format }}"
   }
-
 </script>
 
-<script src="{{ 'variants.js' | asset_url }}" defer></script>
-<script src="{{ 'product-form-component.js' | asset_url }}" defer></script>
+{%- comment -%} Import javascript {%- endcomment -%}
 <script src="{{ 'quick-shop.js' | asset_url }}" type="module"></script>
+<script src="{{ 'product-form-component.js' | asset_url }}" defer></script>

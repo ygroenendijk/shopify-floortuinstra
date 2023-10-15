@@ -8,3 +8,58 @@
     @apply hidden;
   }
 }
+
+// outside of a layer so it has the highest priority and we have to overwrite the app
+
+// reviews.io styling for product reviews to hide the 'no reviews' text when the form is visible
+.ElementsWidget__inner:has(.ElementsWidget__form.isActive) {
+  .ElementsWidget__list:has(> .u-textCenter--all) {
+    @apply hidden;
+  }
+}
+
+// reviews vars
+.ElementsWidget-prefix .ElementsWidget {
+  --heading-text-color: var(--color-scheme-text-color), theme('colors.text-default');
+  --heading-text-font-family: var(--font-heading-family);
+
+  --body-text-font-family: var(--font-body-family);
+  --body-text-color: var(--color-scheme-text-color), theme('colors.text-default');
+
+  --common-border-color: theme('colors.gray.100');
+
+  --inputfield-background-color: theme('colors.gray.100');
+  --inputfield-text-color: theme('colors.black');
+  --inputfield-border-color: transparent;
+
+  --pagination-tab-active-text-color: var(--color-scheme-text-active-color), theme('colors.text-default');
+  --pagination-tab-active-border-color: var(--color-scheme-text-active-color), theme('colors.text-default');
+  --common-star-color: #eec909;
+  --common-star-disabled-color: ##e3e3e3;
+
+  --pagination-tab-text-color: var(--color-scheme-text-color), theme('colors.text-default');
+  --avatar-thumbnail-text-color: var(--color-scheme-text-color), theme('colors.text-default');
+  --slider-indicator-button-color: var(--color-scheme-text-color), theme('colors.text-default');
+
+  --primary-button-bg-color: var(--button-background), theme('colors.secondary.DEFAULT');
+  --primary-button-text-color: var(--button-text), theme('colors.secondary.text');
+  --primary-button-border-color: var(--button-border-color), theme('colors.secondary.DEFAULT');
+
+  .color-scheme:not(.color-scheme--white) & {
+    --inputfield-background-color: theme('colors.white');
+  }
+  .color-scheme--gray & {
+    --common-border-color: theme('colors.gray.300');
+  }
+  .R-Button--secondary {
+    color: var(--color-scheme-text-color);
+  }
+  .R-Button--primary {
+    background: var(--color-scheme-text-active-color);
+    color: var(--button-text);
+  }
+  .R-DropUpDownMenu {
+    background-color: theme('colors.white');
+    color: theme('colors.black');
+  }
+}
