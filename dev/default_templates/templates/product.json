@@ -93,5 +93,5 @@
       }
     }
   },
-  "order": ["breadcrumbs", "main", "product-recommendations"]
+  "order": ["breadcrumbs", "main-product", "product-recommendations"]
 }

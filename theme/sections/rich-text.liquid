@@ -1,15 +1,17 @@
 {%- capture container_content -%}
-  <div class="rich-text space-y-4 {{ section.settings.text_alignment }}">
+  <div class="rich-text {{ section.settings.text_alignment }}">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
-        {%- when 'heading' -%}
-          <{{ block.settings.heading_element }} class="rich-text__title mb-1 {{ block.settings.heading_color }} {{ block.settings.heading_size }} {{ block.settings.title_width_layout -}}" {{ block.shopify_attributes -}}>
-            {{- block.settings.heading -}}
-          </{{ block.settings.heading_element }}>
-        {%- when 'text' -%}
-          <div class="rich-text__text rte mx-auto {{ block.settings.text_width_layout }}" {{ block.shopify_attributes -}}>
-            {{- block.settings.text | replace: '<h3>', '<h3 class="font-secondary mt-0 mb-1 text-lg">' -}}
-          </div>
+        <div class="space-y-4">
+          {%- when 'heading' -%}
+            <{{ block.settings.heading_element }} class="rich-text__title mb-1 {{ block.settings.heading_color }} {{ block.settings.heading_size }} {{ block.settings.title_width_layout -}}" {{ block.shopify_attributes -}}>
+              {{- block.settings.heading -}}
+            </{{ block.settings.heading_element }}>
+          {%- when 'text' -%}
+            <div class="rich-text__text rte mx-auto {{ block.settings.text_width_layout }}" {{ block.shopify_attributes -}}>
+              {{- block.settings.text | replace: '<h3>', '<h3 class="font-secondary mt-0 mb-1 text-lg">' -}}
+            </div>
+        </div>
         {%- when 'button' -%}
           {% if block.settings.button_link != blank and block.settings.button_label != blank %}
             {%- if block.settings.button_color_scheme == 'button--pink' -%}

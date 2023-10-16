@@ -18,9 +18,9 @@
     }
 
     // Container
-    --container-spacing: theme(spacing.16);
+    --container-spacing: theme(spacing.12);
     @screen md {
-      --container-spacing: theme(spacing.32);
+      --container-spacing: theme(spacing.24);
     }
 
     // Element

@@ -78,38 +78,6 @@
       {{ 'sections.load_more.info_html' | t: current: current_html, total: total_html }}
     </p>
 
-    {%- comment -%} Toggle collection layout - mobile only {%- endcomment -%}
-    <collection-view class="collection-layout -ms-3 flex md:hidden">
-      {%- if section.settings.show_collection_layout_buttons -%}
-        {%- liquid
-          assign collection_view_default_class = 'collection-layout__button--active opacity-100'
-          if template.suffix == 'alt'
-            assign collection_view_default_class = 'opacity-25'
-          endif
-        -%}
-        <a
-          href="{{ collection.url }}"
-          aria-label="Double"
-          class="collection-layout__button block p-3 text-inherit hover:opacity-100 md:p-0 {{ collection_view_default_class }}"
-          data-collection-view="">
-          {%- render 'icons', icon: 'grid-double', icon_class: 'w-6' -%}
-        </a>
-        {%- liquid
-          assign collection_view_alt_class = 'opacity-25'
-          if template.suffix == 'alt'
-            assign collection_view_alt_class = 'collection-layout__button--active opacity-100'
-          endif
-        -%}
-        <a
-          href="{{ collection.url }}?view=alt"
-          aria-label="Single"
-          class="collection-layout__button block p-3 text-inherit hover:opacity-100 md:p-0 {{ collection_view_alt_class }}"
-          data-collection-view="alt">
-          {%- render 'icons', icon: 'grid-single', icon_class: 'w-6' -%}
-        </a>
-      {%- endif -%}
-    </collection-view>
-
     {% comment %} Sort sorting {% endcomment %}
     {%- if section.settings.enable_sorting -%}
       <div class="collection-header__sorting relative flex justify-end gap-4">

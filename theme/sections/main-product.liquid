@@ -72,6 +72,12 @@
               </p>
             {%- endif -%}
 
+          {%- comment -%} Rich text {%- endcomment -%}
+          {%- when 'richtext' -%}
+            {%- if block.settings.richtext != blank -%}
+              {{ block.settings.richtext }}
+            {%- endif -%}
+
           {%- comment -%} Product price {%- endcomment -%}
           {%- when 'price' -%}
             <div class="flex items-center gap-base">
@@ -390,6 +396,18 @@
     "blocks": [
       {
         "type": "@app"
+      },
+      {
+        "type": "richtext",
+        "name": "Rich text",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "richtext",
+            "label": "Rich text",
+            "info": "Optionally, you can use this to add rich text meta content."
+          }
+        ]
       },
       {
         "type": "text",

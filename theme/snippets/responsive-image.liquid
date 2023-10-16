@@ -75,7 +75,7 @@
 
   assign image_fit = 'object-contain'
   if class contains 'object-cover'
-    assign image_fit = 'object-cover' | append: ' h-full'
+    assign image_fit = 'object-cover' | append: ' h-full w-full'
     assign class = class | remove: 'object-cover'
   endif
 

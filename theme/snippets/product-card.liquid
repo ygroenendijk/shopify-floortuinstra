@@ -11,7 +11,6 @@
   - image_title:            {String} The img title attribute. (optional)
   - show_vendor:            {Boolean} Show the product vendor. Default: false. (optional)
   - show_secondary_image:   {Boolean} Show the secondary image on hover. Default: false. (optional)
-  - view:                   {String} The collection template view can be 'default' or 'alt'. For view = alt, the product images are rendered as swipers. (optional)
   - product_card_title_el:  {String} h3, h4, etc. (optional) Defaults to h2.
 
   Usage:
@@ -103,15 +102,8 @@
   endif
 -%}
 
-{%- liquid
-  # Start output product card
-  assign product_card_state_classes = ''
-  if view != blank
-    assign product_card_state_classes = 'z-20 product-card--' | append: view
-  endif
--%}
 <article
-  class="product-card group/product-card relative z-0 flex h-full flex-col gap-4 overflow-hidden {{ product_card_state_classes }} group-[.color-scheme]/color-scheme:bg-white group-[.color-scheme]/color-scheme:pb-4 {% if view == 'alt' -%}rounded-md border border-gray-100 p-4{%- endif %} md:border-none md:p-0"
+  class="product-card group/product-card relative z-0 flex h-full flex-col gap-4 overflow-hidden group-[.color-scheme]/color-scheme:bg-white group-[.color-scheme]/color-scheme:pb-4 md:border-none md:p-0"
   data-product-card>
   {%- comment -%} Accesibility text {%- endcomment -%}
   <a
@@ -123,12 +115,12 @@
     {{ product_object.title -}}
   </a>
 
-  <header class="product-card__header">
+  <header class="product-card__header flex flex-col gap-4">
     {%- comment -%} Product images {%- endcomment -%}
     <div class="product-card__images relative px-4 group-[.color-scheme]/color-scheme:pt-4">
       {%- comment -%} Render image with hover {%- endcomment -%}
       <a
-        class="product-card__image relative block {% unless product_object.available -%}opacity-50 saturate-50{%- endunless %} {% unless show_secondary_image %}transition-all states:scale-105{%- endunless -%}"
+        class="product-card__image relative block text-center {% unless product_object.available -%}opacity-50 saturate-50{%- endunless %} {% unless show_secondary_image %}transition-all states:scale-105{%- endunless -%}"
         href="{{ product_link }}"
         title="{{ product_object.title }}"
         tabindex="-1">
@@ -140,7 +132,7 @@
           sizes: image_sizes,
           alt: image_alt,
           title: image_title,
-          class: 'product-card__image--primary block mb-0 mx-auto'
+          class: 'product-card__image--primary block mb-0 mx-auto w-fit'
         -%}
         {%- if secondary_image != null and show_secondary_image -%}
           {%- render 'responsive-image',
@@ -151,7 +143,7 @@
             sizes: image_sizes,
             alt: image_alt,
             title: image_title,
-            class: 'product-card__image--secondary absolute object-cover inset-0 mb-0 transition-opacity duration-300 block opacity-0 group-hover/product-card:opacity-100 group-focus/product-card:opacity-100 mx-auto'
+            class: 'product-card__image--secondary absolute object-cover inset-0 mb-0 transition-opacity duration-300 block opacity-0 group-hover/product-card:opacity-100 group-focus/product-card:opacity-100 mx-auto w-fit'
           -%}
         {%- endif -%}
       </a>
@@ -162,17 +154,10 @@
       -%}
     </div>
 
-    {%- comment -%} Product information {%- endcomment -%}
-    {%- liquid
-      assign product_card_information_classes = 'text-center'
-      if view == 'alt'
-        assign product_card_information_classes = 'pt-3 text-center'
-      endif
-    -%}
     <a
       href="{{ product_link }}"
       title="{{ product_object.title }}"
-      class="product-card__information block grow px-4 text-sm text-text-default no-underline states:text-primary states:no-underline {{ product_card_information_classes }}"
+      class="product-card__information block grow px-4 text-center text-sm text-text-default no-underline states:text-primary states:no-underline"
       tabindex="-1">
       {%- comment -%} Vendor {%- endcomment -%}
       {%- if show_vendor -%}
@@ -201,7 +186,7 @@
       {% comment %} ATC button to display the options {% endcomment %}
       {%- if show_quick_shop -%}
         {% comment %} Render quick shop {% endcomment %}
-        {%- render 'quick-shop', product: product_object, quick_shop_render_second_option: quick_shop_render_second_option, unique_identifier: product.handle, view: view -%}
+        {%- render 'quick-shop', product: product_object, quick_shop_render_second_option: quick_shop_render_second_option, unique_identifier: product.handle -%}
       {% endif %}
 
       {% comment %} Link to PDP {% endcomment %}

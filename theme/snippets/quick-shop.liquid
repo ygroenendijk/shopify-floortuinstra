@@ -204,7 +204,7 @@
       data-src="#QuickShop-{{ product.id }}-{{ unique_identifier }}"
       aria-labelledby="quickAddLabel-{{ product.id }}-{{ unique_identifier }}">
       {%- render 'icons', icon: 'cart', icon_class: 'w-5' -%}
-      <span class="{% if view != 'alt' -%}hidden sm:block{%- endif -%}" id="quickAddLabel-{{ product.id }}-{{ unique_identifier }}">
+      <span id="quickAddLabel-{{ product.id }}-{{ unique_identifier }}">
         {%- render 'render-translation', namespace: 'products.product', key: 'add_to_cart_short', fallback: 'Add' -%}
       </span>
     </button>

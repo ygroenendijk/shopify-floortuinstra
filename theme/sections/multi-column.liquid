@@ -1,7 +1,17 @@
 {%- liquid
   assign title = section.settings.heading
   assign container_class = 'multi-column__container'
-  assign content_class = 'multi-column__content grid gap-8'
+  assign content_class = 'multi-column__content grid'
+
+  if section.settings.show_border
+    assign content_class = content_class | append: ' border border-accent md:py-6'
+  endif
+
+  if section.settings.show_content_dividers
+    assign content_class = content_class | append: ' divide-y md:divide-y-0 md:divide-x divide-accent divide-dashed md:px-0'
+  else
+    assign content_class = content_class | append: ' gap-8'
+  endif
 
   # Container classes
   if section.settings.container_width != blank
@@ -9,6 +19,9 @@
   endif
   if section.settings.color_scheme != blank
     assign container_class = container_class | append: ' container--background ' | append: section.settings.color_scheme
+  endif
+  if section.settings.show_border
+    assign container_class = container_class | append: ' mx-[var(--content-wrapper-padding)]'
   endif
 
   # Set the grid layout.
@@ -52,7 +65,7 @@
       -%}
 
       {%- comment -%} Render column {%- endcomment -%}
-      <div class="multi-columns__column flex flex-col {{ block.settings.position_vertical }} {{ block.settings.position_horizontal }} {{ block.settings.mobile_order }} md:order-none" {{ block.shopify_attributes }}>
+      <div class="multi-columns__column rte flex flex-col {{ block.settings.position_vertical }} {{ block.settings.position_horizontal }} {{ block.settings.mobile_order }} md:order-none {% if section.settings.show_content_dividers %}px-2 py-4 md:py-0{%- endif -%}" {{ block.shopify_attributes }}>
         {%- comment -%} Column inner width and text align {%- endcomment -%}
         <div class="space-y-5 {{ block.settings.text_align }}">
 
@@ -188,6 +201,20 @@
             "label": "Gray"
           }
         ]
+      },
+      {
+        "type": "checkbox",
+        "id": "show_border",
+        "label": "Show border",
+        "info": "Will add a border to the entire block",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_content_dividers",
+        "label": "Show content dividers",
+        "info": "Will show lines between the columns.",
+        "default": false
       },
       {
         "type": "range",
@@ -345,26 +372,6 @@
           },
           {
             "type": "select",
-            "id": "text_align",
-            "label": "Text align",
-            "default": "text-start",
-            "options": [
-              {
-                "value": "text-start",
-                "label": "Left"
-              },
-              {
-                "value": "text-center",
-                "label": "Center"
-              },
-              {
-                "value": "text-end",
-                "label": "Right"
-              }
-            ]
-          },
-          {
-            "type": "select",
             "id": "mobile_order",
             "label": "Mobile order",
             "default": "order-none",
@@ -497,7 +504,7 @@
           },
           {
             "type": "header",
-            "content": "Content"
+            "content": "Heading"
           },
           {
             "type": "text",
@@ -568,10 +575,34 @@
             ]
           },
           {
+            "type": "header",
+            "content": "Text"
+          },
+          {
             "type": "richtext",
             "id": "text",
             "label": "Text",
             "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tristique, nibh ut facilisis imperdiet, odio velit suscipit ipsum, rhoncus pretium diam urna sit amet lacus. Aliquam a volutpat quam.</p>"
+          },
+          {
+            "type": "select",
+            "id": "text_align",
+            "label": "Text align",
+            "default": "text-start",
+            "options": [
+              {
+                "value": "text-start",
+                "label": "Left"
+              },
+              {
+                "value": "text-center",
+                "label": "Center"
+              },
+              {
+                "value": "text-end",
+                "label": "Right"
+              }
+            ]
           },
           {
             "type": "header",

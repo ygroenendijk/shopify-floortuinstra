@@ -12,24 +12,12 @@
     rte-headings:font-bold
     rte-headings:leading-[1.2]
     rte-headings:text-inherit
-    rte-h1:text-[2rem]
-    rte-h2:text-[1.5rem]
-    rte-h3:text-[1.25rem]
-    rte-h4:text-[1.25rem]
-    rte-h5:text-[1.1rem]
-    rte-h6:text-[1.1rem]
     rte-p:mt-0
     last:rte-p:mb-0
     rte-blockquote:mb-5
     rte-blockquote:mt-0
     rte-strong:text-inherit
-    rte-ul:pl-4
-    md:rte-h1:text-[2.25rem]
-    md:rte-h2:text-[2rem]
-    md:rte-h3:text-[1.75rem]
-    md:rte-h4:text-[1.5rem]
-    md:rte-h5:text-[1.25rem]
-    md:rte-h6:text-[1.1rem];
+    rte-ul:pl-4;
 
     ul {
       list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 74.1 74.1' xml:space='preserve'%3E%3Ccircle cx='37.1' cy='37.1' r='35.1' fill='none' stroke='%23c01414' stroke-width='2'/%3E%3Ccircle cx='37.1' cy='37.1' r='21.4' fill='%23c01414' stroke='%23c01414'/%3E%3C/svg%3E");

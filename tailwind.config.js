@@ -132,7 +132,7 @@ module.exports = {
             '--tw-prose-quote-borders': theme('colors.primary.600'),
             color: theme('colors.text-default'),
             a: {
-              color: theme('colors.primary.600'),
+              color: '#70a4b3',
               textDecoration: 'underline',
               transition: 'all .2s',
               '&:hover': {
