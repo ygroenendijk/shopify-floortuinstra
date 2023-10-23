@@ -11,7 +11,10 @@
       text-text-default;
   }
   .content-for-layout {
-    @apply flex-auto;
+    @apply flex flex-auto flex-col;
+    .shopify-section:only-child {
+      @apply flex flex-auto flex-col items-stretch;
+    }
   }
 
   // accessibility optimizations

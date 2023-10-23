@@ -62,6 +62,7 @@ class ProductFormComponent extends HTMLElement {
           this.cartItems?.updateAfterError();
           return;
         }
+
         if (this.cartDrawer) {
           this.cartDrawer.renderContents(parsedState);
         }

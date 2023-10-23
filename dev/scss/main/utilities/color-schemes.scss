@@ -69,7 +69,7 @@
     &--white,
     &--black,
     &--secondary {
-      .button {
+      .button:not(.button--primary):not(.button--secondary):not(.button--outline):not(.button--outline-white):not(.button--gradient):not(.button--link) {
         --button-hover-text: theme('colors.primary.text');
         --button-border-color: transparent;
         --button-hover-border-color: transparent;

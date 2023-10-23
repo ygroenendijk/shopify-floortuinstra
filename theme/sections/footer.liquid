@@ -24,6 +24,13 @@
               endif
             -%}
 
+            {%- comment -%}
+              Skiplink so users can go straight to the newsletter -- can only be used with a fixed menu, not the drag/drop we have now
+              <a class="button button--primary sr-only !absolute inset-[3px] bottom-auto z-popover !p-2 focus:not-sr-only focus:outline-dashed focus:outline-1 states:no-underline" href="#newsletter-form-{{ section.id }}">
+                {% render "render-translation", namespace: "accessibility", key: "skip_the_menu", fallback: "Skip the menu" -%}
+              </a>
+            {%- endcomment -%}
+
             <div
               class="footer-block footer-block--{{ block.type }} {{ block.settings.width_mobile }} {{ block.settings.width_tablet }} {{ block.settings.width_desktop }}"
               {{ block.shopify_attributes }}>
@@ -33,7 +40,8 @@
                 data-options='
                   {
                     "breakpointMax": 768,
-                    "closeSiblings": true
+                    "closeSiblings": true,
+                    "trapFocus": false
                   }
                 '>
                 {%- comment -%} Output menu and collapsible content {%- endcomment -%}
@@ -108,7 +116,7 @@
     {%- if section.settings.copyright and section.settings.copyright_text != blank -%}
       <div class="mt-4 text-center">
         <p class="text-sm">
-          {{- section.settings.copyright_text | replace: '[[ year ]]', year -}}
+          {{- section.settings.copyright_text | replace: '[year]', year -}}
         </p>
       </div>
     {%- endif -%}
@@ -169,17 +177,17 @@
         "content": "Copyright"
       },
       {
+        "type": "checkbox",
+        "id": "copyright",
+        "label": "Enable copyright text",
+        "default": true
+      },
+      {
         "type": "text",
         "id": "copyright_text",
         "label": "Copyright text",
-        "info": "Add '[[ year ]]' to your text string and it will be replaced with the current year.",
-        "default": "© H1 Webdevelopment [[ year ]]. All rights reserved."
-      },
-      {
-        "type": "checkbox",
-        "id": "copyright",
-        "label": "Enable",
-        "default": true
+        "info": "Add '[year]' to your text string and it will be replaced with the current year.",
+        "default": "© H1 Webdevelopment [year]. All rights reserved."
       }
     ],
     "blocks": [
@@ -248,7 +256,7 @@
             "type": "select",
             "id": "width_tablet",
             "label": "Width tablet",
-            "default": "md:col-span-6",
+            "default": "md:col-span-8",
             "options": [
               {
                 "value": "md:col-span-12",
@@ -364,7 +372,7 @@
             "type": "select",
             "id": "width_tablet",
             "label": "Width tablet",
-            "default": "md:col-span-6",
+            "default": "md:col-span-8",
             "options": [
               {
                 "value": "md:col-span-12",
@@ -509,7 +517,7 @@
             "type": "select",
             "id": "width_tablet",
             "label": "Width tablet",
-            "default": "md:col-span-6",
+            "default": "md:col-span-4",
             "options": [
               {
                 "value": "md:col-span-12",
@@ -533,7 +541,7 @@
             "type": "select",
             "id": "width_desktop",
             "label": "Width desktop",
-            "default": "xl:col-span-9",
+            "default": "xl:col-span-3",
             "options": [
               {
                 "value": "xl:col-span-12",
@@ -638,7 +646,7 @@
             "type": "select",
             "id": "width_tablet",
             "label": "Width tablet",
-            "default": "md:col-span-6",
+            "default": "md:col-span-12",
             "options": [
               {
                 "value": "md:col-span-12",
@@ -662,7 +670,7 @@
             "type": "select",
             "id": "width_desktop",
             "label": "Width desktop",
-            "default": "xl:col-span-9",
+            "default": "xl:col-span-12",
             "options": [
               {
                 "value": "xl:col-span-12",
@@ -771,7 +779,7 @@
             "type": "select",
             "id": "width_mobile",
             "label": "Width mobile",
-            "default": "col-span-12",
+            "default": "col-span-6",
             "options": [
               {
                 "value": "col-span-12",
@@ -787,7 +795,7 @@
             "type": "select",
             "id": "width_tablet",
             "label": "Width tablet",
-            "default": "md:col-span-6",
+            "default": "md:col-span-4",
             "options": [
               {
                 "value": "md:col-span-12",
@@ -811,7 +819,7 @@
             "type": "select",
             "id": "width_desktop",
             "label": "Width desktop",
-            "default": "xl:col-span-9",
+            "default": "xl:col-span-3",
             "options": [
               {
                 "value": "xl:col-span-12",

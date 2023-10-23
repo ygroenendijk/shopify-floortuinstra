@@ -75,6 +75,7 @@
   "accessibility": {
     "skip_to_text": "Skip to content",
     "skip_to_product_info": "Skip to product information",
+    "skip_the_menu": "Skip the menu",
     "skip_filters": "Skip filters",
     "close": "Close",
     "delete": "Delete",

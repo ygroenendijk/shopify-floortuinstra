@@ -37,7 +37,7 @@
         data-product-info
       >
         {%- comment -%} Product title {%- endcomment -%}
-        <h1 class="product__title h5 hidden md:block">
+        <h1 class="product__title h5 m-0 hidden md:block">
           {{ product.title }}
         </h1>
 
@@ -67,9 +67,9 @@
           {%- comment -%} Text block {%- endcomment -%}
           {%- when 'text' -%}
             {%- if block.settings.text != blank -%}
-              <p class="product__text {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+              <div class="product__text {{ block.settings.text_size }}" {{ block.shopify_attributes }}>
                 {{- block.settings.text -}}
-              </p>
+              </div>
             {%- endif -%}
 
           {%- comment -%} Rich text {%- endcomment -%}
@@ -132,18 +132,18 @@
                       if product.selected_or_first_available_variant.inventory_quantity <= block.settings.inventory_threshold
                         render 'icons', icon: 'warning-orange', icon_class: 'w-4'
                         if block.settings.show_inventory_quantity
-                          render "render-translation", namespace: "products.product", key: "inventory_low_stock_show_count", quantity: product.selected_or_first_available_variant.inventory_quantity, fallback: "Low stock {{ quantity }}"
+                          render "render-translation", namespace: "products.product.inventory", key: "low_stock_show_count", quantity: product.selected_or_first_available_variant.inventory_quantity, fallback: "Low stock: {{ quantity }} left"
                         else
-                          render "render-translation", namespace: "products.product", key: "inventory_low_stock", fallback: "Low stock"
+                          render "render-translation", namespace: "products.product.inventory", key: "low_stock", fallback: "Low stock"
                         endif
 
                       # In Stock
                       else
                         render 'icons', icon: 'warning-green', icon_class: 'w-4'
                         if block.settings.show_inventory_quantity
-                          render "render-translation", namespace: "products.product", key: "inventory_in_stock_show_count", quantity: product.selected_or_first_available_variant.inventory_quantity, fallback: "In stock {{ quantity }}"
+                          render "render-translation", namespace: "products.product.inventory", key: "in_stock_show_count", quantity: product.selected_or_first_available_variant.inventory_quantity, fallback: "{{ quantity }} in stock"
                         else
-                          render "render-translation", namespace: "products.product", key: "inventory_in_stock", fallback: "In stock"
+                          render "render-translation", namespace: "products.product.inventory", key: "in_stock", fallback: "In stock"
                         endif
                       endif
 
@@ -151,10 +151,10 @@
                     else
                       if product.selected_or_first_available_variant.inventory_policy == 'continue'
                         render 'icons', icon: 'warning-green', icon_class: 'w-4'
-                        render "render-translation", namespace: "products.product", key: "inventory_out_of_stock_continue_selling", fallback: "In stock"
+                        render "render-translation", namespace: "products.product.inventory", key: "out_of_stock_continue_selling", fallback: "In stock"
                       else
                         render 'icons', icon: 'warning-red', icon_class: 'w-4'
-                        render "render-translation", namespace: "products.product", key: "inventory_out_of_stock", fallback: "Out of stock"
+                        render "render-translation", namespace: "products.product.inventory", key: "out_of_stock", fallback: "Out of stock"
                       endif
                     endif
                   endif
@@ -198,6 +198,11 @@
                   if block.settings.quantity_label == false
                     assign quantity_label_class = 'hidden'
                   endif
+
+                  # assign the max attribute for the qty input. When there is no inventory management, ignore it
+                  if product.selected_or_first_available_variant.inventory_management != blank
+                    assign max = product.selected_or_first_available_variant.inventory_quantity
+                  endif
                 -%}
                 <label class="quantity__label  mb-2 block text-sm font-semibold {{ quantity_label_class }}" for="Quantity-{{ product.id }}">
                   {%- render 'render-translation', namespace: "products.product.quantity", key: "label", fallback: "Quantity" -%}
@@ -209,7 +214,7 @@
                   value: 1,
                   qty_product: product,
                   type: 'pdp',
-                  max: product.selected_or_first_available_variant.inventory_quantity,
+                  max: max,
                   is_preorder: is_preorder
                 -%}
               </div>
@@ -414,36 +419,35 @@
         "name": "Text",
         "settings": [
           {
-            "type": "text",
+            "type": "richtext",
             "id": "text",
-            "default": "Text block",
             "label": "Text"
           },
           {
             "type": "select",
-            "id": "text_style",
-            "label": "Text style",
-            "default": "text-sm",
+            "id": "text_size",
+            "label": "Text size",
+            "default": "text-base",
             "options": [
               {
                 "value": "text-xs",
-                "label": "XS"
+                "label": "xs"
               },
               {
                 "value": "text-sm",
-                "label": "SM"
+                "label": "sm"
               },
               {
                 "value": "text-base",
-                "label": "MD"
+                "label": "base"
               },
               {
                 "value": "text-lg",
-                "label": "LG"
+                "label": "lg"
               },
               {
                 "value": "text-xl",
-                "label": "XL"
+                "label": "xl"
               }
             ]
           }
