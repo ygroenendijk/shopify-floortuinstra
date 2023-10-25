@@ -1,4 +1,4 @@
-{%- assign style_guide_sections = 'colors, color-schemes, typography, rte, grid, logo, icons, buttons, forms, options, quantity-input, collapsibles, toggle-element, badges, prices, collection-cards, product-cards, article-cards'
+{%- assign style_guide_sections = 'colors, color-schemes, typography, rte, grid, logo, icons, buttons, forms, options, quantity-input, collapsibles, toggle-element, badges, prices, collection-cards, product-cards, blog-post-cards'
   | split: ', '
 -%}
 
@@ -13,7 +13,7 @@
         {%- for section in style_guide_sections -%}
           {%- assign heading = section | replace: '-', ' ' | capitalize -%}
 
-          <li class="hover:pl-1 transition-all">
+          <li class="transition-all hover:ps-1">
             <a class="block" href="#styleguide-{{- section -}}">{{- heading -}}</a>
           </li>
         {%- endfor -%}
@@ -91,7 +91,7 @@
                 render 'styleguide-prices'
               when 'product-cards'
                 render 'styleguide-product-cards'
-              when 'article-cards'
+              when 'blog-post-cards'
                 render 'styleguide-article-cards'
               when 'collection-cards'
                 render 'styleguide-collection-cards'
