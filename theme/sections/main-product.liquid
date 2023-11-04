@@ -15,7 +15,7 @@
   <div class="product grid grid-cols-12 gap-x-4 gap-y-base">
 
     {%- comment -%} Product title {%- endcomment -%}
-    <h1 class="product__title h5 content-wrapper-padding col-span-12 md:hidden">
+    <h1 class="product__title h5 col-span-12 px-content-wrapper-padding md:hidden">
       {{ product.title }}
     </h1>
 
@@ -33,7 +33,7 @@
     {%- comment -%} Right col: Product info {%- endcomment -%}
     <div id="ProductInfo" class="product__info col-span-12 md:col-span-5 lg:col-span-6 2xl:col-span-5">
       <product-info
-        class="product-info-col content-wrapper-padding flex flex-col gap-y-5 bg-gray-50 py-6 md:z-10 md:rounded-md md:drop-shadow-lg {% if section.settings.enable_sticky_info -%}product-info-col--sticky sticky top-4 transition-all duration-300 group-[.header-sticky:not(.header-hidden)]/body:top-20{%- endif -%}"
+        class="product-info-col flex flex-col gap-y-5 bg-gray-50 px-content-wrapper-padding py-6 md:z-10 md:rounded-md md:drop-shadow-lg {% if section.settings.enable_sticky_info -%}product-info-col--sticky sticky top-4 transition-all duration-300 group-[.header-sticky:not(.header-hidden)]/body:top-20{%- endif -%}"
         data-product-info
       >
         {%- comment -%} Product title {%- endcomment -%}
@@ -258,7 +258,7 @@
 
                     {% comment %} Pre-orders {% endcomment %}
                     {%- if is_preorder -%}
-                      <input type="hidden" name="properties[{%-render 'render-translation', namespace: 'products.product', key: 'pre-order', fallback: 'Pre-order'-%}]" value="{% render 'render-translation', namespace: 'products.product.yes', fallback: 'Yes' %}">
+                      <input type="hidden" name="properties[{%- render 'render-translation', namespace: 'products.product', key: 'pre-order', fallback: 'Pre-order' -%}]" value="{% render 'render-translation', namespace: 'products.product.yes', fallback: 'Yes' %}">
                     {% endif %}
 
                     {%- comment -%} Show variants in dropdowns for the fixed 'add to cart'{%- endcomment -%}
@@ -289,7 +289,7 @@
                                 {%- if variant.available == false %} -
                                   {%- render 'render-translation', namespace: "products.product", key: "sold_out", fallback: "Sold out" -%}
                                 {% endif %}
-                                - {{ variant.price  | money_with_currency | strip_html }}
+                                - {{ variant.price | money_with_currency | strip_html }}
                               </option>
                             {%- endfor -%}
                           </select>
@@ -318,7 +318,6 @@
                       <button
                         type="submit"
                         name="add"
-                        aria-label="Add"
                         class="button button--lg button--primary w-full"
                         {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                         data-add-to-cart-behavior="{{ settings.add_to_cart_behavior }}"
@@ -529,7 +528,7 @@
             "type": "select",
             "id": "picker_type",
             "default": "radio",
-            "label": "Type",
+            "label": "Variant display",
             "options": [
               {
                 "value": "dropdown",
@@ -538,6 +537,23 @@
               {
                 "value": "radio",
                 "label": "Radio inputs"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "color_variant_display",
+            "default": "images",
+            "label": "Linked color variant display",
+            "info": "This only applies to color variants added through the metafield. Color variants of the current product will be rendered as selected above.",
+            "options": [
+              {
+                "value": "swatches",
+                "label": "Swatches"
+              },
+              {
+                "value": "images",
+                "label": "Variant images"
               }
             ]
           },
@@ -554,23 +570,6 @@
               {
                 "value": "block",
                 "label": "Block"
-              }
-            ]
-          },
-          {
-            "type": "select",
-            "id": "color_variant_display",
-            "default": "swatches",
-            "label": "Color variant display",
-            "info": "Only applies when using 'Radio inputs'. When selecting 'images', the theme will check for the 'color variants' product metafield to retrieve the images.",
-            "options": [
-              {
-                "value": "swatches",
-                "label": "Swatches"
-              },
-              {
-                "value": "images",
-                "label": "Variant images"
               }
             ]
           },

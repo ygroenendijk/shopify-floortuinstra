@@ -74,11 +74,12 @@
               render 'responsive-image', image_object: block.settings.image, aspect_ratio: block.settings.image_ratio, class: 'multi-columns__image hidden md:block object-cover w-full', max_width: image_max_width, sizes: sizes
             endif
 
-            # Mobile Image
-            if image_mobile != blank
-              render 'responsive-image', image_object: image_mobile, aspect_ratio: block.settings.image_ratio_mobile, class: 'multi-columns__image md:hidden object-cover w-full', max_width: 768,
-            endif
-          -%}
+              # Mobile Image
+              if image_mobile != blank
+                render 'responsive-image', image_object: image_mobile, aspect_ratio: block.settings.image_ratio_mobile, class: 'multi-columns__image md:hidden object-cover w-full', max_width: 768,
+              endif
+            -%}
+          </div>
 
           {%- comment -%} Heading {%- endcomment -%}
           {%- if block.settings.heading != blank -%}

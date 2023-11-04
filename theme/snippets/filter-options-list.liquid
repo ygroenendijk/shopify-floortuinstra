@@ -28,7 +28,7 @@
     endif
   endfor
 
-  assign wrapper_classes = 'field field--checkbox mb-2'
+  assign wrapper_classes = 'field field--checkbox mb-2 last:mb-0'
   assign input_classes = 'field__checkbox field__checkbox--' | append: filter_label_handleized
   assign label_classes = 'field__checkbox-label'
 
@@ -92,7 +92,7 @@
             </label>
           {%- endcapture -%}
 
-          <li class=" list-menu__item {{ wrapper_classes }} {% unless render_as_swatch%}p-[1px]{%- endunless -%}">
+          <li class=" list-menu__item {{ wrapper_classes }} {% unless render_as_swatch %}p-[1px]{%- endunless -%}">
             <input class="{{ input_classes }} sr-only"
               type="checkbox"
               name="{{ value.param_name }}"
@@ -143,4 +143,4 @@
   {%- endif -%}
 {%- endcapture -%}
 
-{%- render 'render-filter-group', summary_content: summary_content, label: filter.label, filter_index: filter_index, is_color: is_color -%}
+{%- render 'filter-group', summary_content: summary_content, label: filter.label, filter_index: filter_index, is_color: is_color, collapsible: collapsible, is_last: is_last -%}

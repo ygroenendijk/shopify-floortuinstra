@@ -69,10 +69,14 @@
         -%}
           <input
             type="hidden"
-            name="properties[{%-render 'render-translation', namespace: 'products.product', key: 'pre-order', fallback: 'Pre-order'-%}]"
+            name="properties[{%- render 'render-translation', namespace: 'products.product', key: 'pre-order', fallback: 'Pre-order' -%}]"
             value="{% render 'render-translation', namespace: 'products.product.yes', fallback: 'Yes' %}">
         {%- endif -%}
-        <button type="submit" name="add" aria-label="Add" class="quick-shop__button quick-shop__button--form {{ button_class }}" data-add-to-cart-behavior="open_cart_drawer">
+        <button
+          type="submit"
+          name="add"
+          class="quick-shop__button quick-shop__button--form {{ button_class }}"
+          data-add-to-cart-behavior="open_cart_drawer">
           {%- render 'icons', icon: 'cart', icon_class: 'w-5' -%}
           <span>
             {%- render 'render-translation', namespace: 'products.product', key: 'add_to_cart_short', fallback: 'Add' -%}
@@ -134,7 +138,6 @@
               value="{{ variant.id }}"
               type="radio"
               name="variant-{{ product.handle }}"
-              readonly
               {% if variant.available == false %}
                 disabled
               {% endif %}
@@ -147,14 +150,13 @@
               for="quick-shop__item-{{ variant.id }}"
               {% if color_hex and is_color %}
                 style="background-color: {{ color_hex }}"
-                title="{{ option_label }}"
-                aria-label="{{ option_label }}"
               {% endif %}>
-              {%- liquid
-                unless color_is_mapped
-                  echo option_label
-                endunless
-              -%}
+              <span
+                {% if color_is_mapped -%}
+                  class="sr-only"
+                {%- endif -%}>
+                {{- option_label -}}
+              </span>
             </label>
           </div>
         {%- endfor -%}
@@ -175,7 +177,7 @@
           -%}
             <input
               type="hidden"
-              name="properties[{%-render 'render-translation', namespace: 'products.product', key: 'pre-order', fallback: 'Pre-order'-%}]"
+              name="properties[{%- render 'render-translation', namespace: 'products.product', key: 'pre-order', fallback: 'Pre-order' -%}]"
               value="{% render 'render-translation', namespace: 'products.product.yes', fallback: 'Yes' %}">
           {%- endif -%}
 
@@ -186,7 +188,6 @@
           <button
             type="submit"
             name="add"
-            aria-label="Add"
             class="quick-shop__button quick-shop__button--form button button--primary button--md rounded-full"
             data-add-to-cart-behavior="{{ add_to_cart_behavior }}">
             {%- render 'icons', icon: 'cart', icon_class: 'w-4' -%}
@@ -201,10 +202,9 @@
       type="button"
       class="quick-shop__trigger {{ button_class }}"
       data-quick-shop-toggle
-      data-src="#QuickShop-{{ product.id }}-{{ unique_identifier }}"
-      aria-labelledby="quickAddLabel-{{ product.id }}-{{ unique_identifier }}">
+      data-src="#QuickShop-{{ product.id }}-{{ unique_identifier }}">
       {%- render 'icons', icon: 'cart', icon_class: 'w-5' -%}
-      <span id="quickAddLabel-{{ product.id }}-{{ unique_identifier }}">
+      <span class="{% if view != 'alt' -%}sr-only sm:not-sr-only{%- endif -%}">
         {%- render 'render-translation', namespace: 'products.product', key: 'add_to_cart_short', fallback: 'Add' -%}
       </span>
     </button>
