@@ -15,7 +15,7 @@
         {%- when 'button' -%}
           {% if block.settings.button_link != blank and block.settings.button_label != blank %}
             {%- if block.settings.button_color_scheme == 'button--pink' -%}
-              <div class="button-divider group">
+              <div class="button-divider group last:mb-0">
             {%- endif -%}
               <a href="{{ block.settings.button_link }}" class="rich-text__button button button--lg {{ block.settings.button_color_scheme }}" {{ block.shopify_attributes -}}>
                 {{ block.settings.button_label }}

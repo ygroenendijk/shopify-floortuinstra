@@ -47,7 +47,7 @@
 {%- capture container_footer -%}
   {%- if section.settings.button_text != blank -%}
     {%- if section.settings.button_color_scheme == 'button--pink' -%}
-      <div class="button-divider group">
+      <div class="button-divider group last:mb-0">
     {%- endif -%}
     <a
       {% if section.settings.button_url != blank or object.url != blank %}
