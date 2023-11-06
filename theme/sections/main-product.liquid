@@ -105,7 +105,7 @@
             {%- if block.settings.heading != blank -%}
               <p class="usp peer flex w-full items-center justify-items-start gap-4 text-start text-xs peer-[.usp]:-mt-5"  {{ block.shopify_attributes }}>
                 {%- if block.settings.icon != 'none' -%}
-                  <span class="usp__icon rounded-full bg-primary-200 p-2">
+                  <span class="usp__icon rounded-full bg-primary p-2 text-primary-text">
                     {%- render 'icons', icon: block.settings.icon, icon_class: 'w-4 shrink-0 grow-0' -%}
                   </span>
                 {%- endif -%}

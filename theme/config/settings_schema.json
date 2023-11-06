@@ -4,8 +4,8 @@
     "theme_name": "Floor Tuinstra",
     "theme_version": "1.0.0",
     "theme_author": "PinkPaisley Designs",
-    "theme_documentation_url": "https://shopify.dev/themes",
-    "theme_support_url": "https://www.pinkpaisleydesigns.com"
+    "theme_documentation_url": "https:\/\/shopify.dev\/themes",
+    "theme_support_url": "https:\/\/www.pinkpaisleydesigns.com"
   },
   {
     "name": "Branding",
@@ -59,7 +59,7 @@
       {
         "type": "header",
         "content": "Linked data",
-        "info": "These SEO values deliver more easily indexable content to search crawlers like Googlebot. Test you data [here](https://search.google.com/test/rich-results)"
+        "info": "These SEO values deliver more easily indexable content to search crawlers like Googlebot. Test you data [here](https:\/\/search.google.com\/test\/rich-results)"
       },
       {
         "type": "image_picker",
@@ -90,7 +90,7 @@
       {
         "type": "text",
         "id": "jsonld_address_state",
-        "label": "State / province"
+        "label": "State \/ province"
       },
       {
         "type": "text",
@@ -118,13 +118,13 @@
         "type": "text",
         "id": "klaviyo_bis_api_key",
         "label": "Klaviyo account API key",
-        "info": "[Where to find this?](https://help.klaviyo.com/hc/en-us/articles/115005062267-How-to-Manage-Your-Account-s-API-Keys#find-your-api-keys2)"
+        "info": "[Where to find this?](https:\/\/help.klaviyo.com\/hc\/en-us\/articles\/115005062267-How-to-Manage-Your-Account-s-API-Keys#find-your-api-keys2)"
       },
       {
         "type": "text",
         "id": "klaviyo_bis_listid",
         "label": "Klaviyo List ID",
-        "info": "[Where to find this?](https://help.klaviyo.com/hc/en-us/articles/115005078647-How-to-Find-a-List-ID#find-your-list-id1)"
+        "info": "[Where to find this?](https:\/\/help.klaviyo.com\/hc\/en-us\/articles\/115005078647-How-to-Find-a-List-ID#find-your-list-id1)"
       },
       {
         "type": "header",
@@ -134,7 +134,7 @@
         "type": "checkbox",
         "id": "klaviyo_bis_subscribe_checked",
         "label": "Check opt-in checkbox by default",
-        "info": "Check the checkbox for the opt-in by default. Make sure this allowed in your country/region.",
+        "info": "Check the checkbox for the opt-in by default. Make sure this allowed in your country\/region.",
         "default": false
       },
       {
@@ -162,49 +162,49 @@
         "type": "text",
         "id": "social_facebook_link",
         "label": "Facebook link",
-        "placeholder": "https://facebook.com/your_url"
+        "placeholder": "https:\/\/facebook.com\/your_url"
       },
       {
         "type": "text",
         "id": "social_x_link",
         "label": "X link",
-        "placeholder": "https://x.com/your_url"
+        "placeholder": "https:\/\/x.com\/your_url"
       },
       {
         "type": "text",
         "id": "social_pinterest_link",
         "label": "Pinterest link",
-        "placeholder": "https://pinterest.com/your_url"
+        "placeholder": "https:\/\/pinterest.com\/your_url"
       },
       {
         "type": "text",
         "id": "social_instagram_link",
         "label": "Instagram link",
-        "placeholder": "https://instagram.com/your_url"
+        "placeholder": "https:\/\/instagram.com\/your_url"
       },
       {
         "type": "text",
         "id": "social_snapchat_link",
         "label": "Snapchat link",
-        "placeholder": "https://snapchat.com/your_url"
+        "placeholder": "https:\/\/snapchat.com\/your_url"
       },
       {
         "type": "text",
         "id": "social_tumblr_link",
         "label": "Tumblr link",
-        "placeholder": "https://tumblr.com/your_url"
+        "placeholder": "https:\/\/tumblr.com\/your_url"
       },
       {
         "type": "text",
         "id": "social_youtube_link",
         "label": "Youtube link",
-        "placeholder": "https://youtube.com/your_url"
+        "placeholder": "https:\/\/youtube.com\/your_url"
       },
       {
         "type": "text",
         "id": "social_vimeo_link",
         "label": "Vimeo link",
-        "placeholder": "https://vimeo.com/your_url"
+        "placeholder": "https:\/\/vimeo.com\/your_url"
       },
       {
         "type": "header",
@@ -337,7 +337,7 @@
         "type": "select",
         "id": "filter_display",
         "label": "Filter display",
-        "info": "Applies to larger screens. Either keep the filters always visible or hide them in a drawer. The 'horizontal' option is best used with a max of 5 or 6 filters.",
+        "info": "Applies to larger screens. Either keep the filters always visible or hide them in a drawer.",
         "default": "drawer",
         "options": [
           {
@@ -346,20 +346,9 @@
           },
           {
             "value": "grid",
-            "label": "In grid - vertical"
-          },
-          {
-            "value": "flex",
-            "label": "Above products - horizontal"
+            "label": "In grid"
           }
         ]
-      },
-      {
-        "type": "checkbox",
-        "id": "enable_filter_collapsibles",
-        "label": "Enable filter collapsibles",
-        "info": "This will allow customers to close filters",
-        "default": false
       },
       {
         "type": "header",
@@ -370,7 +359,7 @@
         "id": "availability_filter_name",
         "label": "Availability filter name",
         "default": "Availability",
-        "info": "Set the name as it's used for product availability. This will render the filter as a toggle/switch."
+        "info": "Set the name as it's used for product availability. This will render the filter as a toggle\/switch."
       },
       {
         "type": "header",
@@ -399,7 +388,7 @@
         "type": "textarea",
         "id": "color_mappings",
         "label": "Color mappings",
-        "info": "Set up color mappings. One per line. color|#hexvalue or color name, where 'color' is lowercase and hyphened, like 'dark-blue'. For a list of accepted color names or hex codes, [got to this page](https://htmlcolorcodes.com/color-names/).",
+        "info": "Set up color mappings. One per line. color|#hexvalue or color name, where 'color' is lowercase and hyphened, like 'dark-blue'. For a list of accepted color names or hex codes, [got to this page](https:\/\/htmlcolorcodes.com\/color-names\/).",
         "default": "blue|SteelBlue\nred|Red\norange|DarkOrange\nblack|#000\ngray|Silver\nlight_brown|Tan\nwhite|white\nyellow|Gold",
         "placeholder": "blue|#68b7ff\nred|#ff0000\nblack|#000"
       }
@@ -445,50 +434,50 @@
         "id": "product_card_image_aspect",
         "label": "Image ratio",
         "info": "Be sure to choose the correct aspect ratio for your content or clipping might occur.",
-        "default": "1/1",
+        "default": "1\/1",
         "options": [
           {
-            "value": "1/1",
+            "value": "1\/1",
             "label": "Square"
           },
           {
-            "value": "1/2",
-            "label": "1/2",
+            "value": "1\/2",
+            "label": "1\/2",
             "group": "Portrait"
           },
           {
-            "value": "2/3",
-            "label": "2/3",
+            "value": "2\/3",
+            "label": "2\/3",
             "group": "Portrait"
           },
           {
-            "value": "3/4",
-            "label": "3/4",
+            "value": "3\/4",
+            "label": "3\/4",
             "group": "Portrait"
           },
           {
-            "value": "5/6",
-            "label": "5/6",
+            "value": "5\/6",
+            "label": "5\/6",
             "group": "Portrait"
           },
           {
-            "value": "2/1",
-            "label": "2/1",
+            "value": "2\/1",
+            "label": "2\/1",
             "group": "Landscape"
           },
           {
-            "value": "3/2",
-            "label": "3/2",
+            "value": "3\/2",
+            "label": "3\/2",
             "group": "Landscape"
           },
           {
-            "value": "4/3",
-            "label": "4/3",
+            "value": "4\/3",
+            "label": "4\/3",
             "group": "Landscape"
           },
           {
-            "value": "16/9",
-            "label": "16/9",
+            "value": "16\/9",
+            "label": "16\/9",
             "group": "Landscape"
           }
         ]
@@ -678,43 +667,43 @@
         "type": "select",
         "id": "ha_min_ratio_mobile",
         "label": "Mobile screens",
-        "default": "aspect-[9/16]",
+        "default": "aspect-[9\/16]",
         "options": [
           {
             "value": "",
             "label": "Default"
           },
           {
-            "value": "aspect-[1/1]",
+            "value": "aspect-[1\/1]",
             "label": "Square"
           },
           {
-            "value": "aspect-[2/1]",
+            "value": "aspect-[2\/1]",
             "label": "2x1",
             "group": "Landscape"
           },
           {
-            "value": "aspect-[4/3]",
+            "value": "aspect-[4\/3]",
             "label": "4x3",
             "group": "Landscape"
           },
           {
-            "value": "aspect-[5/2]",
+            "value": "aspect-[5\/2]",
             "label": "5x2",
             "group": "Landscape"
           },
           {
-            "value": "aspect-[16/9]",
+            "value": "aspect-[16\/9]",
             "label": "16x9",
             "group": "Landscape"
           },
           {
-            "value": "aspect-[3/4]",
+            "value": "aspect-[3\/4]",
             "label": "3x4",
             "group": "Portrait"
           },
           {
-            "value": "aspect-[9/16]",
+            "value": "aspect-[9\/16]",
             "label": "9x16",
             "group": "Portrait"
           }
@@ -725,43 +714,43 @@
         "id": "ha_min_ratio_tablet",
         "label": "Tablet screens",
         "info": "Only applies to devices larger than 768 pixels and smaller than 1280 pixels.",
-        "default": "md:aspect-[2/1]",
+        "default": "md:aspect-[2\/1]",
         "options": [
           {
             "value": "",
             "label": "Default (same as mobile)"
           },
           {
-            "value": "md:aspect-[1/1]",
+            "value": "md:aspect-[1\/1]",
             "label": "Square"
           },
           {
-            "value": "md:aspect-[2/1]",
+            "value": "md:aspect-[2\/1]",
             "label": "2x1",
             "group": "Landscape"
           },
           {
-            "value": "md:aspect-[4/3]",
+            "value": "md:aspect-[4\/3]",
             "label": "4x3",
             "group": "Landscape"
           },
           {
-            "value": "md:aspect-[5/2]",
+            "value": "md:aspect-[5\/2]",
             "label": "5x2",
             "group": "Landscape"
           },
           {
-            "value": "md:aspect-[16/9]",
+            "value": "md:aspect-[16\/9]",
             "label": "16x9",
             "group": "Landscape"
           },
           {
-            "value": "aspect-[3/4]",
+            "value": "aspect-[3\/4]",
             "label": "3x4",
             "group": "Portrait"
           },
           {
-            "value": "aspect-[9/16]",
+            "value": "aspect-[9\/16]",
             "label": "9x16",
             "group": "Portrait"
           }
@@ -772,38 +761,38 @@
         "id": "ha_min_ratio_desktop",
         "label": "Desktop and up",
         "info": "Only applies to devices larger than 1280 pixels.",
-        "default": "xl:aspect-[3/1]",
+        "default": "xl:aspect-[3\/1]",
         "options": [
           {
             "value": "",
             "label": "Default (same as tablet)"
           },
           {
-            "value": "xl:aspect-[1/1]",
+            "value": "xl:aspect-[1\/1]",
             "label": "Square"
           },
           {
-            "value": "xl:aspect-[2/1]",
+            "value": "xl:aspect-[2\/1]",
             "label": "2x1",
             "group": "Landscape"
           },
           {
-            "value": "xl:aspect-[3/1]",
+            "value": "xl:aspect-[3\/1]",
             "label": "3x1",
             "group": "Landscape"
           },
           {
-            "value": "xl:aspect-[4/3]",
+            "value": "xl:aspect-[4\/3]",
             "label": "4x3",
             "group": "Landscape"
           },
           {
-            "value": "xl:aspect-[5/2]",
+            "value": "xl:aspect-[5\/2]",
             "label": "5x2",
             "group": "Landscape"
           },
           {
-            "value": "xl:aspect-[16/9]",
+            "value": "xl:aspect-[16\/9]",
             "label": "16x9",
             "group": "Landscape"
           }
@@ -901,7 +890,7 @@
         "type": "checkbox",
         "id": "show_tax_note",
         "default": true,
-        "label": "Show tax/shipping message in cart drawer"
+        "label": "Show tax\/shipping message in cart drawer"
       },
       {
         "type": "checkbox",

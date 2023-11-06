@@ -1,55 +1,39 @@
+{%- comment -%} Capture container data with url from where to fetch recommendations {%- endcomment -%}
+{%- capture container_data -%}
+    {%- if product.id -%}
+      data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&intent={{ section.settings.intent }}&limit={{ section.settings.limit }}"
+    {%- endif -%}
+  {%- endcapture -%}
+
 {%- liquid
   if recommendations.performed? and recommendations.products_count > 0
     assign object_array = recommendations.products
   else
     assign object_array = product.collections.first.products
   endif
--%}
 
-{%- comment -%} Render the content {%- endcomment -%}
-{%- if object_array.size > 0 -%}
-  {%- capture container_content -%}
-    {%- render 'swiper-content',
-      object_array: object_array,
-      is_recommendations: true,
-      custom_element: 'product-recommendations',
-      render_products: true,
-      max_count: section.settings.limit,
-      index_on_page: section.index,
-      id: section.id,
-      swiper_indication: section.settings.swiper_indication,
-      swiper_navigation: section.settings.swiper_navigation,
-      swiper_autoplay: section.settings.swiper_autoplay,
-      swiper_autoplay_delay: section.settings.swiper_autoplay_delay
-    -%}
-  {%- endcapture -%}
+  assign object_array_size = object_array.size
+  assign has_current_product = object_array | where: 'id', product.id
+  if has_current_product
+    assign object_array_size = object_array_size | minus: 1
+  endif
 
-  {%- comment -%} Capture container data with url from where to fetch recommendations {%- endcomment -%}
-  {%- capture container_data -%}
-    {%- if product.id -%}
-      data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&intent={{ section.settings.intent }}&limit={{ section.settings.limit }}"
-    {%- endif -%}
-  {%- endcapture -%}
+  # Render the content
+  if object_array_size > 0
+    capture container_content
+      render 'swiper-content', object_array: object_array, is_recommendations: true, custom_element: 'product-recommendations', render_products: true, max_count: section.settings.limit, index_on_page: section.index, id: section.id, swiper_indication: section.settings.swiper_indication, swiper_navigation: section.settings.swiper_navigation, swiper_autoplay: section.settings.swiper_autoplay, swiper_autoplay_delay: section.settings.swiper_autoplay_delay
+    endcapture
 
-  {%- liquid
     # Container class
     assign container_class = 'product-recommendations block overflow-hidden'
     if section.settings.color_scheme != blank
       assign container_class = container_class | append: ' container--background my-0 group/color-scheme ' | append: section.settings.color_scheme
     endif
-  -%}
 
-  {% comment %} Render the section {% endcomment %}
-  {%- render 'render-container-content',
-    tag: 'product-recommendations',
-    data: container_data,
-    title: section.settings.heading,
-    title_class: 'h4 product-recommendations__heading',
-    class: container_class,
-    content: container_content,
-    content_class: 'p-0'
-  -%}
-{%- endif -%}
+    # Render the section
+    render 'render-container-content', tag: 'product-recommendations', data: container_data, title: section.settings.heading, title_class: 'h4 product-recommendations__heading', class: container_class, content: container_content, content_class: 'p-0'
+  endif
+-%}
 
 {% schema %}
   {

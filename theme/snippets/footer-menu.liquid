@@ -31,16 +31,11 @@
   assign link_active_class = 'active'
 
   assign collapsible_button_class = 'flex items-center gap-2'
-
-  assign grid_cols = 'md:grid-cols-' | append: menu.links.size
-  if menu.links.size > 3
-    assign grid_cols = 'md:grid-cols-3'
-  endif
 -%}
 
 {%- if menu.links.size > 0 -%}
   {%- comment -%} Level 1 {%- endcomment -%}
-  <ul class="footer-menu level-1 grid {{ grid_cols }} list-none gap-base">
+  <ul class="footer-menu level-1 flex flex-col md:flex-row md:justify-center list-none gap-base">
     {%- for level_1_link in menu.links -%}
       {%- comment -%} Get link and fix deep link to native filters {%- endcomment -%}
       {%- liquid

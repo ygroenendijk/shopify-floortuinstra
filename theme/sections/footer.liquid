@@ -4,7 +4,12 @@
   assign enable_language_selector = false
 -%}
 
-<footer class="footer pb-4 pt-8 md:pb-6 md:pt-10 {{ section.settings.color_scheme }}">
+<footer class="footer mt-[100px] pb-4 md:pb-6 {{ section.settings.color_scheme }}">
+  {% comment %} Logo first {% endcomment %}
+  <div class="footer__logo mx-auto w-[116px] -translate-y-1/2 rounded-full bg-primary p-2">
+    {%- render 'global-logo', classes: 'max-w-[100px]', text_color: 'fill-white', line_color: 'stroke-white', hide_feet: true, bg_color: 'fill-white' -%}
+  </div>
+
   <div class="content-wrapper flex flex-col px-content-wrapper-padding">
     <div class="footer__blocks grid grid-cols-12 gap-y-10 md:gap-base">
       {%- for block in section.blocks -%}
@@ -32,7 +37,7 @@
             {%- endcomment -%}
 
             <div
-              class="footer-block footer-block--{{ block.type }} {{ block.settings.width_mobile }} {{ block.settings.width_tablet }} {{ block.settings.width_desktop }}"
+              class="footer-block footer-block--{{ block.type }} {{ block.settings.width_mobile }} {{ block.settings.width_tablet }} {{ block.settings.width_desktop }} {% if block.settings.width_desktop == 'xl:col-span-12' -%}text-center{%- endif %}"
               {{ block.shopify_attributes }}>
               {%- comment -%} Create collapsible group for mobile {%- endcomment -%}
               <collapsible-component
@@ -59,8 +64,15 @@
 
             {%- comment -%} Social links {%- endcomment -%}
           {%- when 'socials' -%}
+            {%- liquid
+              if block.settings.alignment == 'justify-self-center'
+                assign social_class = 'justify-center'
+              elsif block.settings.alignment == 'justify-self-end'
+                assign social_class = 'justify-end'
+              endif
+            -%}
             <div class="footer-block footer-block--social {{ block.settings.width_mobile }} {{ block.settings.width_tablet }} {{ block.settings.width_desktop }}">
-              {%- render 'global-social-links', icon_shape: block.settings.social_icons_shape, icon_size: block.settings.social_icons_size -%}
+              {%- render 'global-social-links', icon_shape: block.settings.social_icons_shape, icon_size: block.settings.social_icons_size, social_class: social_class -%}
             </div>
 
             {% comment %} Newsletter {% endcomment %}
@@ -105,7 +117,14 @@
             <div class="footer-block footer-block--{{ block.type }} {{ block.settings.width_mobile }} {{ block.settings.width_tablet }} {{ block.settings.width_desktop }} {{ block.settings.alignment }}">
               {%- comment -%} Payment icons {%- endcomment -%}
               <div class="col-span-12 md:col-span-8 xl:col-span-9">
-                {%- render 'global-payment-methods', icon_size: block.settings.payment_icons_size, -%}
+                {%- liquid
+                  if block.settings.alignment == 'justify-self-center'
+                    assign list_class = 'justify-center'
+                  elsif block.settings.alignment == 'justify-self-end'
+                    assign list_class = 'justify-end'
+                  endif
+                -%}
+                {%- render 'global-payment-methods', icon_size: block.settings.payment_icons_size, list_class: list_class -%}
               </div>
             </div>
         {%- endcase -%}
@@ -219,7 +238,6 @@
             "type": "select",
             "id": "alignment",
             "label": "Alignment",
-            "info": "Applies to medium screens and up.",
             "default": "",
             "options": [
               {
@@ -227,12 +245,12 @@
                 "label": "Left"
               },
               {
-                "value": "md:justify-self-center",
+                "value": "justify-self-center",
                 "label": "Center"
               },
               {
-                "value": "md:justify-self-end",
-                "label": "right"
+                "value": "justify-self-end",
+                "label": "Right"
               }
             ]
           },
@@ -335,7 +353,6 @@
             "type": "select",
             "id": "alignment",
             "label": "Alignment",
-            "info": "Applies to medium screens and up.",
             "default": "",
             "options": [
               {
@@ -343,12 +360,12 @@
                 "label": "Left"
               },
               {
-                "value": "md:justify-self-center",
+                "value": "justify-self-center",
                 "label": "Center"
               },
               {
-                "value": "md:justify-self-end",
-                "label": "right"
+                "value": "justify-self-end",
+                "label": "Right"
               }
             ]
           },
@@ -480,7 +497,6 @@
             "type": "select",
             "id": "alignment",
             "label": "Alignment",
-            "info": "Applies to medium screens and up.",
             "default": "",
             "options": [
               {
@@ -488,12 +504,12 @@
                 "label": "Left"
               },
               {
-                "value": "md:justify-self-center",
+                "value": "justify-self-center",
                 "label": "Center"
               },
               {
-                "value": "md:justify-self-end",
-                "label": "right"
+                "value": "justify-self-end",
+                "label": "Right"
               }
             ]
           },
@@ -609,7 +625,6 @@
             "type": "select",
             "id": "alignment",
             "label": "Alignment",
-            "info": "Applies to medium screens and up.",
             "default": "",
             "options": [
               {
@@ -617,12 +632,12 @@
                 "label": "Left"
               },
               {
-                "value": "md:justify-self-center",
+                "value": "justify-self-center",
                 "label": "Center"
               },
               {
-                "value": "md:justify-self-end",
-                "label": "right"
+                "value": "justify-self-end",
+                "label": "Right"
               }
             ]
           },
@@ -758,7 +773,6 @@
             "type": "select",
             "id": "alignment",
             "label": "Alignment",
-            "info": "Applies to medium screens and up.",
             "default": "",
             "options": [
               {
@@ -766,12 +780,12 @@
                 "label": "Left"
               },
               {
-                "value": "md:justify-self-center",
+                "value": "justify-self-center",
                 "label": "Center"
               },
               {
-                "value": "md:justify-self-end",
-                "label": "right"
+                "value": "justify-self-end",
+                "label": "Right"
               }
             ]
           },
