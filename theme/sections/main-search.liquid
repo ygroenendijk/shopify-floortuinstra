@@ -25,8 +25,7 @@
   {%- render 'search-form',
     predictive_search_enabled: false,
     prefix: 'search-page',
-    max_results: settings.predictive_search_max_results_per_type,
-    show_shadow: false
+    max_results: settings.predictive_search_max_results_per_type
   -%}
 
   {%- if search.performed -%}
@@ -60,7 +59,7 @@
 {%-
   render 'render-container-content',
   content: container_content,
-  class: 'group/search-page mt-8',
+  class: 'group/search-page mt-8 w-full',
   header_class: 'mb-8',
   title: container_title,
   title_tag: 'h1',

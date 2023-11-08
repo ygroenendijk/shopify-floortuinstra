@@ -124,15 +124,6 @@
   endif
 -%}
 
-{%- if is_video -%}
-  <style>
-    .video-element__video iframe {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-{%- endif -%}
-
 {% comment %} Banner wrapper {% endcomment %}
 <div
   class="{{- class -}}__wrapper relative {% if is_swiper -%}swiper-slide{%- endif %} {{ min_ratio_mobile }} {{ min_ratio_tablet }} {% if object.settings.container_width == 'container--full' %}w-screen{%- else -%}w-full min-w-full{%- endif -%}"
@@ -214,9 +205,11 @@
         {%- elsif video_type == 'vimeo' -%}
           <div id="vimeo-player-{{ video_id }}-{{ id }}" class="video-element__video--vimeo {{ video_class }}"></div>
         {%- else -%}
-          {% comment %} Render MP4 video {% endcomment %}
-          {%- assign video_class = video_class | append: ' video-element__video--mp4 object-cover' -%}
-          {{ object.settings.video_mp4 | video_tag: image_size: '1x', autoplay: autoplay, muted: autoplay, loop: loop, controls: controls, class: video_class }}
+          {%- liquid
+            # Render MP4 video
+            assign video_class = video_class | append: ' video-element__video--mp4 object-cover'
+            echo object.settings.video_mp4 | video_tag: image_size: '1x', autoplay: autoplay, muted: autoplay, loop: loop, controls: controls, class: video_class
+          -%}
         {%- endif -%}
       </div>
     {%- else -%}
