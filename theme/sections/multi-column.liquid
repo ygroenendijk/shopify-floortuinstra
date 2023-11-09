@@ -20,9 +20,6 @@
   if section.settings.color_scheme != blank
     assign container_class = container_class | append: ' container--background ' | append: section.settings.color_scheme
   endif
-  if section.settings.show_border
-    assign container_class = container_class | append: ' mx-[var(--content-wrapper-padding)]'
-  endif
 
   # Set the grid layout. Make sure there are enough blocks for the columns selected
   assign columns = section.blocks.size
@@ -73,39 +70,103 @@
 {%- comment -%} Capture the content {%- endcomment -%}
 {%- capture container_content -%}
   {%- for block in section.blocks -%}
-    {%- if block.settings.image != blank or block.settings.heading != blank or block.settings.text != blank or block.settings.button_label_1 != blank or block.settings.button_label_2 != blank -%}
+    {%- case block.type -%}
+      {%- when 'column' -%}
+        {%- if block.settings.image != blank or block.settings.heading != blank or block.settings.text != blank or block.settings.button_label_1 != blank or block.settings.button_label_2 != blank -%}
 
-      {%- liquid
-        # Get mobile image
-        assign image_mobile = block.settings.image_mobile
-        if image_mobile == blank
-          assign image_mobile = block.settings.image
-        endif
+          {%- liquid
+            # Get mobile image
+            assign image_mobile = block.settings.image_mobile
+            if image_mobile == blank
+              assign image_mobile = block.settings.image
+            endif
 
-        # Set images sizes depending on the number of columns
-        assign image_size = 100 | divided_by: columns | append: 'vw'
-        assign image_max_width = 1376 | divided_by: columns | round
-        assign sizes = '(min-width: 768px) ' | append: image_size | append: ', 100vw'
-        if section.settings.odd_even
-          assign sizes = '(min-width: 1024px) ' | append: image_size | append: ', (min-width: 768px) 50vw, 100vw'
-        endif
+            # Set images sizes depending on the number of columns
+            assign image_size = 100 | divided_by: columns | append: 'vw'
+            assign image_max_width = 1376 | divided_by: columns | round
+            assign sizes = '(min-width: 768px) ' | append: image_size | append: ', 100vw'
+            if section.settings.odd_even
+              assign sizes = '(min-width: 1024px) ' | append: image_size | append: ', (min-width: 768px) 50vw, 100vw'
+            endif
 
-        # Align buttons with flex as parent based on text align block.
-        assign button_align = 'justify-start'
-        case block.settings.text_align
-          when 'text-center'
-            assign button_align = 'justify-center'
-          when 'text-end'
-            assign button_align = 'justify-end'
-        endcase
-      -%}
+            # Align buttons with flex as parent based on text align block.
+            assign button_align = 'justify-start'
+            case block.settings.text_align
+              when 'text-center'
+                assign button_align = 'justify-center'
+              when 'text-end'
+                assign button_align = 'justify-end'
+            endcase
+          -%}
 
-      {%- comment -%} Render column {%- endcomment -%}
-      <div class="multi-columns__column rte flex flex-col {{ block.settings.position_vertical }} {{ block.settings.position_horizontal }} {{ block.settings.mobile_order }} md:order-none {% if section.settings.show_content_dividers %}px-2 py-4 md:py-0{%- endif -%}" {{ block.shopify_attributes }}>
-        {%- comment -%} Column inner width and text align {%- endcomment -%}
-        <div class="flex flex-col gap-y-4 {% if section.settings.odd_even -%}{% cycle 'md:flex-row', 'md:flex-row-reverse' %} items-center gap-x-base xl:flex-col{%- endif %}">
+          {%- comment -%} Render column {%- endcomment -%}
+          <div class="multi-columns__column rte flex flex-col {{ block.settings.position_vertical }} {{ block.settings.position_horizontal }} {{ block.settings.mobile_order }} md:order-none {% if section.settings.show_content_dividers %}px-2 py-4 md:py-0{%- endif -%}" {{ block.shopify_attributes }}>
+            {%- comment -%} Column inner width and text align {%- endcomment -%}
+            <div class="flex flex-col gap-y-4 {% if section.settings.odd_even -%}{% cycle 'md:flex-row', 'md:flex-row-reverse' %} items-center gap-x-base xl:flex-col{%- endif %}">
 
-          <div class="multi-columns__text {{ block.settings.text_align }}">
+              <div class="multi-columns__text {{ block.settings.text_align }}">
+                {%- comment -%} Heading {%- endcomment -%}
+                {%- if block.settings.heading != blank -%}
+                  <{{ block.settings.heading_element }} class="mt-0 {{ block.settings.heading_size }}">
+                    {{- block.settings.heading -}}
+                  </{{ block.settings.heading_element }}>
+                {%- endif -%}
+
+                {%- liquid
+                  # Text
+                  if block.settings.text != blank
+                    echo block.settings.text
+                  endif
+
+                  # Desktop image
+                  if block.settings.image != blank
+                    render 'responsive-image', image_object: block.settings.image, aspect_ratio: block.settings.image_ratio, class: 'multi-columns__image hidden md:block object-cover w-full', max_width: image_max_width, sizes: sizes
+                  endif
+
+                  # Mobile Image
+                  if image_mobile != blank
+                    render 'responsive-image', image_object: image_mobile, aspect_ratio: block.settings.image_ratio_mobile, class: 'multi-columns__image md:hidden object-cover w-full', max_width: 768,
+                  endif
+
+                  # First button
+                  assign button_1 = false
+                  if block.settings.button_label_1 != blank and block.settings.button_url_1 != blank
+                    assign button_1 = true
+                  endif
+
+                  # Second button
+                  assign button_2 = false
+                  if block.settings.button_label_2 != blank and block.settings.button_url_2 != blank
+                    assign button_2 = true
+                  endif
+                -%}
+
+                {%- comment -%} Buttons {%- endcomment -%}
+                {%- if button_1 or button_2 -%}
+                  <div class="flex gap-4 {{ button_align }}">
+                    {%- if block.settings.button_label_1 != blank and block.settings.button_url_1 != blank or request.design_mode and block.settings.button_label_1 != blank -%}
+                      <a href="{{ block.settings.button_url_1 | default: '#' }}"
+                        class="{{ block.settings.button_type_1 }}{% if block.settings.button_url_1 == blank %} disabled{% endif %}">
+                        {{- block.settings.button_label_1 -}}
+                      </a>
+                    {%- endif -%}
+                    {%- if block.settings.button_label_2 != blank and block.settings.button_url_2 != blank or request.design_mode and block.settings.button_label_2 != blank -%}
+                      <a href="{{ block.settings.button_url_2 | default: '#' }}"
+                        class="{{ block.settings.button_type_2 }}{% if block.settings.button_url_2 == blank %} disabled{% endif %}">
+                        {{- block.settings.button_label_2 -}}
+                      </a>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- when 'product' -%}
+          {%- comment -%} Render column {%- endcomment -%}
+          <div class="multi-columns__column rte flex flex-col md:order-none" {{ block.shopify_attributes }}>
+
             {%- comment -%} Heading {%- endcomment -%}
             {%- if block.settings.heading != blank -%}
               <{{ block.settings.heading_element }} class="mt-0 {{ block.settings.heading_size }}">
@@ -113,56 +174,9 @@
               </{{ block.settings.heading_element }}>
             {%- endif -%}
 
-            {%- liquid
-              # Text
-              if block.settings.text != blank
-                echo block.settings.text
-              endif
-
-              # Desktop image
-              if block.settings.image != blank
-                render 'responsive-image', image_object: block.settings.image, aspect_ratio: block.settings.image_ratio, class: 'multi-columns__image hidden md:block object-cover w-full', max_width: image_max_width, sizes: sizes
-              endif
-
-              # Mobile Image
-              if image_mobile != blank
-                render 'responsive-image', image_object: image_mobile, aspect_ratio: block.settings.image_ratio_mobile, class: 'multi-columns__image md:hidden object-cover w-full', max_width: 768,
-              endif
-
-              # First button
-              assign button_1 = false
-              if block.settings.button_label_1 != blank and block.settings.button_url_1 != blank
-                assign button_1 = true
-              endif
-
-              # Second button
-              assign button_2 = false
-              if block.settings.button_label_2 != blank and block.settings.button_url_2 != blank
-                assign button_2 = true
-              endif
-            -%}
-
-            {%- comment -%} Buttons {%- endcomment -%}
-            {%- if button_1 or button_2 -%}
-              <div class="flex gap-4 {{ button_align }}">
-                {%- if block.settings.button_label_1 != blank and block.settings.button_url_1 != blank or request.design_mode and block.settings.button_label_1 != blank -%}
-                  <a href="{{ block.settings.button_url_1 | default: '#' }}"
-                    class="{{ block.settings.button_type_1 }}{% if block.settings.button_url_1 == blank %} disabled{% endif %}">
-                    {{- block.settings.button_label_1 -}}
-                  </a>
-                {%- endif -%}
-                {%- if block.settings.button_label_2 != blank and block.settings.button_url_2 != blank or request.design_mode and block.settings.button_label_2 != blank -%}
-                  <a href="{{ block.settings.button_url_2 | default: '#' }}"
-                    class="{{ block.settings.button_type_2 }}{% if block.settings.button_url_2 == blank %} disabled{% endif %}">
-                    {{- block.settings.button_label_2 -}}
-                  </a>
-                {%- endif -%}
-              </div>
-            {%- endif -%}
+            {%- render 'product-card', product_object: block.settings.product -%}
           </div>
-        </div>
-      </div>
-    {%- endif -%}
+      {%- endcase -%}
   {%- endfor -%}
 {%- endcapture -%}
 
@@ -727,6 +741,93 @@
               {
                 "value": "link",
                 "label": "Link"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Product option"
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product to highlight"
+          },
+          {
+            "type": "header",
+            "content": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Column"
+          },
+          {
+            "type": "select",
+            "id": "heading_element",
+            "default": "h3",
+            "label": "Heading element",
+            "info": "Change the element of the heading for SEO purposes. If the section heading is H2, this should be H3, etc.",
+            "options": [
+              {
+                "value": "h2",
+                "label": "H2"
+              },
+              {
+                "value": "h3",
+                "label": "H3"
+              },
+              {
+                "value": "h4",
+                "label": "H4"
+              },
+              {
+                "value": "h5",
+                "label": "H5"
+              },
+              {
+                "value": "h6",
+                "label": "H6"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "heading_size",
+            "label": "Heading size",
+            "info": "This is applied only for visual reasons.",
+            "default": "h5",
+            "options": [
+              {
+                "value": "h1",
+                "label": "H1"
+              },
+              {
+                "value": "h2",
+                "label": "H2"
+              },
+              {
+                "value": "h3",
+                "label": "H3"
+              },
+              {
+                "value": "h4",
+                "label": "H4"
+              },
+              {
+                "value": "h5",
+                "label": "H5"
+              },
+              {
+                "value": "h6",
+                "label": "H6"
               }
             ]
           }
