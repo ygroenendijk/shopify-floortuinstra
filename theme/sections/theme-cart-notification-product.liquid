@@ -1,6 +1,7 @@
 {%- if cart != empty -%}
   {%- for item in cart.items -%}
     <div id="cart-notification-product-{{ item.id }}" class="cart-item">
+      <!-- {{ item | json }} -->
       {%- if item.image != blank -%}
         {%- render 'responsive-image', image_object: item.image, alt: item.title, widths: '80, 160', aspect_ratio: '1/1', class: 'w-20 border' -%}
       {%- endif -%}
@@ -10,7 +11,7 @@
         </p>
 
         {% comment %} Price {% endcomment %}
-        {% render 'render-price', product: item.variant %}
+        {% render 'render-price', product: item %}
 
         <div class="mt-auto">
           {%- unless item.product.has_only_default_variant -%}

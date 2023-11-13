@@ -103,7 +103,7 @@
 -%}
 
 <article
-  class="product-card group/product-card relative z-0 flex h-full flex-col gap-4 overflow-hidden {{ product_card_state_classes }} group-[.color-scheme]/color-scheme:bg-white group-[.color-scheme]/color-scheme:pb-4 {% if view == 'alt' -%}rounded-md border border-gray-100 p-4{%- endif %} rounded-md md:border-none md:p-0"
+  class="product-card group/product-card relative z-0 flex h-full flex-col gap-4 overflow-hidden {{ product_card_state_classes }} group-[.color-scheme]/color-scheme:bg-white group-[.color-scheme]/color-scheme:pb-4 {% if view == 'alt' -%}border border-gray-100 p-4{%- endif %} md:border-none md:p-0"
   data-product-card>
   {%- comment -%} Accesibility text {%- endcomment -%}
   <a
@@ -117,7 +117,7 @@
 
   <header class="product-card__header flex flex-col gap-4">
     {%- comment -%} Product images {%- endcomment -%}
-    <div class="product-card__images relative mb-4 px-4 group-[.color-scheme]/color-scheme:pt-4">
+    <div class="product-card__images relative mb-4 group-[.color-scheme]/color-scheme:px-4 group-[.color-scheme]/color-scheme:pt-4">
       {%- comment -%} Render image with hover {%- endcomment -%}
       <a
         class="product-card__image relative block text-center {% unless product_object.available -%}opacity-50 saturate-50{%- endunless %} {% unless show_secondary_image %}transition-all states:scale-105{%- endunless -%}"

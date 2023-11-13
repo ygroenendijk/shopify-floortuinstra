@@ -51,9 +51,8 @@
       endif
 
       # Check if there are extra parent collection metafields defined
-      if collection.metafields.breadcrumbs.parent_collection.value != blank
-        assign parent_collection = collection.metafields.breadcrumbs.parent_collection.value
-      endif
+      assign parent_collection = product.collections[0]
+      assign all_products_text = 'sections.breadcrumbs.all_products' | t
 
       case template.name
         when 'list-collections'
@@ -61,18 +60,27 @@
           echo 'sections.breadcrumbs.collections' | t
           echo '::' | append: routes.collections_url
         when 'collection'
+          if collection.url != '/collections/all'
+            echo '||' | append: all_products_text
+            echo '::' | append: '/collections/all'
+          endif
           if parent_collection != blank
             echo '||' | append: parent_collection.title
             echo '::' | append: parent_collection.url
           endif
-          echo '||' | append: collection.title
+          if collection.url == '/collections/all'
+            echo '||' | append: all_products_text
+          else
+            echo '||' | append: collection.title
+          endif
           echo '::' | append: collection.url
         when 'product'
-          if collection.title != blank
-            if parent_collection != blank
-              echo '||' | append: parent_collection.title
-              echo '::' | append: parent_collection.url
-            endif
+          echo '||' | append: all_products_text
+          echo '::' | append: '/collections/all'
+          if parent_collection != blank
+            echo '||' | append: parent_collection.title
+            echo '::' | append: parent_collection.url
+          elsif collection.title != blank
             echo '||' | append: collection.title
             echo '::' | append: collection.url
           endif

@@ -117,50 +117,53 @@
 
             {% comment %} Inventory status {% endcomment %}
             {%- when 'inventory' -%}
-              <div id="inventory-{{ product.id }}" class="product__inventory no-js-hidden">
-              <p
-                class="mb-0 flex items-center gap-2 text-sm leading-none {% if product.selected_or_first_available_variant.inventory_management != 'shopify' %}hidden{% endif %}"
-                {{ block.shopify_attributes }}
-                role="status">
-                {%- liquid
-                  if product.selected_or_first_available_variant.inventory_management == 'shopify'
+              {%- if product.available -%}
+                <div id="inventory-{{ product.id }}" class="product__inventory no-js-hidden">
+                  <p
+                    class="mb-0 flex items-center gap-2 text-sm leading-none {% if product.selected_or_first_available_variant.inventory_management != 'shopify' %}hidden{% endif %}"
+                    {{ block.shopify_attributes }}
+                    role="status">
+                    {%- liquid
+                      if product.selected_or_first_available_variant.inventory_management == 'shopify'
 
-                    # Stock available
-                    if product.selected_or_first_available_variant.inventory_quantity > 0
+                        # Stock available
+                        if product.selected_or_first_available_variant.inventory_quantity > 0
 
-                      # Low stock
-                      if product.selected_or_first_available_variant.inventory_quantity <= block.settings.inventory_threshold
-                        render 'icons', icon: 'warning-orange', icon_class: 'w-4'
-                        if block.settings.show_inventory_quantity
-                          render "render-translation", namespace: "products.product.inventory", key: "low_stock_show_count", quantity: product.selected_or_first_available_variant.inventory_quantity, fallback: "Low stock: {{ quantity }} left"
+                          # Low stock
+                          if product.selected_or_first_available_variant.inventory_quantity <= block.settings.inventory_threshold
+                            render 'icons', icon: 'warning-orange', icon_class: 'w-4'
+                            if block.settings.show_inventory_quantity
+                              render "render-translation", namespace: "products.product.inventory", key: "low_stock_show_count", quantity: product.selected_or_first_available_variant.inventory_quantity, fallback: "Low stock: {{ quantity }} left"
+                            else
+                              render "render-translation", namespace: "products.product.inventory", key: "low_stock", fallback: "Low stock"
+                            endif
+
+                          # In Stock
+                          else
+                            render 'icons', icon: 'warning-green', icon_class: 'w-4'
+                            if block.settings.show_inventory_quantity
+                              render "render-translation", namespace: "products.product.inventory", key: "in_stock_show_count", quantity: product.selected_or_first_available_variant.inventory_quantity, fallback: "{{ quantity }} in stock"
+                            else
+                              render "render-translation", namespace: "products.product.inventory", key: "in_stock", fallback: "In stock"
+                            endif
+                          endif
+
+                        # No stock available
                         else
-                          render "render-translation", namespace: "products.product.inventory", key: "low_stock", fallback: "Low stock"
-                        endif
-
-                      # In Stock
-                      else
-                        render 'icons', icon: 'warning-green', icon_class: 'w-4'
-                        if block.settings.show_inventory_quantity
-                          render "render-translation", namespace: "products.product.inventory", key: "in_stock_show_count", quantity: product.selected_or_first_available_variant.inventory_quantity, fallback: "{{ quantity }} in stock"
-                        else
-                          render "render-translation", namespace: "products.product.inventory", key: "in_stock", fallback: "In stock"
+                          if product.selected_or_first_available_variant.inventory_policy == 'continue'
+                            render 'icons', icon: 'warning-green', icon_class: 'w-4'
+                            render "render-translation", namespace: "products.product.inventory", key: "out_of_stock_continue_selling", fallback: "In stock"
+                          else
+                          # this is never rendered
+                            render 'icons', icon: 'warning-red', icon_class: 'w-4'
+                            render "render-translation", namespace: "products.product.inventory", key: "out_of_stock", fallback: "Out of stock"
+                          endif
                         endif
                       endif
-
-                    # No stock available
-                    else
-                      if product.selected_or_first_available_variant.inventory_policy == 'continue'
-                        render 'icons', icon: 'warning-green', icon_class: 'w-4'
-                        render "render-translation", namespace: "products.product.inventory", key: "out_of_stock_continue_selling", fallback: "In stock"
-                      else
-                        render 'icons', icon: 'warning-red', icon_class: 'w-4'
-                        render "render-translation", namespace: "products.product.inventory", key: "out_of_stock", fallback: "Out of stock"
-                      endif
-                    endif
-                  endif
-                -%}
-              </p>
-            </div>
+                    -%}
+                  </p>
+                </div>
+              {%- endif -%}
 
           {%- comment -%} Line break {%- endcomment -%}
           {%- when 'linebreak' -%}

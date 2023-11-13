@@ -6,7 +6,7 @@
   assign media_content_thumbnails_slider = ''
 
   assign image_count = 0
-  assign media_class = 'product-media-swiper__item relative mx-auto block aspect-square max-w-lg'
+  assign media_class = 'product-media-swiper__item relative mx-auto block max-w-lg'
 -%}
 
 {%- for media in product.media -%}
@@ -51,13 +51,12 @@
           >
             {%- render 'responsive-image',
               image_object: media,
-              aspect_ratio: '1/1',
               max_width: 1024,
               sizes: '(min-width: 768px) 512px, 100vw',
               alt: media.alt,
               title: media.alt,
               lazy: lazy,
-              class: 'aspect-square w-full'
+              class: 'w-full object-cover'
               -%}
             {%- render 'icons', icon: 'zoom', icon_class: 'w-6 absolute end-4 bottom-4 md:hidden pointer-events-none' -%}
           </a>
@@ -131,7 +130,7 @@
 
 {%- comment -%} Output slider {%- endcomment -%}
 {%- if product.media != blank -%}
-  <product-media-swiper class="product-media-swiper relative flex h-full flex-col justify-between">
+  <product-media-swiper class="product-media-swiper relative flex h-full flex-col justify-between gap-base">
     {%- comment -%} Main Slider {%- endcomment -%}
     <div class="product-media-swiper__slider col-span-12 mb-4 md:mb-0">
       {%- comment -%} Main slider {%- endcomment -%}
