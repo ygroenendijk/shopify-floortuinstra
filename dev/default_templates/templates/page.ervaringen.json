@@ -1,0 +1,497 @@
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page"
+    },
+    "main": {
+      "type": "main-ervaringen",
+      "blocks": {
+        "129d524e-9057-4c53-9010-da064c56950e": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Kinderen",
+            "text_nl": "<p>YES Floor Tuinstra heeft me de beste voetmassage gegeven die ik ooit heb gehad, het was magisch, ik verdween in een zalige semi-slaap en wilde niet dat het voorbij was … dat geld ook voor mijn dochter (4), ze zei ‘mama, kun je alsjeblieft de deur dicht doen, ik wil niet dat iemand mij stoort wanneer Floor mijn voeten masseert’ … oh mijn god … ons dochtertje stelt al hoge eisen :-).</p>",
+            "text_en": "<p>YES Floor Tuinstra gave me the BEST foot massage I have ever had, it was magical I just disappeared into a blissful semi-sleep and did not want it to be over…so did my daughter (4), she said ‘mum, can you please close the door, I do not want anybody to disturb me when Floor is massaging my feet’…OMG…high maintenance kind of girl our little daughter :-)</p>",
+            "text_de": "<p>JA – Floor hat mir die beste Fußmassage überhaupt gegeben! Es war traumhaft und hat mich im glückseligen Halbschlaf gelassen, ich wollte einfach nicht das es zu Ende geht. Da stimmte auch meine Tochter (4) zu, sie sagte, ‘Mama, kannst Du bitte die Tür zu machen? Ich will ungestört bleiben während Floor mir meine Füße massiert.’ Mensch, ganz anspruchsvoll unsere Kleine!</p>",
+            "title": "<p>Pia & Sophia (4) – Helsinki</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "24670539-df45-4eed-91d9-34580350bfb4": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Floor, jij masseert als een Chinees met het verschil dat je Nederlands praat. Je hebt mensen die reflex punten zeggen te kunnen masseren maar waarbij je het gevoel hebben dat ze de juiste plek net niet raken, dat doe jij wel. Je bent de koningin van de reflex massage!</p>",
+            "text_en": "<p>Floor, you massage like a Chinese with the difference that you speak Dutch. There’s people that say they massage reflexzones but they give you the feeling they don’t hit the right spot, but you hit the right spot! You are the queen of reflex massage!</p>",
+            "text_de": "<p>Floor, Du massierst wie eine Chinesin mit dem Unterschied das Du Niederländisch sprichst! Es gibt Leute die sagen das sie Reflexzonen Masseure sind, jedoch einem das Gefühl geben nie die richtigen Stellen zu finden – aber DU findest genau die richtigen Stellen! Du bist die Königin von Fußreflexionen Massagen!</p>",
+            "title": "<p>Catharina – Den Haag</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "608b2969-d1fa-4ab5-9712-e9072efa7533": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Floors voetreflexologie sessies zijn geweldig. Ze is een zeer vriendelijk, zorgzaam en koesterend persoon en deze kwaliteiten komen altijd duidelijk naar voren in haar behandelingen. Ze past de sessie altijd aan op mijn specifieke behoeften die dag en legt altijd uit waarom ze een bepaalde techniek gebruikt en hoe deze zou kunnen helpen. Floor heeft een zeer professionele manier en haar kalmerende en positieve energie en aanwezigheid – gecombineerd met haar bekwame voetreflexmassage – maken me een bijzonder blije en dankbare cliënt van haar.</p>",
+            "text_en": "<p>Floor’s foot reflexology sessions are amazing. She is an extremely kind, caring and nurturing person and these qualities are always evident in her practice. She always tailors the session to address my particular needs on each day, and explains why she has chosen a certain technique and how it could be of assistance. Floor has a very professional manner, and her clming and positive energy and presence – combined with her skillful reflexology massage – make me an exceptionally happy and grateful client of hers.</p>",
+            "text_de": "<p>Floors Fußreflexzonenmassagen sind unglaublich. Sie ist sehr aufmerksam, freundlich und fürsorglich, was auch in ihrer Praxis auffällt. Sie passt jede Behandlung an die Person, die Situation und Stimmung des Tages an, und erklärt wieso sie eine bestimmte Technik ausgewählt hat und wie diese helfen könnte. Floor hat eine sehr professionelle Arbeitsweise und ihre beruhigende, positive Energie und Präsenz, kombiniert mit ihrer gekonnten Massage Technik, machen mich zur sehr glücklichen, zufriedenen und dankbaren Kundin.</p>",
+            "title": "<p>Hilary – Den Haag</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "1be0d181-cf34-4f41-911e-b4bff13ff9c4": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Je denkt dat je voeten hebt om op te lopen, te rennen, om op te dansen..zelfs om mee te verven (waarom niet?). Maar in een recente voetreflexologie behandeling van Floor realiseerde ik me dat het voor haar een deur is om toe te treden in de wereld van energetische banen en stromen van iemands lichaam om zo balans en genezing tot stand te brengen…het bracht me in een diepe ontspanning maar meer dan dat was het een ontdekking en verbindende reis naar andere delen van het lichaam en de geest. Dankjewel Floor.</p>",
+            "text_en": "<p>One may think that feet are for walking, running, dancing..even painting (why not?) but in a recent foot reflexology session with Floor I’ve realized that for her it is a door to enter into the energetic strings and flows of one’s body in order to bring balance and healing..it was deeply relaxing but much more than that it was a discovery and connecting journey to other parts of the body and soul. Thank you Floor.</p>",
+            "text_de": "<p>Manche Menschen denken das Füße dazu dienen um zu gehen, laufen, tanzen… oder sogar um zu malen (wieso nicht?) aber in der Fußreflexzonenmassage mit Floor habe ich gesehen das für sie Füße eine Tür in die energischen Ströme des Körpers darstellen welche genutzt werden können um Balance und Heilkraft des Körpers zu fördern. Die Massage war sehr erholsam aber sie war auch viel mehr – eine Entdeckungsreise in andere Teile des Körpers und der Seele. Danke Floor.</p>",
+            "title": "<p>Filipe – Lissabon</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "d404613a-4cfe-4bfe-97bc-0697244dcbe3": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Prima op mijn gemak gesteld, ik kon luisteren naar mijn eigen muziek! De behandeling was ongemerkt intensief, maar nooit vervelend. Ik heb veel informatie gekregen over de gevoelige plekken en waar deze mee zijn verbonden. Al met al de moeite meer dan waard!</p>",
+            "text_en": "<p>I was nicely put at ease, I could listen to my own music! The foot reflexology treatment was intensive yet it went almost unnoticed and it was never annoying. I received a lot of information about sensitive spots and to what they are connected. All together it was definitely worth it!</p>",
+            "text_de": "<p>Ich habe mich von Anfang an sehr wohl gefühlt, und konnte sogar zu meiner eigenen Musik entspannen! Die Fußreflex Behandlung war intensiv jedoch nicht störend oder unerfreulich. Ich habe viele Informationen zu empfindlichen Stellen am Fuß bekommen und wie sie mit anderen Teilen des Körpers verbunden sind. Im Endergebnis hat sich alles wirklich sehr gelohnt!</p>",
+            "title": "<p>Marcel – Wateringen</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "7e21d227-ad9a-4de9-9d5f-a696f355bc4a": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Bij Floor ben je op je gemak. Of je nou met haar praat of een behandeling ondergaat. De voetmassage was zeer ontspannen en na afloop had ik een rozig en tevreden gevoel. Sommige reflexgebieden onder mijn voeten waren gevoelig, wat erop duidt dat er elders wat probleempjes zijn die mijn aandacht verdienen. Ook al denk je niks te mankeren, een voetmassage door Floor is een heel fijne vorm van ontspanning.</p>",
+            "text_en": "<p>With Floor you are at ease. Whether you are talking to her or undergoing a massage. The footmassage was very relaxing and afterwards I had a very satisfied.Some reflexzones under my feet were sensitive, which indicated that somewhere else in my body certain problems need more attention. Even if you think you don’t have any problems, a footmassage from Floor is very nice form of relaxation.</p>",
+            "text_de": "<p>Bei Floor fühlt mann sich von anhieb an sehr gut versorgt, wenn mann mit ihr spricht und auch während der Behandlung. Die Fußmassage war entspannend und auch danach habe ich mich sehr zufrieden gefühlt. Einige Reflexzonen in meinen Füßen waren äußerst empfindlich, was wiederum gezeigt hat das einige Stellen in meinem Körper mehr Aufmerksamkeit gebraucht haben als andere. Auch wenn mann keine Beschwerden hat ist eine Fußmassage von Floor sehr angenehm und eine schöne Form der Entspannung.</p>",
+            "title": "<p>Eelkje – Leiden</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "610fd7a8-75be-43ef-8ace-56584de09c91": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Floor was heel professioneel. De massage heeft goed geholpen met het verlichten van mijn voetklachten. Ze gaf ook goede uitleg hoe ze te werk zou gaan en wat alles betekende. Ik was diep onder de indruk van haar kennis en heb echt genoten van de massage. Ik wil graag dat ze nog een keer langskomt!</p>",
+            "text_en": "<p>Floor was very professional. The massage has helped a lot with relieving my foot aches. She also explained really well how she would work and what everything meant. I was deeply impressed with her knowledge and really enjoyed the massage. I would love her to visit again!</p>",
+            "text_de": "<p>Floor war durchaus professionell. Die Massage hat meinen schmerzenden Füßen sehr gut getan. Sie hat auch ihre einzelnen Schritte und die Wissenschaft dahinter ausführlich erklärt. Ich war von ihrem Expertenwissen sehr beeindruckt und habe die Massage sehr genossen. Ich würde liebend gerne wieder kommen!</p>",
+            "title": "<p>Stefan – Eindhoven</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "c88a1518-f181-486a-9005-9a5e1e50fcc4": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>De massage was een ontspannende voetreflex massage. Ik vond het fijn dat Floor af en toe ook uitlegde wat ze deed en welke conclusies ze trok. Met name haar vraag of ik last van mijn blaas had gehad pasgeleden vond ik opmerkelijk, omdat ik inderdaad pasgeleden een urineweginfectie heb gehad. Na de massage was ik weer erg relax en voelde ik me rozig. een goed teken dus. Zeker voor herhaling vatbaar. Floor is rustig en pakt het serieus aan. Ze geeft een betrouwbare indruk en weet waar ze het over heeft.</p>",
+            "text_en": "<p>The massage was a relaxing foot reflexology massage. I liked it that Floor explained every now and then what she was doing and which conclusions she pulled from that. Especially her question if I had any problems with my bladder lately I found remarkable, because I actually just had a urinary tract infection. After the massage I was very relaxed and I felt at ease. I would definitely repeat this. Floor is calm and handles things seriously. She comes across as trustworthy and she knows what she is talking about.</p>",
+            "text_de": "<p>Die Massage welche ich ausgewählt habe war eine erholsame Fußreflexzonenmassage. Mir gefiel das Floor ab und zu erklärt hat was sie macht, was sie fühlt und was für Schlüsse sie daraus ziehen konnte. Sie hat gezielt gefragt ob ich Schwierigkeiten mit meiner Blase hatte, was ich erstaunlich fand dar ich gerade eine Harnwegsinfektion hinter mir hatte. Nach der Massage fühlte ich mich sehr entspannt und erholt. Ich würde es auf jedem Fall gerne wiederholden. Floor is ruhig und nimmt die Behandlung auch ernst. Sie scheint vertrauenswürdig und kompetent.</p>",
+            "title": "<p>Tjitske – Utrecht</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "3cdc87ba-05c0-46ae-9b09-a8d9d8cc7e27": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Ik heb een lange voetmassage van Floor gehad om een pijn in mijn beide hielen te verzachten en om mijn vermoeide voeten beter te laten voelen. Ik vind dat Floor excellent werk heeft geleverd door druk uit te oefenen op belangrijke punten op mijn voeten. Het netto resultaat: een ontspannen gevoel dat uren nadien nog doorging. Ik zou dit heel graag op reguliere basis willen doen en raad iedereen met vermoeide en/of pijnlijke voeten of als je op zoek bent naar ontspanning, een voetmassage van Floor aan.</p>",
+            "text_en": "<p>I had a 1,5 hour long foot massage with Floor back in the summer to help soothe an ache that I have had in both my heels for some time, and help my tired feet feel better. I felt that Floor did an excellent job by applying pressure on key points on my feet. The net result: a relaxed feeling that lasted for hours.I would love to do this on a regular basis. I would recommend Floor to anyone with feet ache or in need of some downtime.</p>",
+            "text_de": "<p>Im Sommer hatte ich eine 90-minutige Fußmassage bei Floor um die Schmerzen in meinen Fersen zu lösen und um meine müden Füße aufzumuntern. Floor hat exzellente Arbeit geleistet und genau die richtigen Stellen an den Füßen getroffen. Das Endergebnis: ein Gefühl der puren Entspannung welches stundenlang andauerte. Ich würde Floor jedem empfehlen der unter schmerzenden Füßen leidet sowie allen die eine Auszeit brauchen.</p>",
+            "title": "<p>Hendrik – Helsinki</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "f48967b9-818e-4857-b553-0f24f7afc59a": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Heerlijk ontspannende massage! Op een aangename manier weet Floor de drukpunten te vinden die tot een prettige ontspanning leiden. Na afloop geeft deze massage een rustig gevoel.</p>",
+            "text_en": "<p>Wonderful relaxing massage! In a pleasant way Floor knows to find key pressure points which lead to relaxation. Afterwards this massage gives a calm feeling.</p>",
+            "text_de": "<p>Eine sehr erholsame Massage! Auf eine angenehme Art weis Floor wie mann die kritischen Punkte an den Füßen findet um die Entlastung und Entspannung zu erzwingen. Die Behandlung selber ist erholsam und verlockend. Bestimmte Reflexzonen werden gezielt stimuliert und dies merkt mann auch während der Behandlung. Floor hat ein Gefühl für das was wirkt und angemessen ist. Das Zufriedenheitsgefühl danach ist sehr intensiv.</p>",
+            "title": "<p>Lena – Dordrecht</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "981e8b1b-6791-4e44-bb9c-a3b843061391": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Kalme en rustige behandeling. De indruk wordt meteen gewekt dat ze zeker van haar zaak is. De behandeling zelf is zowel ontspannend als prikkelend, bepaalde voetzone gebieden worden gestimuleerd en dit is duidelijk te merken tijdens de behandeling. Floor heeft een goed gevoel van wat wenselijk is. Het gevoel van tevredenheid na afloop is heel hoog.</p>",
+            "text_en": "<p>Calm and tranquil massage. You immediately get the impression that she knows what she’s doing. The treatment itself is relaxing and tantalizing, certain foot reflexzones are stimulated and you can notice this clearly during the treatment. Floor has a good sense of what is needed. The feeling of satisfaction is very high afterwards.</p>",
+            "text_de": "",
+            "title": "<p>Oliver – Den Haag</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "93a7312a-ff65-4391-977b-8cd462c80946": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Aanpak: zeer professioneel, respectvol. Massage: vindingrijk, beschikt over veel kennis, uitstekende uitleg over de status van dingen en het lichaamsproces. Respect voor privacy, top service van een top persoon. Ps: Tot nu toe ben ik aardig wat mensen tegengekomen die claimen dat ze van alles weten over voetreflex massage. Maar na die van Floor te hebben gehad ga ik niet meer naar iemand anders. Het is superbe!</p>",
+            "text_en": "<p>Approach: highly professional, respectfulMassage: resourceful, knowledgeable, excellent explanation of status of things and body processes, high respect for privacy.Top service from a top person.ps: I have faced until now quite some people that claimed that they now know foot reflexology massage. After having Floor’s I will not go to any other anymore. It is so supberb!</p>",
+            "text_de": "<p>Vorgehen: hoch professionell, respektvollMassage: einfallsreich, sachkundig, exzellente Erklärung der Ausgangssituation und der Prozesse und Verbindungen im Körper, hoher Respekt vor PrivatsphäreTop Service von einer top Person.PS: Ich habe sehr oft von Masseuren gehört das sie sich in Reflexzonenmassagen auskennen. Nach dem ich bei Floor war gehe ich nur noch zu ihr. Es ist einfach hervorragend!</p>",
+            "title": "<p>Mojca – Ljubljana</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "93d4e5f9-f207-47d7-8372-9a5c6b3c8fce": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Heerlijke voetmassage gehad. Erg ontspannen en daarna weer een stukje fitter voor de dag!! It was very good!! Just give it a try!! Thanks Floor</p>",
+            "text_en": "<p>Had a wonderful foot massage. Very relaxing and afterwards felt fitter to continue my day!!It was verry good!! Just give it a try!! Thanks Floor</p>",
+            "text_de": "<p>Ich hatte eine wundervolle Fußmassage. Sehr entspannend und ich habe mich danach viel besser gefühlt um mit meinem Tag weiterzumachen. Es war hervorragend! Versuchen Sie es einfach mal! Danke Floor</p>",
+            "title": "<p>Dieuwke – Den Haag</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "5e2ed940-7682-4910-965e-82878f576af2": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Ik ben zeer tevreden over de massage. Al na een paar behandelingen was het resultaat (vochtafdrijving) erg goed zichtbaar. Floor is een heel fijne meid, zeer toegankelijk en erg kundig. Elke vraag weet ze goed te beantwoorden. Daarnaast voelde het contact vanaf het 1e moment al erg vertrouwd. Kortom ik ben zeer tevreden over Floor en over haar behandeling en d</p>",
+            "text_en": "",
+            "text_de": "",
+            "title": "<p>Cynthia – Schiedam</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "50137535-631a-40c9-a184-7d62291b82b4": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Ha Floor, ik wilde je nog bedanken voor de fijne behandeling. Vorige week vrijdag had ik hele lichte benen, ’t liefst had ik ze de hele middag omhoog gehouden, zo fijn voelden ze aan. Zelf was ik ook lekker relaxed, ’t was dus een geslaagde behandeling: ik kon goed ontspannen.</p><p>Dus nogmaals dank je wel en we zien elkaar gauw weer. Liefs Paula</p>",
+            "text_en": "<p>Hi Floor, I wanted to thank you for your pleasant treatment. Last week Friday after te massage I had very light legs, I would have preferred to keep them up in the air the whole afternoon, that’s how good they felt. I was also very relaxed so it was a succesfull treatment: I was able to relax. Thank you again and we’ll see eachother soon. Love Paula.</p><p>Paula has difficulty to relax and give in to massage in general.</p>",
+            "text_de": "<p>Hallo Floor, ich wollte mich bei Dir für die angenehme Behandlung bedanken. Freitag letzte Woche nach der Massage hat ich sehr leichte Beine. Die fühlten sich so gut an das ich sie am liebstenganztags in der Luft gehabt hätte. Ich was sehr erholt und die Behandlung war erfolgreich, ich konnte mich richtig entspannen. Danke nochmals und bis bald. Alles Liebe, Paula</p><p>Paula hat Schwierigkeiten sich zu entspannen und sich mit Massagen generell anzufreunden.</p>",
+            "title": "<p>Paula – Rijswijk</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "5fd65d3d-f4bf-484f-8d27-fc8cb54c4b92": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Baby",
+            "text_nl": "<p>Sterre had al 5 dagen geen ontlasting gehad toen ze een massage kreeg op slechts één van haar voeten. Dat was voldoende, want binnen 5 minuten was haar luier gevuld. 45 minuten later poepte ze weer en 3 uur later wéér. Ze had maar één massage nodig en daarna heeft ze nooit meer last gehad van obstipatie. Het is ook fijn dat er geen laxeermiddelen of pilletje nodig waren om haar te helpen.</p><p>(* Maarten heeft zijn eigen apotheken.)</p>",
+            "text_en": "<p>Sterre had been constipated for 5 days when she received a massage on only one of her feet. Within 5 minutes her diaper was full. 45 minutes later she pooped again and three hours later again. She only needed one massage and after that she never had problems with constipation again. It’s great to know no laxatives or pills were necessary.</p><p>[* Maarten has his own pharmacy.]</p>",
+            "text_de": "<p>Sterre war seit 5 Tagen verstopft als sie an nur einem ihrer Füße eine Massage bekam. Innerhalb 5 Minuten war ihre Windel voll und 45 Minuten später erneut, 3 Stunden später wieder. Sie brauchte nur eine Massage und hatte danach nie wieder Verstopfungsprobleme. Es ist super zu wissen das keine Abführmittel oder Pillen hierfür nötig waren.</p><p> [*Maarten ist Apothekeneigentümer]</p>",
+            "title": "<p>Maarten* & Anne, ouders van Sterre – 3 maanden </p>",
+            "title_en": "<p>Maarten & Anne</p>",
+            "title_de": "<p>Maarten & Anne</p>"
+          }
+        },
+        "3d04b5fd-1fff-4a5b-8e8d-a9e73654c533": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Baby",
+            "text_nl": "<p>Binnen een paar minuten na de massage kwam het los bij mijn dochtertje. Het is een wondermiddeltje!! Zico & Janice, ouders van Sofie </p>",
+            "text_en": "<p>Within a couple of minutes after the massage it came loose with my daughter. It works like magic!!</p>",
+            "text_de": "<p>Nur wenige Minuten nach der Massage meiner Tochter hat sich alles bei ihr gelöst. Es war magisch!</p>",
+            "title": "<p>Zico & Janice, ouders van 2-jarige Sofie</p>",
+            "title_en": "<p>Zico & Janice, parents of Sofie – 2 months</p>",
+            "title_de": "<p>Zico & Janice, Eltern von Sofie – 2 Monate</p>"
+          }
+        },
+        "eb502634-78d0-4def-a6e1-76cf89aa5c6c": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Baby",
+            "text_nl": "<p>Destijds voelde Toby zich erg ongemakkelijk als hij moest poepen maar al binnen een half uur na Floor’s massage had hij zijn pamper gevuld en was hij een gelukkiger jongetje. Marjorie & Stefan, ouders van Toby </p>",
+            "text_en": "<p>Toby had been very uncomfortable for a few days but within 30 minutes of Floor’s foot massage he had filled his nappy and was a happier boy!</p>",
+            "text_de": "<p>Toby war schon ein paar Tage unbequem aber innerhalb 30 Minuten von der Fußmassage von Floor hatte er eine volle Windel und war wieder ein glückliches Kind!</p>",
+            "title": "<p>Marjorie & Stefan, ouders van 7-maand-oude Toby</p>",
+            "title_en": "<p>Marjorie & Stefan, parents of Toby – 7 months</p>",
+            "title_de": "<p>Marjorie & Stefan, Eltern von Toby – 7 Monate</p>"
+          }
+        },
+        "5472ced5-6481-45f8-8d4c-cbfb4ce70714": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Baby",
+            "text_nl": "<p>Hoi Floor, nog even een update van Tim. Tim poept tweemaal per dag (nog steeds). We hebben geen problemen meer. Dank je wel. (Tim is twee keer gemasseerd)</p>",
+            "text_en": "<p>Hi Floor, here is an update from Tim. Tim now poops twice a day, still. We don’t have any problems anymore. Thank you.(Tim was massaged twice)</p>",
+            "text_de": "<p>Hi Floor, hier ist ein Update von Tim. Er stuhlt noch immer zweimal täglich und wir haben seit dem keinerlei Probleme gehabt. Danke!(Tim wurde zweimal massiert)</p>",
+            "title": "<p>Simone & Jeroen, ouders van 6-maand-oude Tim</p>",
+            "title_en": "<p>Simone & Jeroen, parents of Tim – 6 months</p>",
+            "title_de": "<p>Simone Jeroen, Eltern von Tim – 6 Monate</p>"
+          }
+        },
+        "e0e26d19-88a3-4644-81a2-08fede462a2d": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Nier en blaas",
+            "text_nl": "<p>Nier- en blaas behandeling: rustig opgebouwd. Pijnlijk punt waar de nier zit (dit is een probleemgebied voor mij) en behandeld. Constante aandacht, waarin naast de uitleg ook vragen werden beantwoord door Floor. Kortom: lekkere massage, rustig opgebouwd, goede uitleg, aandachtig. Conclusie: ik kom zeker terug!</p>",
+            "text_en": "<p>Kidney and bladder treatment: built up very tranquilly. A sensitive point where the kidney is located was treated (this is a problem area for me). Constant attention during which an explanation was given and questions were also answered. In short: a lovely massage, built up tranquilly, good explanation, with attention. Conclusion: I’ll be back</p>",
+            "text_de": "<p>Nieren- und Blasen-Behandlung: wurde sehr langsam aufgebaut. Eine empfindlichen Stelle (am Fuß) wo die Niere stimuliert wird wurde gezielt behandelt (dies ist eine Problemzone für mich). Durchgängige Aufmerksamkeit und klärende und hilfreiche Antworten zu meinen Fragen haben die Massage gezeichnet. Kurz gesagt, eine tolle Massage die langsam und entspannt angefangen hat und durchaus aktiv begleitet wurde. Fazit: Ich komme zurück.</p>",
+            "title": "<p>Jasmijn – Amsterdam</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "597bac02-dd32-430d-b81b-0b9922dd6527": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>nederlands ontbreekt</p>",
+            "text_en": "<p>If you have a foot massage with the idea you’re receiving a normal massage but then on your feet, you’ll be surprised for the better.I have no problems anymore with my back, no tension in my body, and during running I don’t have so much acidification anymore, these are just the short term effects of one massage. I want to go back!</p>",
+            "text_de": "<p>Wenn mann bei einer Fußmassage an eine traditionelle Massage aber für die Füße denkt, ist mann positiv erstaunt. Ich habe keine Schwierigkeiten mehr mit meinem Rücken, die Spannungen in meinem Körper haben sich gelöst und während des Laufens hat sich die Säurebildung deutlich reduziert – und das alles nur von einer einzigen Massage. Ich will wieder zurück!</p>",
+            "title": "",
+            "title_en": "<p>Arjan (marathon runner) – Rotterdam</p>",
+            "title_de": "<p>Arjan (Maratonläufer) – Rotterdam</p>"
+          }
+        },
+        "a9792152-ab68-4f32-9737-ad0324eb30e9": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Zwangerschap en bevallen",
+            "text_nl": "<p>Yesssssss ik heb eindelijk 8 uur geslapen vannacht, want Luna kreeg een baby reflex massage gisteren (en ik heb een energetische massage gehad) Ik voel me GOED!! dank aan Floor Tuinstra!</p>",
+            "text_en": "<p>Yesssssss finally I had 8 hrs of SLEEP last night, because  Luna got a baby reflexology massage yesterday (and I received an energetic massage) i’m feeling GOOD!!!!thanks to Floor Tuinstra.</p><p>Lotte gave birth to a daughter 1,5 month before.</p>",
+            "text_de": "<p>Juhuuuu! Endlich habe ich 8 Stunden SCHLAF gestern Nacht bekommen weil Luna eine Baby Reflexzonenmassage bekommen hat (und ich eine energetische Massage) und ich fühle mich GUT! Vielen Dank Floor Tuinstra.</p><p>Lotte hat vor 6 Wochen ihre Tochter bekommen.</p>",
+            "title": "<p>Lotte  – De Wilgen</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "03cb9e88-104d-4864-819c-2bc64dbb0807": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>nederlands ontbreekt</p>",
+            "text_en": "<p>Reflexology uses a holistic approach and is something that has helped me in the past. Because of this, I trust that this time it will also help me. Floor is a precise person who does her job with precision. This gives me the feeling that I’m in good hands so I can use this time to relax, something that has been very difficult for me. After three sessions of Floor I already notice an improvement in my overall health, but unexpectedly I also notice an improvement in my mood. Due to this last improvement I feel myself increasingly able to do to reduce the stress. Off course I am very happy with this result and I am very grateful for Floor for what she has done for me. I plan to continue to receive regular treatments of Floor for preventiv</p>",
+            "text_de": "<p>Bei der Reflexologie wird ein einheitlicher Ansatz genutzt, etwas was mir in der Vergangenheit sehr viel geholfen hat. Deswegen bin ich auch voller Hoffnung, dass es diesmal wieder hilft. Floor ist eine sehr genaue Person die Ihre Arbeit sehr sorgfältig macht. Dies gibt mir ein vertrauensvolles Gefühl so das ich die Zeit zur Erholung wirklich als solche empfinden kann, was mir oft schwer fällt. Schon nach drei Behandlungen bei Floor habe ich eine Verbesserung in meinem Wohlbefinden gespürt. Unerwartet hat sich dies auf meine Stimmung verbreitet, und meine Laune ist deutlich besser geworden. Vor allem dies hilft mir immer mehr beim Stressabbau. Natürlich bin ich sehr zufrieden mit den Ergebnissen und Dankbar für das was Floor für mich getan hat. Zur Vorbeugung werde ich weiterhin regelmäßige Behandlungen bei Floor haben.</p>",
+            "title": "<p>Susan – Den Haag</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "1a0249ca-14e5-413d-a6be-0db9e3ea86b2": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Spijsvertering",
+            "text_nl": "<p>Ik heb nu ca. 7 behandelingen van Floor gehad, met name gericht op de spijsvertering (darm/milt/maag). De behandelingen geven mij met name veel rust en zorgen voor minder stress verschijnselen in mijn maag, darmen en hoofd. Ik zie Floor niet als een student. Floor is een professional en pakt het heel leuk en goed aan. Ze denkt mee met de cliënt en kijkt verder dan alleen de behandeling, zoals het geven van voedingsadviezen of bewegingsadviezen. Verder is Floor iemand met een natuurlijke rust over haar heen. Dit zorgt ervoor dat je je heel veilig en ontspannen bij haar voelt. Dit vind ik erg belangrijk bij dit soort behandelingen. Ook haar kennis van het menselijk lichaam en van voedsel geeft haar een betrouwbare en serieuze indruk.</p>",
+            "text_en": "<p>I’ve had around 7 treatments from Floor, focused on the digestion (gut / spleen / stomach). The treatments give me lots of rest, relaxation and ensure less stress symptoms in my stomach, intestines and head. I do not see Floor as a student. Floor is a professional and approaches her treatments and me in a very nice and good way. She thinks outside the box with the client and looks beyond the treatment, such as giving dietary or exercise advice. Furthermore, Floor has a natural calmth over her. This ensures that you feel very safe and relaxed with her. I think this is very important in this type of treatment. Her knowledge of the human body and food gives her a reliable and serious impression.</p>",
+            "text_de": "<p>Ich hatte 7 Behandlungen mit Floor, welche sich auf die Verdauung (Darm/Milz/Magen) konzentriert haben. Die Behandlungen geben mir Erholung, Entspannung und lindern die stressbedingten Symptome in meinem Magen, Darm und im Kopf. Ich sehe Floor nicht als Studentin. Sie ist eine Expertin und geht ihre Behandlungen sehr korrekt an und mit viel Gefühl. Sie denkt quer für ihre Kunden und schaut über den Tellerrand und die Reflex-Behandlung hinaus, und gibt zum Beispiel Empfehlungen zum Thema Sport und Ernährung. Hinzu strahlt Floor eine natürliche innere Ruhe aus. Dies gibt einem ein Gefühl von Geborgenheit und Entspannung was meines Erachtens sehr wichtig bei solch einer Behandlung ist. Ihr Wissen über den menschlichen Körper und Ernährung gibt einen sehr kompetenten und ernsten Eindruck.</p>",
+            "title": "<p>Nienke – Den Haag</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "b03c5f4f-7e14-4455-9b13-63eca39f8bb3": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Slapeloosheid",
+            "text_nl": "<p>Met chronisch jarenlang voortslepende slaapproblematiek ben ik per toeval bij Floor terechtgekomen. Ik viel slecht in slaap en sliep slecht door ondanks lichamelijke vermoeidheid. (Van obstruerende ademhaling en apneu-syndroom was geen sprake) Zonder enige verwachting bij Floor aan haar behandelingsplan begonnen met in mijn achterhoofd, dat de in de voetreflex therapie voorkomende meridianen nog nooit wetenschappelijk zijn aangetoond.�Na de 3e behandeling is er langzamerhand een verbetering ontstaan die nog steeds verder�toeneemt, inmiddels heb ik een keer 6 uur onafgebroken geslapen wat voor mij uniek is. Het lijkt erop dat ze mijn verstoorde slaappatroon heeft gereset. Ik ben erg blij maar ook behoorlijk onder de indruk van dit behaalde resultaat.�Wat opvalt aan Floor is haar grote toewijding cq passie voor haar vakgebied.�In mijn optiek is zij een zeldzame ongecultiveerde parel binnen de voetreflex therapie en kan ik haar ten zeerste aanbevelen. René kampt al 33 jaar met insomnia/slapeloosheid.</p>",
+            "text_en": "<p>Dealing with chronic sleeping problems it was by coincidence that I came across Floor and her practice. I had a difficult time falling asleep and I had a hard time to continue sleeping throughout the night despite physical fatigue. (There was no question of obstructive breathing and apnea syndrome).Without any expectations I started with her treatment plan, aware in the back of my mind that the meridians which are spoken of in Chinese reflexology have never been explained scientifically.After the 3rd treatment a gradual improvement arose which is still further increasing. In the meantime I have slept for 6 hours uninterrupted which is unique for me. It seems like she has reset my sleeping pattern. I am very happy but also quite impressed with this result.What stands out about Floor is her devotion and passion for her profession. In my opinion she is a rare uncultivated pearl within foot reflexology therapy and I can highly recommend her.</p>",
+            "text_de": "<p>Ich leide seit langer Zeit an Schlafstörungen und bin per Zufall zu Floor und ihrer Praxis gekommen. Ich hatte Schwierigkeiten einzuschlafen und durchzuschlafen obwohl ich müde und erschöpft war (keine Anzeichen von obstruktiver Schlafapnoe). Ich fang ohne großer Erwartungen die Therapie an mit dem Wissen, dass das Meridiansystem der Chinesischen Reflexologie nicht wissenschaftlich bestätigt ist. Nach der dritten Behandlung wurden erste Erfolge erzielt, die sich mit jeder Massage steigern. Seit dem habe ich ungestört für 6 Stunden geschlafen, was für mich sehr außergewöhnlich ist. Es ist als ob sie mein Schlafrhythmus zurückgesetzt hat. Ich bin mit diesen Resultaten sehr zufrieden und äußerst beeindruckt. Was Floor bezeichnet ist ihre Hingabe und Leidenschaft für ihren Beruf. Meiner Meinung nach ist sie eine seltene Perle der Reflexzonen Therapiewelt und ich empfehle sie gerne weiter.Rene leidet seit 33 Jahren an Schlaflosigkeit.</p>",
+            "title": "<p>Rene – Zwammerdam</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "963d2752-5fdd-4f04-bf1a-01eedb5ba8dc": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Zwangerschap en bevallen",
+            "text_nl": "<p>Floor geeft niet alleen eerste klas behandelingen, ze heeft ook een persoonlijkheid die dat evenaart. Ik heb genoten van mijn voetreflex sessies zowel voor als na de zwangerschap en mijn dochter vond haar voetreflex massages ook heerlijk. Zonder te twijfelen heb ik haar ook direct aangeraden bij vrienden. Clare ontvangt reflexologie massages vanaf 32 weken zwangerschap tot op heden.</p>",
+            "text_en": "<p>Not only are Floor’s treatments first class but she also has the personality to match. I have enjoyed my pre and post pregnancy sessions and my daughter has also loved hers. I have recommended Floor to friends without hesitation.</p>",
+            "text_de": "<p>Floors Behandlungen sind nicht nur erstklassig, sie hat auch die passende Persönlichkeit. Ich habe die Massagen vor sowie nach der Geburt meiner Tochter genossen, und die Kleine ihre auch! Ich würde Floor immer wieder empfehlen.</p><p>Clare in Reflexzonen-Behandlung seit der 32 Schwangerschaftswoche.</p>",
+            "title": "<p>Clare</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "7ba3b9bc-d972-4eaa-a6fe-605e9a45767c": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Overig",
+            "text_nl": "<p>Floor, dankje voor de heerlijk ontspannende voetmassage vandaag; was een welkome rust na mijn migraine aanval. Dankje!</p>",
+            "text_en": "<p>Floor, thank you for the wonderful and relaxing footmassage today; it was a welcome rest after my migraine attack. Thank you!</p>",
+            "text_de": "<p>Floor, vielen Dank für die wundervolle und erholsame Massage heute, es war eine sehr willkommene Auszeit nach meinem Migräneanfall. Danke!Bei der Reflexologie wird ein einheitlicher Ansatz genutzt, etwas was mir in der Vergangenheit sehr viel geholfen hat. Deswegen bin ich auch voller Hoffnung, dass es diesmal wieder hilft. Floor ist eine sehr genaue Person die Ihre Arbeit sehr sorgfältig macht. Dies gibt mir ein vertrauensvolles Gefühl so das ich die Zeit zur Erholung wirklich als solche empfinden kann, was mir oft schwer fällt. Schon nach drei Behandlungen bei Floor habe ich eine Verbesserung in meinem Wohlbefinden gespürt. Unerwartet hat sich dies auf meine Stimmung verbreitet, und meine Laune ist deutlich besser geworden. Vor allem dies hilft mir immer mehr beim Stressabbau. Natürlich bin ich sehr zufrieden mit den Ergebnissen und Dankbar für das was Floor für mich getan hat. Zur Vorbeugung werde ich weiterhin regelmäßige Behandlungen bei Floor haben.</p>",
+            "title": "<p>Jacinta – Voorburg</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "867dbf6f-8dfa-42c5-943f-a2d2a0e506a1": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Zwangerschap en bevallen",
+            "text_nl": "<p>Anne kwam langs om weeën op te weken maar met 38 weken zwangerschap kun je niets beloven. Het kindje komt wanneer het er zelf klaar voor is. Een week na de behandeling ontving ik een mail: “Hai Floor, een dag na de behandeling is onze dochter Christine geboren. Ik wilde het je toch even laten weten! Groetjes Anne</p>",
+            "text_en": "",
+            "text_de": "",
+            "title": "<p>Anne - 38,5 weken zwanger</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "974844c4-7070-4ec8-9de6-864a226b14f1": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Zwangerschap en bevallen",
+            "text_nl": "<p>Beste Floor, graag zou ik een afspraak willen maken. Ik ben momenteel 39 weken en 4 dagen zwanger van mijn tweede dochter en zou graag willen proberen de bevalling op te wekken. Bij mijn eerste dochter ben ik met 42 weken ingeleid, wat nogal traumatisch is verlopen… De gynaecoloog heeft aangegeven dat de kans zeer groot is dat inleiden dit keer weer nodig is, iets wat ik liever zou willen voorkomen. Wat zijn de mogelijkheden?” Na de eerste behandeling ontstonden er binnen een uur na de behandeling harde buiken en het gevoel van weeën maar het zette nog niet door. Daarom heeft Mireille uiteindelijk twee reflexologie behandelingen ontvangen. Vijf dagen later ontving ik een reactie: “Hoi Floor, ik wilde je even laten weten dat gisteren onze dochter Francesca is geboren! Alles is goed gegaan en ik ben gewoon op de natuurlijke manier bevallen. Heel erg bedankt voor alles en wie weet tot ziens!</p>",
+            "text_en": "",
+            "text_de": "",
+            "title": "<p>Mireille – 39 weken zwanger</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "3bb9fc06-0cbe-495c-83d3-499b7edd816e": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Algemeen",
+            "text_nl": "<p>Voor iedereen een aanrader om hoogzwanger voetreflex massage te doen! Erg ontspannend, rustgevend en pijn verlichtend! Ik was nog nooit geweest dus ging er “blanco” naar toe! Ik heb de dagen na de massage veel meer rust in me gehad, kon veel beter slapen, minder stoelgang problemen en had meer energie!</p><p>Floor nam echt de tijd voor me, was oprecht geïnteresseerd in me en ik voelde me erg op mijn gemak bij haar! Zeer professioneel. Ik ga zeker met 39 weken nog eens!</p>",
+            "text_en": "",
+            "text_de": "",
+            "title": "<p>Esther – 38 weken zwanger</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "b6f16818-8c72-42bc-a44c-7dd9dd51cebf": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Overig",
+            "text_nl": "<p>Reactie na de eerste behandeling: Je behandeling heeft mijn voet en rest van mijn lijf enorm goed gedaan. Dankjewel! Twee weken later de tweede behandeling, vier dagen voorafgaand aan een trailrun: Hoi Floor,de trailrun van afgelopen zaterdag ging prima! Het was een pittig parcours maar mijn voeten deden het prima. Ik was best zenuwachtig over mijn rechtervoet… maar helemaal nergens last van gehad. Mijn voeten zijn nu wel wat stijf maar dat mag na zo’n inspanning.</p><p>Johanna is Ultraloper en heeft een zenuwbeknelling tussen het tweede en derde middenvoetsbeentje.</p>",
+            "text_en": "",
+            "text_de": "",
+            "title": "<p>Johanna</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "37c8326f-0d9f-43ae-b50f-15995d999e92": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Overgangsklachten",
+            "text_nl": "<p>De 1e massage was kennismaken, een ontspanningsmassage, ik ben toen in slaap gevallen! De 2e massage hebben we overlegd over wat ze ging behandelen, dat werd voor mij de overgangsklachten. De massage vond ik prettig, goed gedoseerd qua pijn (dat je wat voelt). De klachten zijn beduidend afgenomen, ik heb nauwelijks nog opvliegers en dat terwijl ik tamelijk sceptisch was. Floor is zeer duidelijk, weet waar ze het over heeft, geeft goed te begrijpen informatie, ze masseert rustig en vraagt hoe het gaat en masseert ook op gevoel. Ze is daarbij theoretisch goed onderlegd wat ik prettig vind. Floor is ook rustig in het bewegen tijdens de massage.</p>",
+            "text_en": "",
+            "text_de": "",
+            "title": "<p>Anne – Den Haag</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "48845860-ccac-4948-8961-7028cc0fb208": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Zwangerschap en bevallen",
+            "text_nl": "<p>Hoi Floor, ik zou je nog laten weten hoe het ging na de voetreflexologie sessie op 11 april.  Nou ik weet niet wat je hebt gedaan :) maar dezelfde avond nog begonnen de weeën. Ben in de nacht van woensdag op donderdag naar het ziekenhuis gegaan en Moesa is donderdag 12 april om 13.03 geboren, gezond en wel!</p>",
+            "text_en": "",
+            "text_de": "",
+            "title": "<p>Halima - 41 weken zwanger</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "54a08437-757f-4470-89a5-2c9082d9e805": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Zwangerschap en bevallen",
+            "text_nl": "<p>Marijke heeft last van maagzuur. Op een schaal van 0 tot 10 geeft ze haar maagzuur een 7. 4 dagen geleden heeft ze 1 zwangerschapsreflexologie behandeling ontvangen. Daarna zakte haar maagzuur naar een 2. De 1e nacht na de behandeling vlamde het op naar een 8 maar de volgende dag al was het gezakt naar 2. Ze heeft wat voedingstips gekregen en ging van meer dan 6 Rennies per dag naar 4 in 1 week.</p>",
+            "text_en": "<p>Marijke has been suffering from heartburn. On a scale from 0 to 10 she gives it a 7. 4 days ago she received a reflexology treatment. After that her heartburn went from a 7 to a 2. The first night it inflamed up towards an 8 but after that it has been low and she has been picking up on some health tips as well. She went from using over 6 Rennies a day to 4 in a week.</p>",
+            "text_de": "",
+            "title": "<p>Marijke - 39 weken en 5 dagen zwanger</p>",
+            "title_en": "<p>Marijke, 39 weeks and 5 days pregnant</p>",
+            "title_de": ""
+          }
+        },
+        "3163eb15-dda0-4007-8268-687032eed634": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Zwangerschap en bevallen",
+            "text_nl": "<p>Na slechts 1 reflexologie behandeling voor maagzuur tijdens haar zwangerschaps heeft Natasja  in de afgelopen week maar 1 Rennie geslikt in plaats van 4. Op een schaal van 0 tot 10 (waarbij 10 hevig is en 0 geen enkel gevoel van maagzuur) is ze van een 3 naar 1,5 gegaan, ze slaapt beter en wordt niet meer 's nachts wakker vanwege het maagzuur.</p><p>Na een 2e reflexologie behandeling heeft ze inmiddels geen last meer van maagzuur.</p>",
+            "text_en": "<p>With 23 weeks pregnant and after just 1 reflexology treatment Natasja went from 4 Rennies per week to 1 Rennie. On a scale from 0 to 10 (in which 10 is severe and 0 no sensation of heartburn) she went from a 3 to 1,5, sleeping better at night and not waking up anymore from heartburn. After a 2nd reflexology treatment from Floor she has no signs of heartburn anymore.</p>",
+            "text_de": "",
+            "title": "<p>Natasja - 23 weken zwanger</p>",
+            "title_en": "<p>Nastaja - 23 weeks pregnant</p>",
+            "title_de": ""
+          }
+        },
+        "c07e3283-1eea-4994-bd61-8c8cf97d3023": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Diabetes",
+            "text_nl": "<p>De eerste vijf dagen na de behandeling heb ik aanzienlijk minder last van mijn voeten en onderbenen gehad. Er was ook enige verbetering wat betreft het gevoel in de onderbenen.</p><p><em>Diabetes type 2 met een constante bloedsuikerspiegel sinds een jaar</em></p>",
+            "text_en": "<p>The first five days after the treatment my feet and underlegs were troubling me notably less. There was also some improvement in the sensitivity in my underlegs.</p><p><em>Diabetes type 2 with a constant blood glucose level since one year</em></p>",
+            "text_de": "",
+            "title": "<p>Henk</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        },
+        "3533826f-3c92-4721-8252-ae4e291f8b73": {
+          "type": "ervaring",
+          "settings": {
+            "category": "Diabetes",
+            "text_nl": "<p>Pieter is naast een maandelijks behandeltraject voor de diabetes ook zelf consequent bezig met zijn voeding.Reactie na de derde behandeling:Ik heb weer gevoel in mijn onderbenen en voeten, alsof ze weer aanwezig zijn. Mijn bloedsuikerspiegel is inmiddels constant rond de 5. Ik voel me beter en de stand van mijn voeten is zich ook langzaam aan het aanpassen.</p>",
+            "text_en": "",
+            "text_de": "",
+            "title": "<p>Pieter</p>",
+            "title_en": "",
+            "title_de": ""
+          }
+        }
+      },
+      "block_order": [
+        "129d524e-9057-4c53-9010-da064c56950e",
+        "24670539-df45-4eed-91d9-34580350bfb4",
+        "608b2969-d1fa-4ab5-9712-e9072efa7533",
+        "1be0d181-cf34-4f41-911e-b4bff13ff9c4",
+        "d404613a-4cfe-4bfe-97bc-0697244dcbe3",
+        "7e21d227-ad9a-4de9-9d5f-a696f355bc4a",
+        "610fd7a8-75be-43ef-8ace-56584de09c91",
+        "c88a1518-f181-486a-9005-9a5e1e50fcc4",
+        "3cdc87ba-05c0-46ae-9b09-a8d9d8cc7e27",
+        "f48967b9-818e-4857-b553-0f24f7afc59a",
+        "981e8b1b-6791-4e44-bb9c-a3b843061391",
+        "93a7312a-ff65-4391-977b-8cd462c80946",
+        "93d4e5f9-f207-47d7-8372-9a5c6b3c8fce",
+        "5e2ed940-7682-4910-965e-82878f576af2",
+        "50137535-631a-40c9-a184-7d62291b82b4",
+        "5fd65d3d-f4bf-484f-8d27-fc8cb54c4b92",
+        "3d04b5fd-1fff-4a5b-8e8d-a9e73654c533",
+        "eb502634-78d0-4def-a6e1-76cf89aa5c6c",
+        "5472ced5-6481-45f8-8d4c-cbfb4ce70714",
+        "e0e26d19-88a3-4644-81a2-08fede462a2d",
+        "597bac02-dd32-430d-b81b-0b9922dd6527",
+        "a9792152-ab68-4f32-9737-ad0324eb30e9",
+        "03cb9e88-104d-4864-819c-2bc64dbb0807",
+        "1a0249ca-14e5-413d-a6be-0db9e3ea86b2",
+        "b03c5f4f-7e14-4455-9b13-63eca39f8bb3",
+        "963d2752-5fdd-4f04-bf1a-01eedb5ba8dc",
+        "7ba3b9bc-d972-4eaa-a6fe-605e9a45767c",
+        "867dbf6f-8dfa-42c5-943f-a2d2a0e506a1",
+        "974844c4-7070-4ec8-9de6-864a226b14f1",
+        "3bb9fc06-0cbe-495c-83d3-499b7edd816e",
+        "b6f16818-8c72-42bc-a44c-7dd9dd51cebf",
+        "37c8326f-0d9f-43ae-b50f-15995d999e92",
+        "48845860-ccac-4948-8961-7028cc0fb208",
+        "54a08437-757f-4470-89a5-2c9082d9e805",
+        "3163eb15-dda0-4007-8268-687032eed634",
+        "c07e3283-1eea-4994-bd61-8c8cf97d3023",
+        "3533826f-3c92-4721-8252-ae4e291f8b73"
+      ],
+      "settings": {}
+    }
+  },
+  "order": ["main-page", "main"]
+}

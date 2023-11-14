@@ -9,7 +9,7 @@
 {%- if page != blank -%}
   {%- comment -%} Assign container classes {%- endcomment -%}
   {%- liquid
-    assign container_class = 'page-content'
+    assign container_class = 'page-content group-[.template-page-ervaringen]/body:mb-0'
     if section.settings.container_width != blank
       assign container_class = container_class | append: ' ' | append: section.settings.container_width
     endif

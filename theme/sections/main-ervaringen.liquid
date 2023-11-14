@@ -1,0 +1,188 @@
+<style>
+  .quotes__quote:before {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 57.6 39.7' xml:space='preserve'%3E%3Cpath d='M24.5 11.8c-3.6.8-6.8 2.3-9.4 4.9 5.3.3 9.6 4.4 9.6 9.9 0 6.5-4.7 11.2-11.2 11.2-7.1 0-11.8-6.3-11.8-13.1 0-11.9 12.3-20 22.8-22.3v9.4zm31.5 0c-3.6.8-6.8 2.3-9.4 4.9 5.3.3 9.6 4.4 9.6 9.9 0 6.5-4.7 11.2-11.2 11.2-7.1 0-11.8-6.3-11.8-13.1-.1-11.9 12.2-20 22.8-22.3v9.4z' fill='%23e8a6a6'/%3E%3C/svg%3E")
+      no-repeat center;
+  }
+  .quotes__quote:after {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 57.6 39.7' xml:space='preserve'%3E%3Cpath d='M2.2 28.4c3.6-.8 6.8-2.3 9.4-4.9-5.4-.3-9.6-4.3-9.6-9.8C2 7.2 6.7 2.5 13.2 2.5 20.3 2.5 25 8.8 25 15.6c0 11.8-12.3 19.9-22.8 22.2v-9.4zm31.4 0c3.6-.8 6.8-2.3 9.4-4.9-5.3-.3-9.6-4.4-9.6-9.9 0-6.5 4.7-11.2 11.2-11.2 7.1 0 11.8 6.3 11.8 13.1 0 11.8-12.3 19.9-22.8 22.2v-9.3z' fill='%23e8a6a6'/%3E%3C/svg%3E")
+      no-repeat center;
+  }
+</style>
+
+{%- liquid
+  assign language = localization.language.iso_code
+  assign text_field = 'text_' | append: language
+  assign title_field = 'title_' | append: language
+  if language == 'nl'
+    assign title_field = 'title'
+  endif
+-%}
+
+{%- capture quotes -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings[text_field] != blank -%}
+      {%- assign categories = categories | append: ',' | append: block.settings.category -%}
+
+      <div class="quotes__quote relative mx-10 flex flex-col divide-y divide-dashed divide-accent-300 before:absolute
+        before:-left-6 before:-top-1 before:block before:h-6 before:w-6 before:content-empty after:absolute after:-right-6 after:bottom-0 after:block after:h-6 after:w-6 after:content-empty md:before:content-none md:after:content-none
+        " data-quote-item="{{ block.settings.category | handleize }}" {{ block.shopify_attributes }}>
+        <div class="quotes__quote-text py-4">
+          {{ block.settings[text_field] }}
+        </div>
+
+        {%- assign title = block.settings[title_field] | default: block.settings.title -%}
+        <div class="quotes__quote-name py-4 text-end">
+          {{ title }}
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if quotes != blank -%}
+  {%- comment -%} Capture container content {%- endcomment -%}
+  {%- capture container_content -%}
+
+    {%- assign category_arr = categories | remove_first: ',' | split: ',' | uniq -%}
+
+    <div class="mx-auto mb-10 flex max-w-3xl flex-wrap justify-center gap-4">
+      {%- for category in category_arr -%}
+        <button class="button button--primary" data-quote-trigger="{{ category | handleize }}">{{ category }}</button>
+      {%- endfor -%}
+      <button class="button button--outline button--sm remove-tag flex hidden items-center gap-2" data-quote-remove>
+        {%- render 'icons', icon: 'close', icon_class: 'w-4' -%}
+        Wis filter
+      </button>
+    </div>
+
+    <div class="quotes grid gap-base md:grid-cols-2 lg:grid-cols-3">
+      {{ quotes }}
+    </div>
+  {%- endcapture -%}
+
+  {%- comment -%} Render the content {%- endcomment -%}
+  {%- render 'render-container-content', content: container_content, class: 'ervaringen mt-10' -%}
+{%- endif -%}
+
+<script>
+  const removeButton = document.querySelector('[data-quote-remove]');
+  const categoryItems = document.querySelectorAll('[data-quote-item]');
+  const categoryButtons = document.querySelectorAll('[data-quote-trigger]');
+  categoryButtons.forEach((button) =>
+    button.addEventListener('click', (event) => {
+      const category = event.target.dataset.quoteTrigger;
+      categoryItems.forEach((item) => {
+        item.dataset.quoteItem === category ? item.classList.remove('hidden') : item.classList.add('hidden');
+      });
+
+      removeButton.classList.remove('hidden');
+    })
+  );
+
+  // Show all quotes
+  removeButton.addEventListener('click', (event) => {
+    categoryItems.forEach((item) => item.classList.remove('hidden'));
+    removeButton.classList.add('hidden');
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Ervaringen",
+    "tag": "section",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "ervaring",
+        "name": "Ervaring",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Quote settings"
+          },
+          {
+            "type": "select",
+            "id": "category",
+            "label": "Categorie",
+            "default": "Algemeen",
+            "options": [
+              {
+                "value": "Algemeen",
+                "label": "Algemeen"
+              },
+              {
+                "value": "Baby",
+                "label": "Baby"
+              },
+              {
+                "value": "Kinderen",
+                "label": "Kinderen"
+              },
+              {
+                "value": "Diabetes",
+                "label": "Diabetes"
+              },
+              {
+                "value": "Nier en blaas",
+                "label": "Nier en blaas"
+              },
+              {
+                "value": "Overgangsklachten",
+                "label": "Overgangsklachten"
+              },
+              {
+                "value": "Slapeloosheid",
+                "label": "Slapeloosheid"
+              },
+              {
+                "value": "Spijsvertering",
+                "label": "Spijsvertering"
+              },
+              {
+                "value": "Zwangerschap en bevallen",
+                "label": "Zwangerschap en bevallen"
+              },
+              {
+                "value": "Overig",
+                "label": "Overig"
+              }
+            ]
+          },
+          {
+            "type": "richtext",
+            "id": "text_nl",
+            "label": "Text nederlands"
+          },
+          {
+            "type": "richtext",
+            "id": "text_en",
+            "label": "Text engels"
+          },
+          {
+            "type": "richtext",
+            "id": "text_de",
+            "label": "Text duits"
+          },
+          {
+            "type": "richtext",
+            "id": "title",
+            "label": "Naam nederlands"
+          },
+          {
+            "type": "richtext",
+            "id": "title_en",
+            "label": "Naam engels (optioneel)"
+          },
+          {
+            "type": "richtext",
+            "id": "title_de",
+            "label": "Naam duits (optioneel)"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    }
+  }
+{% endschema %}
