@@ -145,6 +145,9 @@ module.exports = {
                 textDecoration: 'none',
               },
             },
+            li: {
+              margin: 0,
+            },
           },
         },
       }),

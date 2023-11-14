@@ -11,5 +11,8 @@
   }
   figure {
     @apply overflow-hidden;
+    > img {
+      @apply mx-auto;
+    }
   }
 }

@@ -16,6 +16,10 @@
     assign is_slider = true
   endif
 
+  assign language = localization.language.iso_code
+  assign text_field = 'text_' | append: language
+  assign quote_class = 'before:content-empty before:block before:w-6 before:h-6 before:absolute after:content-empty after:block after:w-6 after:h-6 after:absolute before:-left-6 before:-top-6 after:-right-6 after:-bottom-6'
+
   # Import styles and set indicator class
   if is_slider
     render 'import-styles', file_name: 'component-swiper.css'
@@ -55,114 +59,106 @@
   }'
 {%- endcapture -%}
 
-{%- comment -%} Capture container content {%- endcomment -%}
-{%- capture container_content -%}
-  <swiper-slider {% if is_slider -%}{{ swiper_options }}{%- endif -%}>
-    {% comment %} Background image {% endcomment %}
-    {%- liquid
-      assign image_class = 'h-full w-full object-cover'
-      assign image_class_desktop = image_class | append: ' hidden md:block'
-      assign image_class_mobile = image_class | append: ' md:hidden'
-
-      # Assign mobile image
-      assign image_mobile = section.settings.image_desktop
-      if section.settings.image_mobile != blank
-        assign image_mobile = section.settings.image_mobile
-      endif
-    -%}
-
-    {%- if section.settings.image_desktop -%}
-      <div class="quote-slider__image inset-0 md:absolute {{ section.settings.min_ratio_mobile }} {{ section.settings.min_ratio_tablet }}">
-        {%- liquid
-          # Desktop image
-          render 'responsive-image', image_object: section.settings.image_desktop, class: image_class_desktop, max_width: max_width, lazy: lazy
-
-          # Mobile image
-          if image_mobile != blank
-            render 'responsive-image', image_object: image_mobile, class: image_class_mobile, max_width: 768, lazy: lazy
-          endif
-        -%}
-      </div>
-    {%- endif -%}
-
-    <div class="swiper relative max-w-screen" data-swiper>
-      <div class="swiper-wrapper flex">
-        {%- liquid
-          assign lazy = true
-          if section.index == 1
-            assign lazy = false
-          endif
-        -%}
-
-        {%- for block in section.blocks -%}
-          {%- if forloop.index >= 2 -%}
-            {%- assign lazy = true -%}
-          {%- endif -%}
-
-          {%- assign quote_class = 'before:content-empty before:block before:w-6 before:h-6 before:absolute after:content-empty after:block after:w-6 after:h-6 after:absolute before:-left-6 before:-top-6 after:-right-6 after:-bottom-6' -%}
-
-          {%- if block.settings.text != blank -%}
-            <div class="swiper-slide flex items-center justify-center {{ section.settings.min_ratio_tablet }}" {{ block.shopify_attributes }}>
-              <div class="quote relative h-max w-full max-w-screen md:max-w-xl {{ quote_class }} {{ block.settings.text_align }} {{ block.settings.text_color }} w-full bg-white/80">
-                <div class="quote__text p-4">
-                  {{ block.settings.text }}
-                </div>
-                {%- if block.settings.quote_name != blank -%}
-                  <div class="quote__name p-4 text-end">
-                    {{ block.settings.quote_name }}
-                  </div>
-                {%- endif -%}
-              </div>
+{%- capture slides -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings[text_field] != blank -%}
+      <div class="swiper-slide flex items-center justify-center {{ section.settings.min_ratio_tablet }}" {{ block.shopify_attributes }}>
+        <div class="quote relative h-max w-full max-w-screen md:max-w-xl {{ quote_class }} {{ block.settings.text_align }} {{ block.settings.text_color }} w-full bg-white/80">
+          <div class="quote__text p-4">
+            {{ block.settings[text_field] }}
+          </div>
+          {%- if block.settings.title != blank -%}
+            <div class="quote__name p-4 text-end">
+              {{ block.settings.title }}
             </div>
           {%- endif -%}
-        {%- endfor -%}
+        </div>
       </div>
-
-      {% comment %} Navigation and pagination {% endcomment %}
-      {%- if is_slider -%}
-        {% comment %} Navigation {% endcomment %}
-        {%- if section.settings.swiper_navigation %}
-          <button
-            class="swiper-button-prev swiper-button-prev-{{ section.id }} "
-            aria-label="{% render "render-translation", namespace: "accessibility", key: "previous_slide", fallback: "Previous slide" %}"
-          >
-            {%- render 'icons', icon: 'chevron-left', icon_class: 'w-5' -%}
-          </button>
-          <button
-            class="swiper-button-next swiper-button-next-{{ section.id }} "
-            aria-label="{% render "render-translation", namespace: "accessibility", key: "next_slide", fallback: "Next slide" %}"
-          >
-            {%- render 'icons', icon: 'chevron-right', icon_class: 'w-5' -%}
-          </button>
-        {%- endif %}
-
-        {% comment %} Pagination {% endcomment %}
-        {%- if section.settings.swiper_pagination %}
-          <div class="swiper-pagination swiper-pagination-{{ section.id }} flex justify-center"></div>
-        {%- endif %}
-      {%- endif -%}
-    </div>
-  </swiper-slider>
+    {%- endif -%}
+  {%- endfor -%}
 {%- endcapture -%}
 
-{%- comment -%} Import javascript {%- endcomment -%}
-{%- if is_slider -%}
-  <script src="{{ 'swiper-slider.js' | asset_url }}" type="module"></script>
+{%- if slides != blank -%}
+  {%- comment -%} Capture container content {%- endcomment -%}
+  {%- capture container_content -%}
+    <swiper-slider {% if is_slider -%}{{ swiper_options }}{%- endif -%}>
+      {% comment %} Background image {% endcomment %}
+      {%- liquid
+        assign image_class = 'h-full w-full object-cover'
+        assign image_class_desktop = image_class | append: ' hidden md:block'
+        assign image_class_mobile = image_class | append: ' md:hidden'
+
+        # Assign mobile image
+        assign image_mobile = section.settings.image_desktop
+        if section.settings.image_mobile != blank
+          assign image_mobile = section.settings.image_mobile
+        endif
+      -%}
+
+      {%- if section.settings.image_desktop -%}
+        <div class="quote-slider__image inset-0 md:absolute {{ section.settings.min_ratio_mobile }} {{ section.settings.min_ratio_tablet }}">
+          {%- liquid
+            # Desktop image
+            render 'responsive-image', image_object: section.settings.image_desktop, class: image_class_desktop, max_width: max_width, lazy: lazy
+
+            # Mobile image
+            if image_mobile != blank
+              render 'responsive-image', image_object: image_mobile, class: image_class_mobile, max_width: 768, lazy: lazy
+            endif
+          -%}
+        </div>
+      {%- endif -%}
+
+      <div class="swiper relative max-w-screen" data-swiper>
+        <div class="swiper-wrapper flex">
+          {{ slides }}
+        </div>
+
+        {% comment %} Navigation and pagination {% endcomment %}
+        {%- if is_slider and count > 0 -%}
+          {% comment %} Navigation {% endcomment %}
+          {%- if section.settings.swiper_navigation %}
+            <button
+              class="swiper-button-prev swiper-button-prev-{{ section.id }} "
+              aria-label="{% render "render-translation", namespace: "accessibility", key: "previous_slide", fallback: "Previous slide" %}"
+            >
+              {%- render 'icons', icon: 'chevron-left', icon_class: 'w-5' -%}
+            </button>
+            <button
+              class="swiper-button-next swiper-button-next-{{ section.id }} "
+              aria-label="{% render "render-translation", namespace: "accessibility", key: "next_slide", fallback: "Next slide" %}"
+            >
+              {%- render 'icons', icon: 'chevron-right', icon_class: 'w-5' -%}
+            </button>
+          {%- endif %}
+
+          {% comment %} Pagination {% endcomment %}
+          {%- if section.settings.swiper_pagination %}
+            <div class="swiper-pagination swiper-pagination-{{ section.id }} flex justify-center"></div>
+          {%- endif %}
+        {%- endif -%}
+      </div>
+    </swiper-slider>
+  {%- endcapture -%}
+
+  {%- comment -%} Import javascript {%- endcomment -%}
+  {%- if is_slider -%}
+    <script src="{{ 'swiper-slider.js' | asset_url }}" type="module"></script>
+  {%- endif -%}
+
+  {%- liquid
+    # Container width
+    assign container_class = 'quote-slider ' | append: section.settings.container_width | append: ' ' | append: section.settings.min_ratio_tablet
+
+    # Remove y margin if section is full width
+    if section.settings.container_width == 'container--full'
+      assign container_class = container_class | append: ' my-0'
+    endif
+  -%}
+
+  {%- comment -%} Render the content {%- endcomment -%}
+  {%- render 'render-container-content', content: container_content, class: container_class, content_class: 'relative flex place-content-center' -%}
 {%- endif -%}
-
-{%- liquid
-  # Container width
-  assign container_class = 'quote-slider ' | append: section.settings.container_width | append: ' ' | append: section.settings.min_ratio_tablet
-
-  # Remove y margin if section is full width
-  if section.settings.container_width == 'container--full'
-    assign container_class = container_class | append: ' my-0'
-  endif
--%}
-
-{%- comment -%} Render the content {%- endcomment -%}
-{%- render 'render-container-content', content: container_content, class: container_class, content_class: 'relative flex place-content-center' -%}
-
 {% schema %}
   {
     "name": "Quote slider",
@@ -369,13 +365,23 @@
           },
           {
             "type": "richtext",
-            "id": "text",
-            "label": "Text",
-            "default": "<p>The quote.</p>"
+            "id": "text_nl",
+            "label": "Text nederlands",
+            "default": "<p>De quote.</p>"
           },
           {
             "type": "richtext",
-            "id": "quote_name",
+            "id": "text_en",
+            "label": "Text engels"
+          },
+          {
+            "type": "richtext",
+            "id": "text_de",
+            "label": "Text duits"
+          },
+          {
+            "type": "richtext",
+            "id": "title",
             "label": "Name"
           }
         ]
