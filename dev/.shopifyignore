@@ -1,6 +1,6 @@
 // This file is copied before pushing, so we do NOT overwrite live settings and content
 
-confi/g/settings_data.json
+config/settings_data.json
 templates/*.json
 sections/*.json
 
