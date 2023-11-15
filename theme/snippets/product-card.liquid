@@ -103,7 +103,7 @@
 -%}
 
 <article
-  class="product-card group/product-card relative z-0 flex h-full flex-col gap-4 overflow-hidden {{ product_card_state_classes }} group-[.color-scheme]/color-scheme:bg-white group-[.color-scheme]/color-scheme:pb-4 {% if view == 'alt' -%}border border-gray-100 p-4{%- endif %} md:border-none md:p-0"
+  class="product-card group/product-card relative z-0 flex h-full flex-col gap-4 overflow-hidden rounded-md border border-gray-100 p-4 {{ product_card_state_classes }} group-[.color-scheme]/color-scheme:bg-white group-[.color-scheme]/color-scheme:pb-4"
   data-product-card>
   {%- comment -%} Accesibility text {%- endcomment -%}
   <a
@@ -116,6 +116,10 @@
   </a>
 
   <header class="product-card__header flex flex-col gap-4">
+    {%- liquid
+      # Render badges
+      render 'product-badges', product: product_object
+    -%}
     {%- comment -%} Product images {%- endcomment -%}
     <div class="product-card__images relative mb-4 group-[.color-scheme]/color-scheme:px-4 group-[.color-scheme]/color-scheme:pt-4">
       {%- comment -%} Render image with hover {%- endcomment -%}
@@ -147,11 +151,6 @@
           -%}
         {%- endif -%}
       </a>
-
-      {%- liquid
-        # Render badges
-        render 'product-badges', product: product_object
-      -%}
     </div>
 
     <a
@@ -173,32 +172,34 @@
 
       {%- comment -%} Title {%- endcomment -%}
       {%- if product_object.title -%}
-        <{{ product_card_title_el }} class="product-card__title label-lg my-0 text-text-default states:text-black">{{- product_object.title -}}</{{ product_card_title_el }}>
+        <{{ product_card_title_el }} class="product-card__title label-lg my-0 text-text-default states:text-black">
+          {{- product_object.title -}}
+        </{{ product_card_title_el }}>
       {%- endif -%}
     </a>
   </header>
 
-  <footer class="product-card__footer flex h-full flex-col items-center justify-end gap-2 text-center text-text-default">
-    {% comment %} Render formatted price {% endcomment %}
-    {% render 'render-price', product: product_object %}
-
-    <div class="product-card__quickshop flex gap-4">
-      {% comment %} ATC button to display the options {% endcomment %}
-      {%- if show_quick_shop -%}
-        {% comment %} Render quick shop {% endcomment %}
-        {%- render 'quick-shop', product: product_object, quick_shop_render_second_option: quick_shop_render_second_option, view: view -%}
-      {% endif %}
-
-      {% comment %} Link to PDP {% endcomment %}
-      <a
-        href="{{ product_object.url }}"
-        class="product-card__link button button--secondary button--outline mx-auto rounded-full touch:h-12 touch:w-12 touch:p-3 no-touch:h-10 no-touch:w-10 no-touch:p-2"
-        tabindex="-1">
-        {%- render 'icons', icon: 'arrow', icon_class: 'w-5' -%}
-        <span class="sr-only">
-          {%- render 'render-translation', namespace: 'products.product', key: 'go_to_product', fallback: 'Go to product page' -%}
-        </span>
-      </a>
+  <footer class="product-card__footer flex h-full flex-col items-center justify-end gap-4 text-center text-text-default">
+    <div class="flex gap-4">
+      <div class="product-card__quickshop flex gap-4">
+        {% comment %} ATC button to display the options {% endcomment %}
+        {%- if show_quick_shop -%}
+          {% comment %} Render quick shop {% endcomment %}
+          {%- render 'quick-shop', product: product_object, quick_shop_render_second_option: quick_shop_render_second_option -%}
+        {% endif %}
+      </div>
+      {% comment %} Render formatted price {% endcomment %}
+      {% render 'render-price', product: product_object %}
     </div>
+
+    {% comment %} Link to PDP {% endcomment %}
+    <a
+      href="{{ product_object.url }}"
+      class="product-card__link button button--outline mx-auto w-full shadow-md touch:h-12 touch:p-3 no-touch:h-10 no-touch:p-2"
+      tabindex="-1">
+      {%- render 'render-translation', namespace: 'products.product', key: 'go_to_product', fallback: 'Go to product page' -%}
+
+      {%- render 'icons', icon: 'arrow', icon_class: 'w-4' -%}
+    </a>
   </footer>
 </article>

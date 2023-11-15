@@ -1,0 +1,247 @@
+{%- comment -%} Check if there is a page {%- endcomment -%}
+{%- if page != blank -%}
+  {%- comment -%} Assign container classes {%- endcomment -%}
+  {%- liquid
+    assign container_class = 'page-content my-16'
+    if section.settings.container_width != blank
+      assign container_class = container_class | append: ' ' | append: section.settings.container_width
+    endif
+  -%}
+
+  {%- capture page_content -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="grid md:grid-cols-12 gap-10 md:gap-base">
+    {%- endif -%}
+
+      <div class="rte {% if section.blocks.size > 0 -%}md:col-span-7 2xl:col-span-8{%- endif -%}">
+        {{ page.content }}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="sidebar md:col-span-5 2xl:col-span-4 {{ section.settings.sidebar_pos }}">
+
+          {%- if section.settings.sidebar_heading != blank -%}
+            <h2 class="sidebar__title {{ section.settings.sidebar_heading_size }} {{ section.settings.sidebar_heading_color }}">
+              {{- section.settings.sidebar_heading -}}
+            </h2>
+          {%- endif -%}
+
+          <div class="sidebar__wrapper flex flex-col gap-base">
+            {%- for block in section.blocks -%}
+              <div class="sidebar__block">
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="{{ block.settings.heading_size }}">
+                    {{- block.settings.heading -}}
+                  </h3>
+                {%- endif -%}
+
+                {%- if block.settings.text != blank and block.settings.image != blank -%}
+                  <div class="flex gap-4">
+                    {%- if block.settings.image != blank -%}
+                      <div class="shrink-0">
+                        {%- render 'responsive-image', image_object: block.settings.image, alt: block.settings.heading, widths: '120, 240' -%}
+                      </div>
+                    {%- endif -%}
+                    {%- if block.settings.text != blank -%}
+                      <div class="flex-auto text-sm">
+                        {{- block.settings.text -}}
+                      </div>
+                    {%- endif -%}
+                {%- endif -%}
+                {%- if block.settings.text != blank and block.settings.image != blank -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endcapture -%}
+
+  {%- comment -%} Render the content {%- endcomment -%}
+  {%- render 'render-container-content',
+    class: container_class,
+    title: page.title,
+    title_tag: 'h1',
+    content: page_content,
+    content_class: 'page-section__content my-10'
+  -%}
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Sidebar",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Layout settings"
+      },
+      {
+        "type": "select",
+        "id": "container_width",
+        "default": "",
+        "label": "Container width",
+        "options": [
+          {
+            "value": "",
+            "label": "Default"
+          },
+          {
+            "value": "container--sm",
+            "label": "Small"
+          },
+          {
+            "value": "container--md",
+            "label": "Medium"
+          },
+          {
+            "value": "container--wide",
+            "label": "Wide"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "sidebar_pos",
+        "default": "",
+        "info": "Will always be displayed below the content om small devices.",
+        "label": "Sidebar position",
+        "options": [
+          {
+            "value": "",
+            "label": "Right"
+          },
+          {
+            "value": "md:-order-1",
+            "label": "Left"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Sidebar content"
+      },
+      {
+        "type": "text",
+        "id": "sidebar_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "select",
+        "id": "sidebar_heading_size",
+        "label": "Heading size",
+        "default": "h4",
+        "info": "This is applied only for visual reasons.",
+        "options": [
+          {
+            "value": "h1",
+            "label": "H1"
+          },
+          {
+            "value": "h2",
+            "label": "H2"
+          },
+          {
+            "value": "h3",
+            "label": "H3"
+          },
+          {
+            "value": "h4",
+            "label": "H4"
+          },
+          {
+            "value": "h5",
+            "label": "H5"
+          },
+          {
+            "value": "h6",
+            "label": "H6"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "sidebar_heading_color",
+        "default": "text-primary",
+        "label": "Heading color",
+        "options": [
+          {
+            "value": "",
+            "label": "Default"
+          },
+          {
+            "value": "text-primary",
+            "label": "Primary"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "select",
+            "id": "heading_size",
+            "default": "h5",
+            "label": "Heading size",
+            "info": "This is applied only for visual reasons.",
+            "options": [
+              {
+                "value": "h1",
+                "label": "H1"
+              },
+              {
+                "value": "h2",
+                "label": "H2"
+              },
+              {
+                "value": "h3",
+                "label": "H3"
+              },
+              {
+                "value": "h4",
+                "label": "H4"
+              },
+              {
+                "value": "h5",
+                "label": "H5"
+              },
+              {
+                "value": "h6",
+                "label": "H6"
+              }
+            ]
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Description"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Sidebar section",
+        "category": "Page"
+      }
+    ],
+    "enabled_on": {
+      "templates": ["page"]
+    }
+  }
+{% endschema %}

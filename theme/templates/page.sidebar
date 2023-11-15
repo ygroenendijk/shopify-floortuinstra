@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "sidebar": {
+      "type": "page-sidebar",
+      "blocks": {
+        "4ac6ef06-d49f-438a-aca8-b6cc3bfb5f78": {
+          "type": "block",
+          "settings": {
+            "heading": "Women’s Health",
+            "heading_size": "h5",
+            "text": "<p>Zen onder je zolen. Interview in de Women’s Health, editie september & oktober 2015, geschreven door Maud Beucker Andreae.<\/p><p><a href=\"\/blogs\/blog\/zen-onder-je-zolen-womens-health\" title=\"[:nl]Zen onder je Zolen - Women's Health september\/oktober 2015[:en]Zen under your soles - Women's Health September & October 2015 (Netherlands)[:de]Zen unten Ihren Füßen - Women’s Health September & Oktober 2015 (Niederlande) [:]\">Lees hier het artikel<\/a>.<\/p>",
+            "image": "shopify:\/\/shop_images\/womenshealth.jpg"
+          }
+        },
+        "a6657db1-7ea8-435b-a2ec-a799b15996ef": {
+          "type": "block",
+          "settings": {
+            "heading": "Ouders van Nu",
+            "heading_size": "h5",
+            "text": "<p>Happy feet: het effect van baby voetmassage. Een artikel uit de Ouders van Nu, editie nummer 3 van 2015 (18 februari) geschreven voor Jeanine Hoekstra.<\/p><p><a href=\"\/blogs\/blog\/happy-feet-het-effect-van-babyvoetmassage-ouders-van-nu\" title=\"[:nl]Happy feet: het effect van babyvoetmassage - Ouders van Nu[:en]Happy feet: the effect of baby footmassage - Ouders van Nu[:de]Happy Feet: Die Wirkung von Baby Fußmassagen (Ouders van Nu, niederländisches Magazin)[:]\">Lees hier het artikel<\/a>.<\/p>",
+            "image": "shopify:\/\/shop_images\/oudersvannu.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "4ac6ef06-d49f-438a-aca8-b6cc3bfb5f78",
+        "a6657db1-7ea8-435b-a2ec-a799b15996ef"
+      ],
+      "settings": {
+        "container_width": "",
+        "sidebar_pos": "",
+        "sidebar_heading": "In de pers",
+        "sidebar_heading_size": "h4",
+        "sidebar_heading_color": "text-primary"
+      }
+    }
+  },
+  "order": [
+    "sidebar"
+  ]
+}

@@ -19,9 +19,11 @@
   }
   h1,
   .h1 {
-    @apply text-[2rem] md:text-[2.75rem];
+    @apply font-secondary font-normal;
   }
 
+  h1,
+  .h1,
   h2,
   .h2 {
     @apply text-[1.75rem] md:text-[2.25rem];

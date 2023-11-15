@@ -31,16 +31,24 @@
   endif
 -%}
 
-{%- capture logo_link -%}
-  <{{ logo_el }} class="header__heading z-0 col-span-4 mb-0 self-center pb-3 pt-3 text-2xl leading-8 lg:-order-1 lg:col-span-2">
-    <a href="{{ routes.root_url }}"
-      class="header__heading-link m-0 flex items-center justify-center justify-self-center break-words text-inherit no-underline group-[.color-scheme--white]/header-transparent:text-black states:text-primary states:no-underline lg:block lg:justify-self-start"
-      title="{{ shop.name }}"
-    >
-      {%- render 'global-logo', classes: 'max-w-[100px] group-[.header-sticky]/body:max-w-[36px]' -%}
-      <span class="sr-only">{{ shop.name }}</span>
-    </a>
-  </{{ logo_el }}>
+{%- capture search_toggle -%}
+  <class-toggle-component
+    data-options='
+      {
+        "classToToggle": "search-is-open",
+        "ariaExpanded": true
+      }
+    '>
+    <button
+      type="button"
+      aria-expanded="false"
+      aria-controls="SearchModal"
+      aria-haspopup="dialog"
+      aria-label="{%- render "render-translation", namespace: "general.search", key: "search", fallback: "Search" -%}"
+      class="p-3 text-inherit transition {% if template.name == 'search' %}active{%- endif -%}">
+      {%- render 'icons', icon: 'search', icon_class: 'w-5' -%}
+    </button>
+  </class-toggle-component>
 {%- endcapture -%}
 
 {% comment %} Backdrop {% endcomment %}
@@ -70,7 +78,7 @@
   data-header>
   <div class="header-nav content-wrapper grid grid-cols-12 items-center px-content-wrapper-padding gap-base">
     {%- comment -%} Toggle for mobile navigation {%- endcomment -%}
-    <div class="col-span-4 flex lg:hidden">
+    <div class="header-nav__mobile-menu col-span-4 flex items-center lg:hidden">
       {%- if menu_list != blank -%}
         <class-toggle-component
           class="mobile-menu__toggle-button self-center"
@@ -91,16 +99,35 @@
         </class-toggle-component>
         {%- render 'menu-mobile', menu_list: menu_list -%}
       {%- endif -%}
+
+      <div class="header-nav__search-toggle">
+        {{ search_toggle }}
+      </div>
     </div>
 
     {%- comment -%} The menu that is used for desktop. {%- endcomment -%}
-    {%- render 'menu-desktop', section: section, menu_list: menu_list -%}
+    <div class=" hidden h-full text-center lg:col-span-8 lg:flex lg:items-center lg:justify-self-center">
+      <div class="xl:hidden">
+        {{ search_toggle }}
+      </div>
+      {%- render 'menu-desktop', section: section, menu_list: menu_list -%}
+    </div>
 
     {%- comment -%} Shop logo. {%- endcomment -%}
-    {{- logo_link -}}
+    <{{ logo_el }} class="header__heading z-0 col-span-4 mb-0 self-center pb-3 pt-3 text-2xl leading-8 lg:-order-1 lg:col-span-2">
+      <a
+        href="{{ routes.root_url }}"
+        class="header__heading-link m-0 flex items-center justify-center justify-self-center break-words text-inherit no-underline group-[.color-scheme--white]/header-transparent:text-black states:text-primary states:no-underline lg:block lg:justify-self-start"
+        title="{{ shop.name }}">
+        {%- render 'global-logo', classes: 'max-w-[100px] group-[.header-sticky]/body:max-w-[36px]' -%}
+        <span class="sr-only">{{ shop.name }}</span>
+      </a>
+    </{{ logo_el }}>
 
     {%- comment -%} Search, account and cart items. {%- endcomment -%}
-    {%- render 'header-icon-list', section: section -%}
+    <div class="header__icons col-span-4 justify-end group-[.header-sticky]/body:col-start-9 lg:col-span-2 group-[.header-sticky]/body:lg:col-start-11">
+      {%- render 'header-icon-list', section: section, search_toggle: search_toggle -%}
+    </div>
   </div>
 </header-component>
 

@@ -11,6 +11,10 @@
     assign color_scheme = 'color-scheme--white'
   endunless
 
+  unless show_icon
+    assign show_icon = false
+  endunless
+
   if type == 'country'
     assign object = localization.available_countries
     capture label
@@ -77,7 +81,7 @@
       <div class="localization-form relative">
         <button
           type="button"
-          class="localization-form__button button button--outline flex items-center gap-4 whitespace-nowrap p-2"
+          class="localization-form__button {% unless show_icon %}button button--outline gap-4 p-2{% else %}gap-2{% endunless %} flex items-center whitespace-nowrap [&>.icon--chevron-down]:aria-[expanded=true]:rotate-180"
           aria-expanded="false"
           aria-controls="{{ localPosition }}List"
           aria-describedby="{{ localPosition }}Label">
@@ -86,13 +90,24 @@
               {{- localization.country.currency.iso_code }}
               {{ localization.country.currency.symbol }} | {{ localization.country.name -}}
             {%- else -%}
-              {{ localization.language.endonym_name | capitalize }}
+              {%- liquid
+                if show_icon
+                  assign flag_name = 'flag-' | append: localization.language.iso_code
+                  render 'icons', icon: flag_name, icon_class: 'w-5'
+                endif
+              -%}
+              <span
+                {% if show_icon -%}
+                  class="sr-only"
+                {%- endif -%}>
+                {{ localization.language.endonym_name | capitalize }}
+              </span>
             {%- endif -%}
           </span>
-          {% render 'icons', icon: 'chevron-down' %}
+          {% render 'icons', icon: 'chevron-down', icon_class: 'transition' %}
         </button>
         <div
-          class="localization-form__list-wrapper color-scheme absolute top-10 w-full min-w-fit rounded-md border-2 border-inherit p-2 {{ color_scheme }}"
+          class="localization-form__list-wrapper absolute {% if show_icon -%}top-7{% else %}color-scheme top-10 w-full min-w-fit rounded-md border-2 border-inherit p-2 {{ color_scheme }}{% endif -%}"
           hidden
           data-localization-list>
           <ul id="{{ localPosition }}List" role="list" class="localization-form__list list-unstyled">
@@ -108,7 +123,7 @@
 
               <li class="localization-form__item py-2" tabindex="-1">
                 <a
-                  class="localization-form__link focus-inset block text-sm no-underline {% if item.iso_code == localization[item].iso_code %}localization-form__link--active{% endif %}"
+                  class="localization-form__link focus-inset group block text-sm no-underline {% if item.iso_code == localization[item].iso_code %}localization-form__link--active{% endif %}"
                   href="#"
                   {% if item.iso_code == localization.item.iso_code %}
                     aria-current="true"
@@ -121,7 +136,18 @@
                     </span>
                     {{ item.name }}
                   {%- else -%}
-                    {{ item.endonym_name | capitalize }}
+                    {%- liquid
+                      if show_icon
+                        assign flag_name = 'flag-' | append: item.iso_code
+                        render 'icons', icon: flag_name, icon_class: 'w-5 transition group-hover:scale-110'
+                      endif
+                    -%}
+                    <span
+                      {% if show_icon -%}
+                        class="sr-only"
+                      {%- endif -%}>
+                      {{ item.endonym_name | capitalize }}
+                    </span>
                   {%- endif -%}
                 </a>
               </li>

@@ -47,17 +47,21 @@
     <div class="flex flex-auto flex-col gap-4 py-4 {% if show_collection_image or section.settings.header_color_scheme != '' -%}px-8{%- endif -%}">
 
       {%- comment -%} Render collection title {%- endcomment -%}
-      <h1 class="collection-header__title h4 mb-0">
-        <span class="sr-only">
-          {%- render "render-translation", namespace: "sections.collection_template", key: "title", fallback: "Collection:" -%}
-          :
-        </span>
-        {{- collection.title -}}
+      <h1 class="collection-header__title h4 mb-0 text-center">
+        {%- liquid
+          if collection.url == '/collections/all'
+            echo 'sections.breadcrumbs.all_products' | t
+          else
+            echo '<span class="sr-only">'
+            render "render-translation", namespace: "sections.collection_template", key: "title", fallback: "Collection:"
+            echo ': </span>' | append: collection.title
+          endif
+        -%}
       </h1>
 
       {%- comment -%} Collection description {%- endcomment -%}
       {%- if section.settings.show_collection_description and collection.description != blank -%}
-        <div class="collection-header__description rte me-auto ms-0 md:w-full lg:w-3/4">
+        <div class="collection-header__description rte text-center">
           {{- collection.description -}}
         </div>
       {%- endif -%}
@@ -86,8 +90,7 @@
     {%- endif -%}
   </div>
 
-  <div class="mt-4 flex flex-wrap items-center justify-center gap-base sm:justify-between {% if collection.all_products_count == 1 and is_filtered == false -%}!hidden{%- endif -%}">
-
+  <div class="collection-header__totals mt-4 flex flex-wrap items-center justify-center gap-base {% if collection.all_products_count == 1 and is_filtered == false -%}!hidden{%- endif -%}">
     {% comment %} Collection display total {% endcomment %}
     {%- liquid
       paginate collection.products by settings.products_per_page
@@ -109,13 +112,13 @@
       endpaginate
     -%}
 
-    <p class="m-0 text-center sm:order-3 sm:basis-full md:order-none md:basis-auto" data-collection-totals-text>
+    <p class="m-0 text-center" data-collection-totals-text>
       {{ 'sections.load_more.info_html' | t: current: current_html, total: total_html }}
     </p>
 
     {% comment %} Sort sorting {% endcomment %}
-    <div class="collection-header__sorting relative flex justify-end gap-4">
-      {%- if section.settings.enable_sorting -%}
+    {%- if section.settings.enable_sorting -%}
+      <div class="collection-header__sorting relative flex justify-end gap-4">
         {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
 
         {% comment %} Sort options {% endcomment %}
@@ -138,8 +141,8 @@
             </div>
           </form>
         </collection-filters-form>
-      {%- endif -%}
-    </div>
+      </div>
+    {%- endif -%}
   </div>
 {%- endcapture -%}
 
