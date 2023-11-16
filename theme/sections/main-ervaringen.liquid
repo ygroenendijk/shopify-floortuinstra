@@ -43,18 +43,28 @@
   {%- comment -%} Capture container content {%- endcomment -%}
   {%- capture container_content -%}
 
-    {%- assign category_arr = categories | remove_first: ',' | split: ',' | uniq -%}
+    {%- assign category_arr = categories | remove_first: ',' | split: ',' | uniq | sort -%}
 
     <div class="mx-auto mb-10 flex max-w-3xl flex-wrap justify-center gap-4">
+      {% comment %} The categories {% endcomment %}
       {%- for category in category_arr -%}
-        <button class="button button--primary" data-quote-trigger="{{ category | handleize }}">{{ category }}</button>
+        {%- liquid
+          assign category_handleized = category | handleize
+          capture text_label
+            render 'render-translation',  namespace: 'sections.ervaringen', key: category_handleized, fallback: category
+          endcapture
+        -%}
+        <button class="button button--primary" data-quote-trigger="{{ category_handleized }}">{{- text_label -}}</button>
       {%- endfor -%}
+
+      {% comment %} 'Wis' button {% endcomment %}
       <button class="button button--outline button--sm remove-tag flex hidden items-center gap-2" data-quote-remove>
         {%- render 'icons', icon: 'close', icon_class: 'w-4' -%}
         Wis filter
       </button>
     </div>
 
+    {% comment %} The quotes {% endcomment %}
     <div class="quotes grid gap-base md:grid-cols-2 lg:grid-cols-3">
       {{ quotes }}
     </div>
@@ -104,6 +114,7 @@
             "type": "select",
             "id": "category",
             "label": "Categorie",
+            "info": "De vertalingen voor deze labels worden gedaan in de shop vertalingen onder het kopje 'sections' en dan 'ervaringen'.",
             "default": "Algemeen",
             "options": [
               {
@@ -141,10 +152,6 @@
               {
                 "value": "Zwangerschap en bevallen",
                 "label": "Zwangerschap en bevallen"
-              },
-              {
-                "value": "Overig",
-                "label": "Overig"
               }
             ]
           },

@@ -145,6 +145,13 @@ module.exports = {
                 textDecoration: 'none',
               },
             },
+            h2: {
+              color: theme('colors.primary.DEFAULT'),
+            },
+            dd: {
+              margin: 0,
+              padding: 0,
+            },
             li: {
               margin: 0,
             },

@@ -108,7 +108,7 @@
                 # Language switcher
                 if block.settings.enable_language_selector and localization.available_languages.size > 1
                   assign enable_language_selector = true
-                  render 'localization-options', type: 'language', localPosition: 'FooterLanguage', color_scheme: section.settings.color_scheme
+                  render 'localization-options', type: 'language', localPosition: 'FooterLanguage', color_scheme: section.settings.color_scheme, show_icon: true
                 endif
               -%}
             </div>

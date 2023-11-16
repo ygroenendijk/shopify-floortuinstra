@@ -9,9 +9,7 @@
 
 <div class="flex flex-wrap items-center justify-end">
   <div class="header__language">
-    {%- liquid
-      render 'localization-options', type: 'language', localPosition: 'HeaderLanguage', show_icon: true
-    -%}
+    {%- render 'localization-options', type: 'language', localPosition: 'HeaderLanguage', show_icon_only: true -%}
   </div>
 
   {%- comment -%} Icon list with search, account and cart icons. {%- endcomment -%}

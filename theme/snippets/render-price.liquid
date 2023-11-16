@@ -97,17 +97,17 @@
 
       {%- comment -%} Product or variant is on sale {%- endcomment -%}
     {%- elsif compare_at_price > target.price or target.price_varies and target.compare_at_price_varies %}
-      <dl class="price__sale flex flex-wrap gap-x-2">
+      <dl class="price__sale flex flex-wrap gap-x-2 gap-y-1">
         <dt class="sr-only">
           {{ sale_price_str }}
         </dt>
-        <dd class="price__item price__item--sale font-bold text-primary">
+        <dd class="price__item price__item--sale font-bold leading-none text-primary">
           {{ money_price }}
         </dd>
         <dt class="sr-only ">
           {{ regular_price_str }}
         </dt>
-        <dd class="">
+        <dd class=" leading-none">
           <s class="price__item price__item--compare opacity-70 contrast-more:opacity-100">
             {{ compare_at_price | money_with_currency }}
           </s>
