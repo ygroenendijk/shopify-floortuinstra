@@ -52,6 +52,9 @@
   elsif date != blank
     assign translated_str = translation_str | t: date: date
     assign fallback_html = date
+  elsif tags != blank
+    assign translated_str = translation_str | t: tags: tags
+    assign fallback_html = tags
   else
     assign translated_str = translation_str | t
   endif

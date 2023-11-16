@@ -64,33 +64,66 @@
           assign container_class_products = container_class_products | append: ' container--background my-0 group/color-scheme ' | append: block.settings.color_scheme
         endif
 
-        assign container_title = block.settings.title
+        assign slider_container_title = block.settings.title
     endcase
   endfor
 -%}
 
 {%- comment -%} Capture container content {%- endcomment -%}
 {%- capture container_content -%}
-
   {% comment %} If the article content contains a placeholder for products, render the carousel there instead {% endcomment %}
   {%- if featured_products_content != blank and render_inline -%}
     {%- assign article_parts = article.content | split: has_products_placeholder -%}
-
-    <div class="rte mx-auto mb-10 mt-4 max-w-screen-md">{{ article_parts[0] }}</div>
+    <div class="mb-10 mt-4">{{ article_parts[0] }}</div>
     {{- featured_products_content -}}
-    <div class="rte mx-auto mt-10 max-w-screen-md">{{ article_parts[1] }}</div>
+    <div class="mt-10">{{ article_parts[1] }}</div>
   {%- else -%}
     {% comment %} # remove the placeholder and wrap the content {% endcomment %}
-    <div class="rte mx-auto mb-10 mt-4 max-w-screen-md">
-      {{ article.content | replace: has_products_placeholder, '' }}
+    <div class="mb-10 mt-4">
+      {{ article.content }}
     </div>
   {%- endif -%}
+
+  <hr>
+
+  {%- capture tags -%}
+    <ul class="list-unstyled m-0 flex flex-wrap gap-2 p-0">
+      {%- for tag in article.tags -%}
+        <li class="marker:none list-none whitespace-nowrap">
+          {{ tag | link_to_tag: tag }}
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endcapture -%}
+
+  <div class="article-content__footer flex flex-col gap-base">
+    {% comment %} Tag list {% endcomment %}
+    {%- if article.tags.size > 0 -%}
+      <div class="article-content__tags flex gap-2">
+        {%- render 'render-translation',  namespace: 'blogs.article', key: 'tags_html', tags: tags, fallback: tags -%}
+      </div>
+    {%- endif -%}
+
+    {% comment %} Article nav {% endcomment %}
+    {%- if blog.prev_article or blog.next_article -%}
+      <div class="article-content__nav flex justify-between gap-base">
+        <a href="{{ blog.prev_article }}" class="button button--primary {% unless blog.prev_article -%}disabled{%- endunless -%}">
+          {%- render 'icons', icon: 'chevron-left', icon_class: 'w-4' -%}
+          {%- render 'render-translation',  namespace: 'blogs.article.navigation', key: 'prev', fallback: 'Vorig artikel'-%}
+        </a>
+        <a href="{{ blog.next_article }}" class="button button--primary {% unless blog.next_article -%}disabled{%- endunless -%}">
+          {%- render 'render-translation',  namespace: 'blogs.article.navigation', key: 'next', fallback: 'Volgend artikel'-%}
+          {%- render 'icons', icon: 'chevron-right', icon_class: 'w-4' -%}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
 {%- endcapture -%}
 
-{%- assign container_class = class | append: ' article-content' -%}
+{%- assign container_class = class | append: ' article-content ' -%}
 
 {%- comment -%} Render the content {%- endcomment -%}
-{%- render 'render-container-content', tag: 'section', content: container_content, class: container_class -%}
+{%- render 'render-container-content', content: container_content, class: container_class, content_class: 'rte max-w-content-width-md' -%}
 
 {% comment %} If there is no placeholder in the content, render the product slider below the content {% endcomment %}
 {%- liquid
@@ -100,7 +133,7 @@
       if products_display == 'slider'
         assign content_class = 'p-0'
       endif
-      render 'render-container-content', class: container_class_products, content_class: content_class, content: featured_products_content, title: container_title
+      render 'render-container-content', class: container_class_products, content_class: content_class, content: featured_products_content, title: slider_container_title
     endunless
   endif
 -%}

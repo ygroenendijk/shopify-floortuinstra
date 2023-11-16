@@ -89,6 +89,11 @@ module.exports = {
       content: {
         empty: '\'\'',
       },
+      hr: {
+        color: ({ theme }) => ({
+          DEFAULT: theme('colors.secondary.100'),
+        }),
+      },
       height: {
         '80vh': '80vh',
         '90vh': '90vh',
@@ -138,15 +143,22 @@ module.exports = {
             color: theme('colors.text-default'),
             a: {
               color: '#70a4b3',
-              textDecoration: 'underline',
+              textDecoration: 'none',
               transition: 'all .2s',
               '&:hover': {
                 color: theme('colors.primary.700'),
                 textDecoration: 'none',
               },
+              '&:not(.button)': {
+                borderBottom: '1px dashed',
+                borderColor: 'var(--color-scheme-text-color), #70a4b3',
+                '&:hover': {
+                  borderColor: 'var(--color-scheme-text-active-color), #5A0909',
+                },
+              },
             },
-            h2: {
-              color: theme('colors.primary.DEFAULT'),
+            hr: {
+              'color': theme('colors.secondary.100'),
             },
             dd: {
               margin: 0,

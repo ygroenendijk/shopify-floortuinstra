@@ -44,7 +44,6 @@
   {%- capture container_content -%}
 
     {%- assign category_arr = categories | remove_first: ',' | split: ',' | uniq | sort -%}
-
     <div class="mx-auto mb-10 flex max-w-3xl flex-wrap justify-center gap-4">
       {% comment %} The categories {% endcomment %}
       {%- for category in category_arr -%}
@@ -59,8 +58,10 @@
 
       {% comment %} 'Wis' button {% endcomment %}
       <button class="button button--outline button--sm remove-tag flex hidden items-center gap-2" data-quote-remove>
-        {%- render 'icons', icon: 'close', icon_class: 'w-4' -%}
-        Wis filter
+        {%- liquid
+          render 'icons', icon: 'close', icon_class: 'w-4'
+          render 'render-translation',  namespace: 'sections.ervaringen', key: 'wis_filter', fallback: 'Wis filter'
+        -%}
       </button>
     </div>
 

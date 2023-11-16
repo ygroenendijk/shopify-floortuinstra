@@ -4,5 +4,5 @@ config/settings_data.json
 templates/*.json
 sections/*.json
 
-// Ignore all locale files except en-dev.default.json
-/(locales\/)(?!en-dev.default.json)/
+// Ignore all locale files except nl-dev.default.json
+/(locales\/)(?!nl-dev.default.json)/

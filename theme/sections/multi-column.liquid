@@ -18,7 +18,7 @@
     assign container_class = container_class | append: ' ' | append: section.settings.container_width
   endif
   if section.settings.color_scheme != blank
-    assign container_class = container_class | append: ' container--background ' | append: section.settings.color_scheme
+    assign container_class = container_class | append: ' group/color-scheme container--background py-10 ' | append: section.settings.color_scheme
   endif
 
   # Set the grid layout. Make sure there are enough blocks for the columns selected
@@ -104,7 +104,7 @@
             {%- comment -%} Column inner width and text align {%- endcomment -%}
             <div class="flex flex-col gap-y-4 {% if section.settings.odd_even -%}{% cycle 'md:flex-row', 'md:flex-row-reverse' %} items-center gap-x-base xl:flex-col{%- endif %}">
 
-              <div class="multi-columns__text {{ block.settings.text_align }}">
+              <div class="multi-columns__text rte {{ block.settings.text_align }}">
                 {%- comment -%} Heading {%- endcomment -%}
                 {%- if block.settings.heading != blank -%}
                   <{{ block.settings.heading_element }} class="mt-0 {{ block.settings.heading_size }}">

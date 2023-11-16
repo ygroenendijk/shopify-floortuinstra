@@ -110,6 +110,9 @@
     "spaceBetween": 16,
     "slidesOffsetBefore": 16,
     "slidesOffsetAfter": 16,
+    {% if render_inline -%}
+      "centerInsufficientSlides": true,
+    {%- endif %}
     {%- if swiper_autoplay %}
       "autoplay": {
         "delay": {{ swiper_autoplay_delay | default: 7500 }}
@@ -137,29 +140,30 @@
     {% endif -%}
     "breakpoints": {
       "420": {
-        "slidesPerView": {% if render_products or render_product_cards %}2.2{%- elsif render_blog_articles %}1.8{%- endif %},
+        "slidesPerView": {% if render_products or render_product_cards %}{% if render_inline -%}1.2{%- else -%}2.2{%- endif %}{%- elsif render_blog_articles %}1.8{%- endif %},
         "spaceBetween": 16,
         "slidesOffsetBefore": 16,
         "slidesOffsetAfter": 16
       },
       "768": {
-        "slidesPerView": {% if render_products or render_product_cards %}3.2{%- elsif render_blog_articles %}2.4{%- endif %},
+        "slidesPerView": {% if render_products or render_product_cards %}{% if render_inline -%}1.8{%- else -%}3.2{%- endif %}{%- elsif render_blog_articles %}2.4{%- endif %},
         "spaceBetween": 16,
         "slidesOffsetBefore": 32,
         "slidesOffsetAfter": 32
       },
       "1024": {
-        "slidesPerView": {% if render_products or render_product_cards %}4{%- elsif render_blog_articles %}3.2{%- endif %},
+        "slidesPerView": {% if render_products or render_product_cards %}{% if render_inline -%}2.4{%- else -%}4{%- endif %}{%- elsif render_blog_articles %}3.2{%- endif %},
         "spaceBetween": 32,
         "slidesOffsetBefore": 32,
         "slidesOffsetAfter": 32
-      },
+      }
+      {% unless render_inline -%},
       "1440": {
         "slidesPerView": 4,
         "spaceBetween": 32,
         "slidesOffsetBefore": 0,
         "slidesOffsetAfter": 0
-      }
+      }{%- endunless %}
     }
   }'
 {%- endcapture -%}
@@ -172,18 +176,24 @@
       [--swiper-spaceBetween:16px]
       lg:[--swiper-spaceBetween:32px]
       {% if render_products or render_product_cards %}
-        xs:[--swiper-slidesPerView:2.2]
-        md:[--swiper-slidesPerView:3.2]
-        lg:[--swiper-slidesPerView:4]
+        {% if render_inline -%}
+          xs:[--swiper-slidesPerView:1.2]
+          md:[--swiper-slidesPerView:1.8]
+          lg:[--swiper-slidesPerView:2.4]
+        {%- else -%}
+          xs:[--swiper-slidesPerView:2.2]
+          md:[--swiper-slidesPerView:3.2]
+          lg:[--swiper-slidesPerView:4]
+        {% endif -%}
       {% elsif render_blog_articles %}
-        xs:[--swiper-slidesPerView:1.8]
-        md:[--swiper-slidesPerView:2.4]
-        lg:[--swiper-slidesPerView:3.2]
-        2xl:[--swiper-slidesPerView:4]
+          xs:[--swiper-slidesPerView:1.8]
+          md:[--swiper-slidesPerView:2.4]
+          lg:[--swiper-slidesPerView:3.2]
+          2xl:[--swiper-slidesPerView:4]
       {% endif -%}
     ">
     <div
-      class="overflow-hidden {{ swiper_indication_class }} {% if render_inline -%}-ml-content-wrapper-padding w-screen max-w-screen-2xl 2xl:ml-0{% else -%}2xl:px-content-wrapper-padding{%- endif -%}"
+      class="overflow-hidden {{ swiper_indication_class }} {% if render_inline -%}-ms-content-wrapper-padding w-screen max-w-content-width-md 2xl:ms-0{% else -%}2xl:px-content-wrapper-padding{%- endif -%}"
       data-swiper>
       <div
         class="swiper-wrapper flex"
@@ -225,14 +235,20 @@
               swiper-slide
               min-w-[calc((100%-16px)/1.2)]
               {% if render_products or render_product_cards %}
-                xs:min-w-[calc((100%-2*16px)/2.2)]
-                md:min-w-[calc((100%-2*16px)/3.2)]
-                lg:min-w-[calc((100%-3*32px)/4)]
+                {% if render_inline -%}
+                  xs:min-w-[calc((100%-16px)/1.2)]
+                  md:min-w-[calc((100%-2*16px)/1.8)]
+                  lg:min-w-[calc((100%-3*32px)/2.4)]
+                {% else -%}
+                  xs:min-w-[calc((100%-2*16px)/2.2)]
+                  md:min-w-[calc((100%-2*16px)/3.2)]
+                  lg:min-w-[calc((100%-3*32px)/4)]
+              {% endif -%}
               {% elsif render_blog_articles %}
-                xs:min-w-[calc((100%-16px)/1.8)]
-                md:min-w-[calc((100%-2*16px)/2.4)]
-                lg:min-w-[calc((100%-3*32px)/3.2)]
-                2xl:min-w-[calc((100%-3*32px)/4)]
+                  xs:min-w-[calc((100%-16px)/1.8)]
+                  md:min-w-[calc((100%-2*16px)/2.4)]
+                  lg:min-w-[calc((100%-3*32px)/3.2)]
+                  2xl:min-w-[calc((100%-3*32px)/4)]
               {% endif -%}
             "
             data-swiper-slide-index="{{ forloop.index }}">

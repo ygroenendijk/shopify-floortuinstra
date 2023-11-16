@@ -103,7 +103,13 @@
 -%}
 
 <article
-  class="product-card group/product-card relative z-0 flex h-full flex-col gap-4 overflow-hidden rounded-md border border-gray-100 p-4 {{ product_card_state_classes }} group-[.color-scheme]/color-scheme:bg-white group-[.color-scheme]/color-scheme:pb-4"
+  class="
+    product-card group/product-card relative z-0 flex h-full flex-col gap-4 overflow-hidden rounded-md border border-gray-100 p-4 {{ product_card_state_classes }}
+    group-[.color-scheme]/color-scheme:bg-white
+    group-[.color-scheme]/color-scheme:pb-4
+    group-[.color-scheme]/color-scheme:shadow-xl
+    group-[.color-scheme]/color-scheme:shadow-gray-200
+  "
   data-product-card>
   {%- comment -%} Accesibility text {%- endcomment -%}
   <a
@@ -124,7 +130,7 @@
     <div class="product-card__images relative mb-4 group-[.color-scheme]/color-scheme:px-4 group-[.color-scheme]/color-scheme:pt-4">
       {%- comment -%} Render image with hover {%- endcomment -%}
       <a
-        class="product-card__image relative block text-center {% unless product_object.available -%}opacity-50 saturate-50{%- endunless %} {% unless show_secondary_image %}transition-all states:scale-105{%- endunless -%}"
+        class="product-card__image relative block border-none text-center {% unless product_object.available -%}opacity-50 saturate-50{%- endunless %} {% unless show_secondary_image %}transition-all states:scale-105{%- endunless -%}"
         href="{{ product_link }}"
         title="{{ product_object.title }}"
         tabindex="-1">
@@ -156,7 +162,7 @@
     <a
       href="{{ product_link }}"
       title="{{ product_object.title }}"
-      class="product-card__information block grow px-4 text-center text-sm text-text-default no-underline states:text-primary states:no-underline"
+      class="product-card__information block grow border-none px-4 text-center text-sm text-text-default no-underline states:text-primary states:no-underline"
       tabindex="-1">
       {%- comment -%} Vendor {%- endcomment -%}
       {%- if show_vendor -%}
