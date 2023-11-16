@@ -71,23 +71,22 @@
     {%- endfor -%}
   </ol>
 
-{%- if pagination_type == 'load-more' -%}
-  {%- if paginate.pages > 1 -%}
-    <div class="load-more-wrapper text-center mt-20 {% if paginate.current_page >= paginate.pages -%}hidden{%- endif -%}">
-      <div class="load-more load-more--next flex items-center justify-center mb-4" data-pagination-next>
-        {%- if paginate.current_page < paginate.pages -%}
-          <a href="{{ paginate.next.url }}" class="button button--primary" data-load-trigger="next">
-            <span data-load-text>{% render "render-translation", namespace: "sections.load_more", key: "next", fallback: "Next" %}</span>
-            <span class="hidden" data-loader>{% render "render-translation", namespace: "sections.load_more", key: "loading", fallback: "" %}</span>
-          </a>
-        {%- endif -%}
-      </div>
-
+  {%- if pagination_type == 'load-more' -%}
+    <div class="load-more-wrapper text-center mt-20">
       <p class="text-center" data-totals-text>
         {{ 'sections.load_more.info_html' | t: current: current_html, total: total_html }}
       </p>
+      {%- if paginate.pages > 1 -%}
+        <div class="load-more load-more--next flex items-center justify-center mb-4" data-pagination-next>
+          {%- if paginate.current_page < paginate.pages -%}
+            <a href="{{ paginate.next.url }}" class="button button--primary" data-load-trigger="next">
+              <span data-load-text>{% render "render-translation", namespace: "sections.load_more", key: "next", fallback: "Next" %}</span>
+              <span class="hidden" data-loader>{% render "render-translation", namespace: "sections.load_more", key: "loading", fallback: "" %}</span>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </div>
-  {%- endif -%}
   </load-more>
 {%- endif -%}
 

@@ -15,17 +15,6 @@
   endif
 -%}
 
-{% comment %} All collections {% endcomment %}
-<div class="flex flex-wrap justify-center rounded-md p-4 gap-base">
-  {% for other_collection in collections %}
-    {%- unless other_collection == collection or other_collection.all_products_count == 0 -%}
-      <a href="{{ other_collection.url }}" class="button button--primary no-underline">
-        {{- other_collection.title }}
-      </a>
-    {%- endunless -%}
-  {% endfor %}
-</div>
-
 {%- capture collection_header_content -%}
   {% comment %} Collection header {% endcomment %}
   <div class="collection-header {{ section.settings.header_color_scheme }} overflow-hidden rounded-md md:flex md:items-center">
@@ -44,7 +33,7 @@
     {%- endif -%}
 
     {% comment %} Title and Description {% endcomment %}
-    <div class="flex flex-auto flex-col gap-4 py-4 {% if show_collection_image or section.settings.header_color_scheme != '' -%}px-8{%- endif -%}">
+    <div class="collection-header__wrapper flex flex-auto flex-col gap-4 {% if show_collection_image or section.settings.header_color_scheme != '' -%}px-8{%- endif -%}">
 
       {%- comment -%} Render collection title {%- endcomment -%}
       <h1 class="collection-header__title mb-0 text-center">
@@ -65,6 +54,21 @@
           {{- collection.description -}}
         </div>
       {%- endif -%}
+
+      {% comment %} All collections {% endcomment %}
+      <div class="collection-header__collections flex flex-wrap justify-center gap-4 rounded-md">
+        {%- for other_collection in collections -%}
+          {%- if other_collection == collection -%}
+            <button class="button button--outline button--sm pointer-events-none">
+              {{- other_collection.title }}
+            </button>
+          {%- elsif other_collection.all_products_count > 0 -%}
+            <a href="{{ other_collection.url }}" class="button button--primary button--sm no-underline">
+              {{- other_collection.title }}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
     </div>
 
     {%- if collection.all_products_count > 1 and collection.filters.size > 0 -%}
@@ -90,32 +94,7 @@
     {%- endif -%}
   </div>
 
-  <div class="collection-header__totals mt-4 flex flex-wrap items-center justify-center gap-base {% if collection.all_products_count == 1 and is_filtered == false -%}!hidden{%- endif -%}">
-    {% comment %} Collection display total {% endcomment %}
-    {%- liquid
-      paginate collection.products by settings.products_per_page
-        assign total_for_first_pages = paginate.items | divided_by: settings.products_per_page | times: settings.products_per_page
-        assign items_on_last_page = paginate.items | minus: total_for_first_pages
-        if items_on_last_page == 0
-          assign items_on_last_page = settings.products_per_page
-        endif
-
-        assign progress_end = settings.products_per_page
-        if progress_end > paginate.items
-          assign progress_end = paginate.items
-        elsif paginate.pages == paginate.current_page
-          assign progress_end = items_on_last_page
-        endif
-
-        assign current_html = progress_end | prepend: '<span data-progress-current>' | append: '</span>'
-        assign total_html = paginate.items | prepend: '<span data-progress-total>' | append: '</span>'
-      endpaginate
-    -%}
-
-    <p class="m-0 text-center" data-collection-totals-text>
-      {{ 'sections.load_more.info_html' | t: current: current_html, total: total_html }}
-    </p>
-
+  <div class="collection-header__totals mt-8 flex flex-wrap items-center justify-center gap-base {% if collection.all_products_count == 1 and is_filtered == false -%}!hidden{%- endif -%}">
     {% comment %} Sort sorting {% endcomment %}
     {%- if section.settings.enable_sorting -%}
       <div class="collection-header__sorting relative flex justify-end gap-4">
@@ -147,4 +126,4 @@
 {%- endcapture -%}
 
 {%- comment -%} Output collection header with buttons and filters. {%- endcomment -%}
-{%- render 'render-container-content', content: collection_header_content, class: 'my-6' -%}
+{%- render 'render-container-content', content: collection_header_content, class: 'my-10' -%}
