@@ -10,7 +10,7 @@
 
     {%- comment -%} Header {%- endcomment -%}
     <div class="cart__header mb-6 group-[.cart-is-empty]/cart-items:hidden lg:mb-14">
-      <h1 class="h4 {{ section.settings.heading_alignment }}">
+      <h1 class="{{ section.settings.heading_alignment }}">
         {%- render "render-translation", namespace: "sections.cart", key: "title", fallback: "Cart" -%}
       </h1>
     </div>

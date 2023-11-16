@@ -47,7 +47,7 @@
     <div class="flex flex-auto flex-col gap-4 py-4 {% if show_collection_image or section.settings.header_color_scheme != '' -%}px-8{%- endif -%}">
 
       {%- comment -%} Render collection title {%- endcomment -%}
-      <h1 class="collection-header__title h4 mb-0 text-center">
+      <h1 class="collection-header__title mb-0 text-center">
         {%- liquid
           if collection.url == '/collections/all'
             echo 'sections.breadcrumbs.all_products' | t
