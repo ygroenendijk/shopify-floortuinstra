@@ -104,10 +104,10 @@
 
 <article
   class="
-    product-card group/product-card relative z-0 flex h-full flex-col gap-4 overflow-hidden rounded-md border border-gray-200 p-4 {{ product_card_state_classes }}
+    product-card group/product-card relative z-0 flex h-full flex-col gap-4 overflow-hidden rounded-md border border-gray-100 p-4 {{ product_card_state_classes }}
+    shadow-lg
     group-[.color-scheme]/color-scheme:bg-white
     group-[.color-scheme]/color-scheme:pb-4
-    group-[.color-scheme]/color-scheme:shadow-xl
     group-[.color-scheme]/color-scheme:shadow-gray-200
   "
   data-product-card>
@@ -201,7 +201,7 @@
     {% comment %} Link to PDP {% endcomment %}
     <a
       href="{{ product_object.url }}"
-      class="product-card__link button button--outline mx-auto w-full border-gray-200 shadow-md states:border-secondary touch:h-12 touch:p-3 no-touch:h-10 no-touch:p-2"
+      class="product-card__link button button--outline mx-auto w-full border-gray-200 states:border-secondary touch:h-12 touch:p-3 no-touch:h-10 no-touch:p-2"
       tabindex="-1">
       {%- render 'render-translation', namespace: 'products.product', key: 'go_to_product', fallback: 'Go to product page' -%}
 

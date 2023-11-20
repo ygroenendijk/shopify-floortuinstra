@@ -168,152 +168,158 @@
   }'
 {%- endcapture -%}
 
-<swiper-slider {{ swiper_options }}>
-  <div
-    class="
-      swiper relative overflow-visible
-      [--swiper-slidesPerView:1.2]
-      [--swiper-spaceBetween:16px]
-      lg:[--swiper-spaceBetween:32px]
-      {% if render_products or render_product_cards %}
-        {% if render_inline -%}
-          xs:[--swiper-slidesPerView:1.2]
-          md:[--swiper-slidesPerView:1.8]
-          lg:[--swiper-slidesPerView:2.4]
-        {%- else -%}
-          xs:[--swiper-slidesPerView:2.2]
-          md:[--swiper-slidesPerView:3.2]
-          lg:[--swiper-slidesPerView:4]
-        {% endif -%}
-      {% elsif render_blog_articles %}
-          xs:[--swiper-slidesPerView:1.8]
-          md:[--swiper-slidesPerView:2.4]
-          lg:[--swiper-slidesPerView:3.2]
-          2xl:[--swiper-slidesPerView:4]
-      {% endif -%}
-    ">
+{%- capture slides -%}
+  {%- for item in object_array -%}
+    {%- liquid
+      # render products
+      if render_products
+        # Skip current product
+        if item.id == product.id or item.available == false
+          continue
+        endif
+
+        # Add 1 to the count if product is skipped
+        assign count = count | plus: 1
+
+        # render articles
+      elsif render_blog_articles
+        # Skip current article
+        if item.id == article.id
+          continue
+        endif
+
+        # Check if the article has the tag that is defined in the settings
+        if tag_to_show != blank
+          unless item.tags contains tag_to_show
+            continue
+          endunless
+        endif
+
+        # Increase the count for every item that passes the statements so we can make sure the slides don't exceed the max count
+        assign count = count | plus: 1
+      endif
+    -%}
     <div
-      class="overflow-hidden {{ swiper_indication_class }} {% if render_inline -%}-ms-content-wrapper-padding w-screen max-w-content-width-md 2xl:ms-0{% else -%}2xl:px-content-wrapper-padding{%- endif -%}"
-      data-swiper>
+      class="
+        swiper-slide
+        min-w-[calc((100%-16px)/1.2)]
+        {% if render_products or render_product_cards %}
+          {% if render_inline -%}
+            xs:min-w-[calc((100%-16px)/1.2)]
+            md:min-w-[calc((100%-2*16px)/1.8)]
+            lg:min-w-[calc((100%-3*32px)/2.4)]
+          {% else -%}
+            xs:min-w-[calc((100%-2*16px)/2.2)]
+            md:min-w-[calc((100%-2*16px)/3.2)]
+            lg:min-w-[calc((100%-3*32px)/4)]
+        {% endif -%}
+        {% elsif render_blog_articles %}
+            xs:min-w-[calc((100%-16px)/1.8)]
+            md:min-w-[calc((100%-2*16px)/2.4)]
+            lg:min-w-[calc((100%-3*32px)/3.2)]
+            2xl:min-w-[calc((100%-3*32px)/4)]
+        {% endif -%}
+      "
+      data-swiper-slide-index="{{ forloop.index }}">
+      {%- liquid
+        if render_products
+          render 'product-card', product_object: item, image_max_width: image_max_width, image_sizes: image_sizes, product_card_title_el: 'h3'
+        elsif render_blog_articles
+          render 'article-card', article: item, image_max_width: image_max_width, image_sizes: image_sizes
+        elsif render_product_cards
+          echo item
+        endif
+      -%}
+    </div>
+
+    {%- liquid
+      if count >= max_count
+        break
+      endif
+    -%}
+
+    {% comment %} Demo slides {% endcomment %}
+  {%- else -%}
+    {%- for i in (1..8) -%}
+      <div class="swiper-slide">
+        {%- render 'product-card-placeholder' -%}
+      </div>
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if count > 0 -%}
+  <swiper-slider {{ swiper_options }}>
+    <div
+      class="
+        swiper relative overflow-visible
+        [--swiper-slidesPerView:1.2]
+        [--swiper-spaceBetween:16px]
+        lg:[--swiper-spaceBetween:32px]
+        {% if render_products or render_product_cards %}
+          {% if render_inline -%}
+            xs:[--swiper-slidesPerView:1.2]
+            md:[--swiper-slidesPerView:1.8]
+            lg:[--swiper-slidesPerView:2.4]
+          {%- else -%}
+            xs:[--swiper-slidesPerView:2.2]
+            md:[--swiper-slidesPerView:3.2]
+            lg:[--swiper-slidesPerView:4]
+          {% endif -%}
+        {% elsif render_blog_articles %}
+            xs:[--swiper-slidesPerView:1.8]
+            md:[--swiper-slidesPerView:2.4]
+            lg:[--swiper-slidesPerView:3.2]
+            2xl:[--swiper-slidesPerView:4]
+        {% endif -%}
+      ">
       <div
-        class="swiper-wrapper flex"
-        {% if is_recommendations -%}
-          data-recommended-products
-        {%- endif -%}>
-        {%- for item in object_array -%}
-          {%- liquid
-            # render products
-            if render_products
-              # Skip current product
-              if item.id == product.id
-                continue
-              endif
+        class="overflow-hidden {{ swiper_indication_class }} {% if render_inline -%}-ms-content-wrapper-padding w-screen max-w-content-width-md 2xl:ms-0{% else -%}2xl:px-content-wrapper-padding{%- endif -%}"
+        data-swiper>
+        <div
+          class="swiper-wrapper flex"
+          {% if is_recommendations -%}
+            data-recommended-products
+          {%- endif -%}>
+          {{ slides }}
+        </div>
 
-              # Add 1 to the count if product is skipped
-              assign count = count | plus: 1
+        {%- comment -%} Render swiper indication wrapper to show pagination or scrollbar {%- endcomment -%}
+        {%- if swiper_indication != '' -%}
+          <div class="content-wrapper px-content-wrapper-padding 2xl:px-0">
+        {%- endif -%}
 
-              # render articles
-            elsif render_blog_articles
-              # Skip current article
-              if item.id == article.id
-                continue
-              endif
+        {% comment %} Add the placeholders {% endcomment %}
+        {%- case swiper_indication -%}
+          {%- when 'pagination' -%}
+            <div class="swiper-pagination swiper-pagination-{{ section.id }}"></div>
+          {%- when 'scrollbar' -%}
+            <div class="swiper-scrollbar swiper-scrollbar-{{ section.id }}"></div>
+        {%- endcase -%}
 
-              # Check if the article has the tag that is defined in the settings
-              if tag_to_show != blank
-                unless item.tags contains tag_to_show
-                  continue
-                endunless
-              endif
-
-              # Increase the count for every item that passes the statements so we can make sure the slides don't exceed the max count
-              assign count = count | plus: 1
-            endif
-          -%}
-          <div
-            class="
-              swiper-slide
-              min-w-[calc((100%-16px)/1.2)]
-              {% if render_products or render_product_cards %}
-                {% if render_inline -%}
-                  xs:min-w-[calc((100%-16px)/1.2)]
-                  md:min-w-[calc((100%-2*16px)/1.8)]
-                  lg:min-w-[calc((100%-3*32px)/2.4)]
-                {% else -%}
-                  xs:min-w-[calc((100%-2*16px)/2.2)]
-                  md:min-w-[calc((100%-2*16px)/3.2)]
-                  lg:min-w-[calc((100%-3*32px)/4)]
-              {% endif -%}
-              {% elsif render_blog_articles %}
-                  xs:min-w-[calc((100%-16px)/1.8)]
-                  md:min-w-[calc((100%-2*16px)/2.4)]
-                  lg:min-w-[calc((100%-3*32px)/3.2)]
-                  2xl:min-w-[calc((100%-3*32px)/4)]
-              {% endif -%}
-            "
-            data-swiper-slide-index="{{ forloop.index }}">
-            {%- liquid
-              if render_products
-                render 'product-card', product_object: item, image_max_width: image_max_width, image_sizes: image_sizes, product_card_title_el: 'h3'
-              elsif render_blog_articles
-                render 'article-card', article: item, image_max_width: image_max_width, image_sizes: image_sizes
-              elsif render_product_cards
-                echo item
-              endif
-            -%}
+        {%- if swiper_indication != '' -%}
           </div>
-
-          {%- liquid
-            if count >= max_count
-              break
-            endif
-          -%}
-
-          {% comment %} Demo slides {% endcomment %}
-        {%- else -%}
-          {%- for i in (1..8) -%}
-            <div class="swiper-slide">
-              {%- render 'product-card-placeholder' -%}
-            </div>
-          {%- endfor -%}
-        {%- endfor -%}
+        {%- endif -%}
       </div>
 
-      {%- comment -%} Render swiper indication wrapper to show pagination or scrollbar {%- endcomment -%}
-      {%- if swiper_indication != '' -%}
-        <div class="content-wrapper px-content-wrapper-padding 2xl:px-0">
-      {%- endif -%}
-
-      {% comment %} Add the placeholders {% endcomment %}
-      {%- case swiper_indication -%}
-        {%- when 'pagination' -%}
-          <div class="swiper-pagination swiper-pagination-{{ section.id }}"></div>
-        {%- when 'scrollbar' -%}
-          <div class="swiper-scrollbar swiper-scrollbar-{{ section.id }}"></div>
-      {%- endcase -%}
-
-      {%- if swiper_indication != '' -%}
+      {%- comment -%} Render swiper navigation {%- endcomment -%}
+      {%- if swiper_navigation -%}
+        <div class="content-wrapper absolute inset-x-4 inset-y-0 md:inset-x-8">
+          <button
+            class="swiper-button-prev swiper-button-prev-{{ section.id }} {% if swiper_indication != '' %}translate-y-[-50%]{%- endif -%}"
+            aria-label="{% render "render-translation", namespace: "accessibility", key: "previous_slide", fallback: "Previous slide" %}">
+            {%- render 'icons', icon: 'chevron-left', icon_class: 'w-5' -%}
+          </button>
+          <button
+            class="swiper-button-next swiper-button-next-{{ section.id }} {% if swiper_indication != '' %}translate-y-[-50%]{%- endif -%}"
+            aria-label="{% render "render-translation", namespace: "accessibility", key: "next_slide", fallback: "Next slide" %}">
+            {%- render 'icons', icon: 'chevron-right', icon_class: 'w-5' -%}
+          </button>
         </div>
       {%- endif -%}
     </div>
+  </swiper-slider>
 
-    {%- comment -%} Render swiper navigation {%- endcomment -%}
-    {%- if swiper_navigation -%}
-      <div class="content-wrapper absolute inset-x-4 inset-y-0 md:inset-x-8">
-        <button
-          class="swiper-button-prev swiper-button-prev-{{ section.id }} {% if swiper_indication != '' %}translate-y-[-50%]{%- endif -%}"
-          aria-label="{% render "render-translation", namespace: "accessibility", key: "previous_slide", fallback: "Previous slide" %}">
-          {%- render 'icons', icon: 'chevron-left', icon_class: 'w-5' -%}
-        </button>
-        <button
-          class="swiper-button-next swiper-button-next-{{ section.id }} {% if swiper_indication != '' %}translate-y-[-50%]{%- endif -%}"
-          aria-label="{% render "render-translation", namespace: "accessibility", key: "next_slide", fallback: "Next slide" %}">
-          {%- render 'icons', icon: 'chevron-right', icon_class: 'w-5' -%}
-        </button>
-      </div>
-    {%- endif -%}
-  </div>
-</swiper-slider>
-
-{%- comment -%} Import javascript {%- endcomment -%}
-<script src="{{ 'swiper-slider.js' | asset_url }}" type="module"></script>
+  {%- comment -%} Import javascript {%- endcomment -%}
+  <script src="{{ 'swiper-slider.js' | asset_url }}" type="module"></script>
+{%- endif -%}

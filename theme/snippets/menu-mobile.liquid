@@ -13,7 +13,7 @@
 {%- comment -%}  Renders the menu drawer {%- endcomment -%}
 <div
   id="mobileMenu"
-  class="mobile-menu lg:hidden {{ section.settings.color_scheme }}"
+  class="mobile-menu lg:hidden group-[.mobile-menu-is-open]/body:h-screen {{ section.settings.color_scheme }}"
   role="dialog"
   aria-label="{%- render 'render-translation', namespace: 'accessibility', key: 'mobile_menu', fallback: 'Mobile menu' -%}">
   <collapsible-component

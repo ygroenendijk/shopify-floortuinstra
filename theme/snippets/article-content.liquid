@@ -103,20 +103,6 @@
         {%- render 'render-translation',  namespace: 'blogs.article', key: 'tags_html', tags: tags, fallback: tags -%}
       </div>
     {%- endif -%}
-
-    {% comment %} Article nav {% endcomment %}
-    {%- if blog.prev_article or blog.next_article -%}
-      <div class="article-content__nav flex justify-between gap-base">
-        <a href="{{ blog.prev_article }}" class="button button--primary {% unless blog.prev_article -%}disabled{%- endunless -%}">
-          {%- render 'icons', icon: 'chevron-left', icon_class: 'w-4' -%}
-          {%- render 'render-translation',  namespace: 'blogs.article.navigation', key: 'prev', fallback: 'Vorig artikel'-%}
-        </a>
-        <a href="{{ blog.next_article }}" class="button button--primary {% unless blog.next_article -%}disabled{%- endunless -%}">
-          {%- render 'render-translation',  namespace: 'blogs.article.navigation', key: 'next', fallback: 'Volgend artikel'-%}
-          {%- render 'icons', icon: 'chevron-right', icon_class: 'w-4' -%}
-        </a>
-      </div>
-    {%- endif -%}
   </div>
 {%- endcapture -%}
 

@@ -8,16 +8,20 @@
 
   # Collect the title classnames based on settings
   assign title_class = 'text-and-image__title' | append: ' ' | append: section.settings.heading_color | append: ' ' | append: section.settings.heading_size | append: ' ' | append: section.settings.heading_alignment
+
+  assign has_image = false
+  assign has_text = false
 -%}
 
 {%- comment -%} Capture the content {%- endcomment -%}
 {%- capture container_content -%}
-  <div class="text-and-image__wrapper flex flex-col gap-base md:flex-row {{ section.settings.position_vertical }}">
+  {%- capture content -%}
     {%- for block in section.blocks -%}
 
       {% comment %} Text {% endcomment %}
       {%- if block.type == 'text' -%}
         {%- if block.settings.text_1 != blank or block.settings.text_2 != blank -%}
+          {%- assign has_text = true -%}
           <div class="text-and-image__text rte space-y-4 {{ block.settings.block_width }}" {{ block.shopify_attributes }}>
             {%- if block.settings.text_1 != blank -%}
               <div class="{{ block.settings.text_1_font }} {{ block.settings.text_1_size }}">
@@ -38,6 +42,7 @@
         <div class="text-and-image__image {{ block.settings.desktop_order }} flex-1 basis-[min-content]" {{ block.shopify_attributes }}>
           {%- liquid
             # Get mobile image
+            assign has_image = true
             assign image_mobile = block.settings.image_mobile
             if image_mobile == blank
               assign image_mobile = block.settings.image
@@ -62,6 +67,10 @@
         </div>
       {%- endif -%}
     {%- endfor -%}
+  {%- endcapture -%}
+
+  <div class="text-and-image__wrapper {% if has_image and has_text -%}flex flex-col gap-base md:flex-row {{ section.settings.position_vertical }}{%- endif- %}">
+    {{ content }}
   </div>
 {%- endcapture -%}
 

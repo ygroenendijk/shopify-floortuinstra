@@ -11,7 +11,7 @@
 
 {%- liquid
   unless aspect_ratio
-    assign aspect_ratio = '3/4'
+    assign aspect_ratio = settings.product_card_image_aspect
   endunless
 -%}
 
@@ -105,7 +105,7 @@
     </div>
 
     {%- comment -%} Quantity. When only one item is in the cart, add trash icon for minus {%- endcomment -%}
-    <div class="cart-item__quantity flex max-w-[7.5rem] items-end justify-self-end">
+    <div class="cart-item__quantity mt-2 flex max-w-[7.5rem] items-end justify-self-end">
       {%- liquid
         # Quantity input
         assign qty_id = item.index | plus: 1

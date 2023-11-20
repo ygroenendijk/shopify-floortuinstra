@@ -16,9 +16,7 @@
     assign is_slider = true
   endif
 
-  assign language = localization.language.iso_code
-  assign text_field = 'text_' | append: language
-  assign quote_class = 'before:content-empty before:block before:w-6 before:h-6 before:absolute after:content-empty after:block after:w-6 after:h-6 after:absolute before:-left-6 before:-top-6 after:-right-6 after:-bottom-6'
+  assign quote_class = 'before:content-empty before:block before:w-6 before:h-6 before:absolute after:content-empty after:block after:w-6 after:h-6 after:absolute before:left-0 md:before:-left-6 before:-top-2 md:before:-top-6 after:right-0 after:-bottom-2 md:after:-right-6 md:after:-bottom-6'
 
   # Import styles and set indicator class
   if is_slider
@@ -61,11 +59,11 @@
 
 {%- capture slides -%}
   {%- for block in section.blocks -%}
-    {%- if block.settings[text_field] != blank -%}
-      <div class="swiper-slide flex items-center justify-center {{ section.settings.min_ratio_tablet }}" {{ block.shopify_attributes }}>
+    {%- if block.settings.text_nl != blank -%}
+      <div class="swiper-slide flex items-center justify-center p-6 md:p-0 {{ section.settings.min_ratio_tablet }}" {{ block.shopify_attributes }}>
         <div class="quote relative h-max w-full max-w-screen md:max-w-xl {{ quote_class }} {{ block.settings.text_align }} {{ block.settings.text_color }} w-full bg-white/80">
           <div class="quote__text p-4">
-            {{ block.settings[text_field] }}
+            {{ block.settings.text_nl }}
           </div>
           {%- if block.settings.title != blank -%}
             <div class="quote__name p-4 text-end">
@@ -368,16 +366,6 @@
             "id": "text_nl",
             "label": "Text nederlands",
             "default": "<p>De quote.</p>"
-          },
-          {
-            "type": "richtext",
-            "id": "text_en",
-            "label": "Text engels"
-          },
-          {
-            "type": "richtext",
-            "id": "text_de",
-            "label": "Text duits"
           },
           {
             "type": "richtext",
