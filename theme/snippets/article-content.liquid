@@ -89,9 +89,11 @@
   {%- capture tags -%}
     <ul class="list-unstyled m-0 flex flex-wrap gap-2 p-0">
       {%- for tag in article.tags -%}
-        <li class="marker:none list-none whitespace-nowrap">
-          {{ tag | link_to_tag: tag }}
-        </li>
+        {%- unless tag contains 'Category:' -%}
+          <li class="marker:none list-none whitespace-nowrap">
+            {{ tag | link_to_tag: tag }}
+          </li>
+        {%- endunless -%}
       {%- endfor -%}
     </ul>
   {%- endcapture -%}

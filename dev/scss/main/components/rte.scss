@@ -21,7 +21,6 @@
     rte-strong:text-inherit
     rte-ul:ps-8
     rte-li:ps-4
-    rte-li:text-sm
     rte-li:leading-6;
     .font-secondary:where(:not(strong)) {
       @apply font-normal;
