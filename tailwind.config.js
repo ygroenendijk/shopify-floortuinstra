@@ -119,6 +119,9 @@ module.exports = {
         'content-wrapper-padding': 'var(--content-wrapper-padding)',
         'container-spacing': 'var(--container-spacing)',
       },
+      contrast: {
+        110: '1.1',
+      },
       borderColor: ({ theme }) => ({
         DEFAULT: theme('colors.gray.100'),
       }),
@@ -142,7 +145,7 @@ module.exports = {
             '--tw-prose-quote-borders': theme('colors.primary.600'),
             color: theme('colors.text-default'),
             a: {
-              color: '#70a4b3',
+              color: theme('colors.blue.DEFAULT'),
               textDecoration: 'none',
               transition: 'all .2s',
               '&:hover': {
@@ -151,7 +154,7 @@ module.exports = {
               },
               '&:not(.button)': {
                 borderBottom: '1px dashed',
-                borderColor: 'var(--color-scheme-text-color), #70a4b3',
+                borderColor: 'var(--color-scheme-text-color), #43727A',
                 '&:hover': {
                   borderColor: 'var(--color-scheme-text-active-color), #5A0909',
                 },
@@ -239,6 +242,9 @@ module.exports = {
         800: '#3B4853',
         900: '#242B32',
         950: '#181D22',
+      },
+      blue: {
+        DEFAULT: '#43727A',
       },
       info: '#0dcaf0',
       success: '#198754',

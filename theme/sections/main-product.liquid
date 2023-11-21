@@ -12,10 +12,10 @@
 -%}
 
 {%- capture product_content -%}
-  <div class="product grid grid-cols-12 gap-x-4 gap-y-base">
+  <div class="product grid grid-cols-12 gap-base">
 
     {%- comment -%} Product title {%- endcomment -%}
-    <h1 class="product__title h5 col-span-12 px-content-wrapper-padding md:hidden">
+    <h1 class="product__title col-span-12 max-w-3xl px-content-wrapper-padding md:px-0">
       {{ product.title }}
     </h1>
 
@@ -23,7 +23,7 @@
     <div class="product-media relative col-span-12 md:col-span-7 lg:col-span-6 2xl:col-span-7">
 
       {%- comment -%} Skiplink so users can go straight to the product info {%- endcomment -%}
-      <a class="button button--primary sr-only !absolute inset-[3px] bottom-auto z-popover !p-2 focus:not-sr-only focus:outline-dashed focus:outline-1 states:no-underline" href="#ProductInfo">
+      <a class="button button--primary sr-only !absolute inset-[3px] bottom-auto z-popover focus:not-sr-only focus:p-2 focus:outline-dashed focus:outline-1 states:no-underline" href="#ProductInfo">
         {% render "render-translation", namespace: "accessibility", key: "skip_to_product_info", fallback: "Skip to product information" -%}
       </a>
 
@@ -33,13 +33,9 @@
     {%- comment -%} Right col: Product info {%- endcomment -%}
     <div id="ProductInfo" class="product__info col-span-12 md:col-span-5 lg:col-span-6 2xl:col-span-5">
       <product-info
-        class="product-info-col flex flex-col gap-y-5 bg-gray-50 px-content-wrapper-padding py-6 md:z-10 md:rounded-md md:drop-shadow-lg {% if section.settings.enable_sticky_info -%}product-info-col--sticky sticky top-4 transition-all duration-300 group-[.header-sticky:not(.header-hidden)]/body:top-20{%- endif -%}"
+        class="product-info-col flex flex-col gap-y-5 bg-gray-50 px-content-wrapper-padding py-6 md:z-10 md:p-0 {% if section.settings.enable_sticky_info -%}product-info-col--sticky sticky top-4 transition-all duration-300 group-[.header-sticky:not(.header-hidden)]/body:top-20{%- endif -%}"
         data-product-info
       >
-        {%- comment -%} Product title {%- endcomment -%}
-        <h1 class="product__title h5 m-0 hidden md:block">
-          {{ product.title }}
-        </h1>
 
         {%- for block in section.blocks -%}
           {%- case block.type -%}
@@ -86,7 +82,7 @@
                   product: product,
                   use_variant: true,
                   show_badges: block.settings.show_badges,
-                  font_size: 'text-lg',
+                  font_size: 'text-lg font-bold',
                   block: block,
                   is_preorder: is_preorder
                 -%}
@@ -194,34 +190,36 @@
 
           {%- comment -%} Quantity input {%- endcomment -%}
           {%- when 'quantity_selector' -%}
-            {%- if product.available -%}
-              <div class="product-form__input product-form__quantity no-js:hidden" {{ block.shopify_attributes }}>
-                {%- liquid
-                  assign quantity_label_class = ''
-                  if block.settings.quantity_label == false
-                    assign quantity_label_class = 'hidden'
-                  endif
+            {%- capture quantity_selector -%}
+              {%- if product.available -%}
+                <div class="product-form__input product-form__quantity h-full no-js:hidden" {{ block.shopify_attributes }}>
+                  {%- liquid
+                    assign quantity_label_class = ''
+                    if block.settings.quantity_label == false
+                      assign quantity_label_class = 'hidden'
+                    endif
 
-                  # assign the max attribute for the qty input. When there is no inventory management, ignore it
-                  if product.selected_or_first_available_variant.inventory_management != blank
-                    assign max = product.selected_or_first_available_variant.inventory_quantity
-                  endif
-                -%}
-                <label class="quantity__label  mb-2 block text-sm font-semibold {{ quantity_label_class }}" for="Quantity-{{ product.id }}">
-                  {%- render 'render-translation', namespace: "products.product.quantity", key: "label", fallback: "Quantity" -%}
-                </label>
+                    # assign the max attribute for the qty input. When there is no inventory management, ignore it
+                    if product.selected_or_first_available_variant.inventory_management != blank
+                      assign max = product.selected_or_first_available_variant.inventory_quantity
+                    endif
+                  -%}
+                  <label class="quantity__label  mb-2 block text-sm font-semibold {{ quantity_label_class }}" for="Quantity-{{ product.id }}">
+                    {%- render 'render-translation', namespace: "products.product.quantity", key: "label", fallback: "Quantity" -%}
+                  </label>
 
-                {% comment %} Quantity input {% endcomment %}
-                {%- render 'quantity-input',
-                  id: product.id,
-                  value: 1,
-                  qty_product: product,
-                  type: 'pdp',
-                  max: max,
-                  is_preorder: is_preorder
-                -%}
-              </div>
-            {%- endif -%}
+                  {% comment %} Quantity input {% endcomment %}
+                  {%- render 'quantity-input',
+                    id: product.id,
+                    value: 1,
+                    qty_product: product,
+                    type: 'pdp',
+                    max: max,
+                    is_preorder: is_preorder
+                  -%}
+                </div>
+              {%- endif -%}
+            {%- endcapture -%}
 
           {%- comment -%} Variants {%- endcomment -%}
           {%- when 'variant_picker' -%}
@@ -253,94 +251,99 @@
                 group-[.is-fixed]/add-to-cart:inset-0
                 group-[.is-fixed]/add-to-cart:top-auto
                 group-[.is-fixed]/add-to-cart:z-fixed group-[.is-fixed]/add-to-cart:bg-white group-[.is-fixed]/add-to-cart:p-4 group-[.is-fixed]/add-to-cart:drop-shadow-[0_1px_15px_rgba(0,0,0,0.15)]" data-product-form-inner>
-                <product-form-component class="product-form block">
-                  {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                    <input type="hidden" name="quantity" value="1">
-                    <input type="hidden" name="inventory_quantity" value="{%- unless is_preorder -%}{{ product.selected_or_first_available_variant.inventory_quantity }}{%- endunless -%}">
+                <div class="flex gap-4 md:flex-wrap">
+                  <div class="">
+                    {{ quantity_selector }}
+                  </div>
+                  <product-form-component class="product-form block flex-auto">
+                    {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                      <input type="hidden" name="quantity" value="1">
+                      <input type="hidden" name="inventory_quantity" value="{%- unless is_preorder -%}{{ product.selected_or_first_available_variant.inventory_quantity }}{%- endunless -%}">
 
-                    {% comment %} Pre-orders {% endcomment %}
-                    {%- if is_preorder -%}
-                      <input type="hidden" name="properties[{%- render 'render-translation', namespace: 'products.product', key: 'pre-order', fallback: 'Pre-order' -%}]" value="{% render 'render-translation', namespace: 'products.product.yes', fallback: 'Yes' %}">
-                    {% endif %}
+                      {% comment %} Pre-orders {% endcomment %}
+                      {%- if is_preorder -%}
+                        <input type="hidden" name="properties[{%- render 'render-translation', namespace: 'products.product', key: 'pre-order', fallback: 'Pre-order' -%}]" value="{% render 'render-translation', namespace: 'products.product.yes', fallback: 'Yes' %}">
+                      {% endif %}
 
-                    {%- comment -%} Show variants in dropdowns for the fixed 'add to cart'{%- endcomment -%}
-                    <div class="hidden group-[.is-fixed]/add-to-cart:block">
-                      {%- render 'product-variant-select',
-                        product: product,
-                        block: block,
-                        class: 'flex gap-base',
-                        is_preorder: is_preorder
-                      -%}
-                    </div>
-
-                    {% comment %} No script variant select {% endcomment %}
-                    <noscript>
-                      <div class="product-form__input field mb-4 {% if product.has_only_default_variant %} hidden{% endif %}">
-                        <label class="field__label {% if block.settings.picker_label == false %} sr-only{% endif %}" for="Variants-{{ product.id }}">
-                          {%- render 'render-translation', namespace: "products.product", key: "product_variants", fallback: "Variants" -%}
-                        </label>
-                        <div class="select text-text-default">
-                          <select name="id" id="Variants-{{ product.id }}" class="select__select">
-                            {%- for variant in product.variants -%}
-                              <option
-                                {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
-                                {% if variant.available == false %}disabled{% endif %}
-                                value="{{ variant.id }}"
-                              >
-                                {{ variant.title }}
-                                {%- if variant.available == false %} -
-                                  {%- render 'render-translation', namespace: "products.product", key: "sold_out", fallback: "Sold out" -%}
-                                {% endif %}
-                                - {{ variant.price | money_with_currency | strip_html }}
-                              </option>
-                            {%- endfor -%}
-                          </select>
-                          <span class="select__select-icon">
-                            {%- render 'icons', icon: 'chevron-down', icon_size: 'w-3' -%}
-                          </span>
-                        </div>
-                        <div class="field">
-                          <label for="QuantityNoScript-{{ product.id }}" class="field__label">
-                            {%- render 'render-translation', namespace: 'products.product.quantity', key: 'input_label', product_item: product.title, fallback: 'Quantity for product' -%}
-                          </label>
-                          <input
-                            class="field__input"
-                            type="number"
-                            name="quantity"
-                            id="QuantityNoScript-{{ product.id }}"
-                            min="1"
-                            max="{{ product.selected_or_first_available_variant.inventory_quantity }}"
-                            value="1"
-                            inputmode="numeric">
-                        </div>
+                      {%- comment -%} Show variants in dropdowns for the fixed 'add to cart'{%- endcomment -%}
+                      <div class="hidden group-[.is-fixed]/add-to-cart:block">
+                        {%- render 'product-variant-select',
+                          product: product,
+                          block: block,
+                          class: 'flex gap-base',
+                          is_preorder: is_preorder
+                        -%}
                       </div>
-                    </noscript>
 
-                    <div class="product-form__buttons flex flex-col items-center gap-y-2 group-[.is-fixed]/add-to-cart:mt-4">
-                      <button
-                        type="submit"
-                        name="add"
-                        class="button button--lg button--primary w-full"
-                        {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
-                        data-add-to-cart-behavior="{{ settings.add_to_cart_behavior }}"
-                        {% render 'klaviyo-tracking', render_data_attributes: true, product_details: product %}
-                      >
-                        {%- render 'icons', icon: 'cart', icon_class: 'w-6' -%}
-                        <span data-add-to-cart-button-text>
-                          {%- if product.selected_or_first_available_variant.available -%}
-                            {%- render 'render-translation', namespace: "products.product", key: "add_to_cart", fallback: "Add to cart" -%}
-                          {%- else -%}
-                            {%- render 'render-translation', namespace: "products.product", key: "sold_out", fallback: "Sold out" -%}
-                          {%- endif -%}
-                        </span>
-                      </button>
-                      {%- if block.settings.show_dynamic_checkout -%}
-                        {{ form | payment_button }}
-                      {%- endif -%}
-                    </div>
-                  {%- endform -%}
-                </product-form-component>
+                      {% comment %} No script variant select {% endcomment %}
+                      <noscript>
+                        <div class="product-form__input field mb-4 {% if product.has_only_default_variant %} hidden{% endif %}">
+                          <label class="field__label {% if block.settings.picker_label == false %} sr-only{% endif %}" for="Variants-{{ product.id }}">
+                            {%- render 'render-translation', namespace: "products.product", key: "product_variants", fallback: "Variants" -%}
+                          </label>
+                          <div class="select text-text-default">
+                            <select name="id" id="Variants-{{ product.id }}" class="select__select">
+                              {%- for variant in product.variants -%}
+                                <option
+                                  {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                                  {% if variant.available == false %}disabled{% endif %}
+                                  value="{{ variant.id }}"
+                                >
+                                  {{ variant.title }}
+                                  {%- if variant.available == false %} -
+                                    {%- render 'render-translation', namespace: "products.product", key: "sold_out", fallback: "Sold out" -%}
+                                  {% endif %}
+                                  - {{ variant.price | money_with_currency | strip_html }}
+                                </option>
+                              {%- endfor -%}
+                            </select>
+                            <span class="select__select-icon">
+                              {%- render 'icons', icon: 'chevron-down', icon_size: 'w-3' -%}
+                            </span>
+                          </div>
+                          <div class="field">
+                            <label for="QuantityNoScript-{{ product.id }}" class="field__label">
+                              {%- render 'render-translation', namespace: 'products.product.quantity', key: 'input_label', product_item: product.title, fallback: 'Quantity for product' -%}
+                            </label>
+                            <input
+                              class="field__input"
+                              type="number"
+                              name="quantity"
+                              id="QuantityNoScript-{{ product.id }}"
+                              min="1"
+                              max="{{ product.selected_or_first_available_variant.inventory_quantity }}"
+                              value="1"
+                              inputmode="numeric">
+                          </div>
+                        </div>
+                      </noscript>
+
+                      <div class="product-form__buttons flex flex-col items-center gap-y-2">
+                        <button
+                          type="submit"
+                          name="add"
+                          class="button button--lg button--primary w-full"
+                          {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                          data-add-to-cart-behavior="{{ settings.add_to_cart_behavior }}"
+                          {% render 'klaviyo-tracking', render_data_attributes: true, product_details: product %}
+                        >
+                          {%- render 'icons', icon: 'cart', icon_class: 'w-6' -%}
+                          <span data-add-to-cart-button-text>
+                            {%- if product.selected_or_first_available_variant.available -%}
+                              {%- render 'render-translation', namespace: "products.product", key: "add_to_cart", fallback: "Add to cart" -%}
+                            {%- else -%}
+                              {%- render 'render-translation', namespace: "products.product", key: "sold_out", fallback: "Sold out" -%}
+                            {%- endif -%}
+                          </span>
+                        </button>
+                        {%- if block.settings.show_dynamic_checkout -%}
+                          {{ form | payment_button }}
+                        {%- endif -%}
+                      </div>
+                    {%- endform -%}
+                  </product-form-component>
+                </div>
               </div>
             </div>
           {%- endcase -%}
@@ -353,13 +356,11 @@
 {%- capture product_description -%}
   {%- comment -%} Product description {%- endcomment -%}
   {%- if product.description != blank -%}
-    <div class="product__description col-span-12 my-4">
-      <h2 class="h4">
+    <div class="product__description rte col-span-12 my-4">
+      <h2>
         {%- render 'render-translation', namespace: 'products.product', key: 'description', fallback: 'Product description' -%}
       </h2>
-      <div class="rte">
-        {{ product.description }}
-      </div>
+      {{- product.description -}}
     </div>
   {%- endif -%}
 {%- endcapture -%}

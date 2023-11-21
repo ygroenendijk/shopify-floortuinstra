@@ -5,6 +5,7 @@
 
   if section.settings.show_border
     assign content_class = content_class | append: ' border border-accent md:py-6'
+    assign container_class = container_class | append: ' px-content-wrapper-padding'
   endif
 
   if section.settings.show_content_dividers
@@ -331,8 +332,8 @@
         "default": "h3",
         "options": [
           {
-            "value": "h1",
-            "label": "H1"
+            "value": "",
+            "label": "Default"
           },
           {
             "value": "h2",
@@ -603,8 +604,8 @@
             "default": "h5",
             "options": [
               {
-                "value": "h1",
-                "label": "H1"
+                "value": "",
+                "label": "Default"
               },
               {
                 "value": "h2",
@@ -806,8 +807,8 @@
             "default": "h5",
             "options": [
               {
-                "value": "h1",
-                "label": "H1"
+                "value": "",
+                "label": "Default"
               },
               {
                 "value": "h2",

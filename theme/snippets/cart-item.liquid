@@ -11,7 +11,7 @@
 
 {%- liquid
   unless aspect_ratio
-    assign aspect_ratio = settings.product_card_image_aspect
+    assign aspect_ratio = '3/4'
   endunless
 -%}
 
@@ -38,7 +38,7 @@
       {%- comment -%} Title {%- endcomment -%}
       <a
         href="{{ item.product.url }}"
-        class="mb-2 block break-words text-sm font-bold text-inherit no-underline states:underline">
+        class="mb-2 block break-words text-sm text-inherit no-underline states:underline">
         {{- item.product.title -}}
       </a>
 
@@ -96,11 +96,8 @@
     </div>
 
     <div class="flex items-center gap-4">
-      <div class="cart-item__badges relative empty:hidden">
-        {%- render 'product-badges', product: item.product, class: 'relative badges--sm' -%}
-      </div>
       <div class="cart-item__prices">
-        {% render 'render-price', product: item %}
+        {% render 'render-price', product: item, font_size: 'font-bold' %}
       </div>
     </div>
 

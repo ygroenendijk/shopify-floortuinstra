@@ -1,8 +1,8 @@
 @mixin small {
-  @apply px-2 py-1 text-xs;
+  @apply px-1.5 py-0.5 text-xs;
 }
 @mixin medium {
-  @apply px-3 py-1.5 text-sm;
+  @apply px-2 py-1;
 }
 
 @layer components {
@@ -32,16 +32,16 @@
 
     // Variants
     &--custom {
-      --product-badge-background: theme('colors.primary.DEFAULT');
-      --product-badge-text: theme('colors.primary.text');
+      --product-badge-background: theme('colors.blue.DEFAULT');
+      --product-badge-text: theme('colors.white');
     }
     &--sold-out {
       --product-badge-background: theme('colors.danger');
       --product-badge-text: theme('colors.white');
     }
     &--pre-order {
-      --product-badge-background: theme('colors.accent.300');
-      --product-badge-text: theme('colors.black');
+      --product-badge-background: theme('colors.gray.500');
+      --product-badge-text: theme('colors.gray.text');
     }
     &--sale {
       --product-badge-background: theme('colors.success');

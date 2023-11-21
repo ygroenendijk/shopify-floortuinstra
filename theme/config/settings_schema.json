@@ -558,44 +558,6 @@
         "label": "Show excerpt"
       },
       {
-        "type": "select",
-        "id": "ha_content_color_scheme",
-        "label": "Text background",
-        "default": "color-scheme color-scheme--white",
-        "options": [
-          {
-            "value": "color-scheme color-scheme--primary",
-            "label": "Primary",
-            "group": "Theme"
-          },
-          {
-            "value": "color-scheme color-scheme--secondary",
-            "label": "Secondary",
-            "group": "Theme"
-          },
-          {
-            "value": "color-scheme color-scheme--accent",
-            "label": "Accent",
-            "group": "Theme"
-          },
-          {
-            "value": "color-scheme color-scheme--gray",
-            "label": "Gray",
-            "group": "Standard"
-          },
-          {
-            "value": "color-scheme color-scheme--black",
-            "label": "Black",
-            "group": "Standard"
-          },
-          {
-            "value": "color-scheme color-scheme--white",
-            "label": "White",
-            "group": "Standard"
-          }
-        ]
-      },
-      {
         "type": "header",
         "content": "Text positioning"
       },
@@ -802,6 +764,52 @@
         "type": "header",
         "content": "Default article cards",
         "info": "These settings will only apply to default article cards."
+      },
+      {
+        "type": "select",
+        "id": "ac_min_ratio",
+        "label": "Image aspect ratio",
+        "default": "aspect-[1/1]",
+        "options": [
+          {
+            "value": "",
+            "label": "Default"
+          },
+          {
+            "value": "aspect-[1/1]",
+            "label": "Square"
+          },
+          {
+            "value": "aspect-[2/1]",
+            "label": "2x1",
+            "group": "Landscape"
+          },
+          {
+            "value": "aspect-[4/3]",
+            "label": "4x3",
+            "group": "Landscape"
+          },
+          {
+            "value": "aspect-[5/2]",
+            "label": "5x2",
+            "group": "Landscape"
+          },
+          {
+            "value": "aspect-[16/9]",
+            "label": "16x9",
+            "group": "Landscape"
+          },
+          {
+            "value": "aspect-[3/4]",
+            "label": "3x4",
+            "group": "Portrait"
+          },
+          {
+            "value": "aspect-[9/16]",
+            "label": "9x16",
+            "group": "Portrait"
+          }
+        ]
       },
       {
         "type": "checkbox",

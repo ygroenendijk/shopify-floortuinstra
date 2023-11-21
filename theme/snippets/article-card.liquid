@@ -100,18 +100,12 @@
       for tag in article.tags
         assign tag_downcase = tag | downcase
         if tag_downcase contains 'category:'
-          assign category_name = tag | downcase | split: ':' | last
+          assign category_name = tag | split: ':' | last
 
           # Used for regular article cards
           capture tags_as_badges
             echo tags_as_badges
-            echo category_name | link_to_tag: tag | replace: '<a', '<a tabindex="-1" class="badge capitalize no-underline states:scale-110"'
-          endcapture
-
-          # Used for highlighted article
-          capture tags_as_string
-            echo tags_as_string
-            echo category_name | capitalize | upcase | link_to_tag: tag | replace: '<a', '<a tabindex="-1" class="label no-underline inverted"' | prepend: ' | '
+            echo category_name | link_to_tag: tag | replace: '<a', '<a tabindex="-1" class="badge no-underline states:scale-110"'
           endcapture
         endif
       endfor
@@ -120,14 +114,12 @@
 
   {% comment %} Add a wrapper {% endcomment %}
   {%- if tags_as_badges != blank -%}
-    <div class="product-card__badges flex-gap-1 badges absolute z-10 flex {% if image_object -%}left-4 top-4{%- endif -%}">
-      {{ tags_as_badges }}
-    </div>
+    {{ tags_as_badges }}
   {%- endif -%}
 {%- endcapture -%}
 
 {%- comment -%} Render cart {%- endcomment -%}
-<article class="article-card flex flex-col gap-y-4 {{ class -}}">
+<article class="article-card relative flex flex-col gap-y-4 {{ class -}} {% unless highlight -%}{{ settings.ac_min_ratio }}{%- endunless -%}">
   {% comment %} Highlighted card {% endcomment %}
   {%- if highlight -%}
     <div class="relative {% if settings.show_highlight_image -%}flex overflow-hidden rounded-md p-6 lg:p-10 {{ settings.ha_position_horizontal }} {{ settings.ha_position_vertical }} {{ settings.ha_text_align }} {{ settings.ha_min_ratio_mobile }} {{ settings.ha_min_ratio_tablet }} {{ settings.ha_min_ratio_desktop }}{%- endif -%}">
@@ -136,7 +128,7 @@
         <div class="article-card__image absolute inset-0 -z-10 flex-none bg-black">
           {%- liquid
             # Image
-            assign image_classes = 'article-card__image w-full h-full object-cover  group-hover/article-card:scale-105 duration-300 transition-all opacity-80'
+            assign image_classes = 'article-card__image w-full h-full object-cover group-hover/article-card:scale-105 duration-300 transition-all opacity-80'
             if settings.show_highlight_image
               render 'responsive-image', image_object: image_object, alt: article.title, max_width: 1360, sizes: '(min-width: 1440px) 1360px, 100vw', class: image_classes
             endif
@@ -146,28 +138,22 @@
 
       {% comment %} Content {% endcomment %}
       <div class="article-card__content-wrapper">
-        <div class="article-card__content flex flex-col gap-y-4 {% if settings.show_highlight_image -%}max-w-full p-6 md:max-w-lg{%- endif %} {{ settings.ha_content_color_scheme }}">
+        <div class="article-card__content flex flex-col gap-y-4 rounded-md {% if settings.show_highlight_image -%}max-w-full bg-white/[.85] p-6 shadow-md backdrop-blur-sm md:max-w-lg{%- endif %}">
+          {% comment %} Category {% endcomment %}
+          {%- if settings.show_highlight_category and tag_categories != blank -%}
+            <div class="article_card__badges badges flex gap-1">
+              {{- tag_categories -}}
+            </div>
+          {%- endif -%}
+
           <header class="article-card__header flex flex-col gap-y-2">
             {% comment %} Category and date {% endcomment %}
             {%- if settings.show_highlight_category or settings.show_highlight_date -%}
               <div class="has-gap-4 flex items-center justify-between">
-                {% comment %} Category {% endcomment %}
-                {%- if settings.show_highlight_category and tags_as_string != blank -%}
-                  {%- assign categories = tags_as_string | remove_first: '|' | strip -%}
-                  {{- categories -}}
-                {%- endif -%}
-
-                {% comment %} Date {% endcomment %}
-                {%- if settings.show_highlight_date -%}
-                  <p class="article-card__published_at mb-0 text-sm italic">
-                    {{- article_date -}}
-                  </p>
-                {%- endif -%}
-              </div>
             {%- endif -%}
 
             {% comment %} Title {% endcomment %}
-            <a href="{{ article.url }}" class="no-underline">
+            <a href="{{ article.url }}" class="text-primary no-underline">
               <h2 class="article-card__title h4 mb-0">
                 {{- article.title -}}
               </h2>
@@ -181,6 +167,13 @@
             {%- endif -%}
           </header>
 
+          {% comment %} Date {% endcomment %}
+          {%- if settings.show_highlight_date -%}
+            <p class="article-card__published_at mb-0 text-sm italic">
+              {{- article_date -}}
+            </p>
+          {%- endif -%}
+
           {% comment %} Excerpt {% endcomment %}
           {%- if settings.show_highlight_excerpt and article.excerpt != blank -%}
             {{- article_excerpt -}}
@@ -188,7 +181,7 @@
 
           {% comment %} Read more {% endcomment %}
           <footer>
-            <a href="{{ article.url }}" class="button">
+            <a href="{{ article.url }}" class="button button--outline">
               {{- read_more_button -}}
             </a>
           </footer>
@@ -201,7 +194,7 @@
     {% comment %} Article image and title {% endcomment %}
     <a
       href="{{ article.url }}"
-      class="article-card__link group/article-card relative block basis-1/4 overflow-hidden rounded-md"
+      class="article-card__link group/article-card relative block flex-1 basis-1/4 overflow-hidden rounded-md"
       tabindex="-1">
       {%- if show_image -%}
         <div class="article-card__image-wrapper">
@@ -209,34 +202,43 @@
             if image_object == blank
               echo 'image' | placeholder_svg_tag
             else
-              render 'responsive-image', image_object: image_object, alt: article.title, aspect_ratio: image_aspect_ratio, max_width: image_max_width, sizes: image_sizes, class: 'article-card__image w-full group-hover/article-card:scale-105 duration-300 transition-all object-cover'
+              assign aspect_ratio = settings.ac_min_ratio | split: '[' | last | remove: ']'
+              render 'responsive-image', image_object: image_object, alt: article.title, aspect_ratio: aspect_ratio, max_width: image_max_width, sizes: image_sizes, class: 'article-card__image w-full group-hover/article-card:scale-105 duration-300 transition-all object-cover object-top'
             endif
           -%}
         </div>
       {%- endif -%}
     </a>
 
-    <div class="flex basis-3/4 flex-col gap-y-4">
-      <header class="article-card__header relative flex flex-col">
-        {% comment %} Article category {% endcomment %}
-        {%- if tag_categories != blank -%}
+    {% comment %} Article category {% endcomment %}
+    <div class="absolute inset-0 bottom-auto">
+      {%- if tag_categories != blank -%}
+        <div class="article_card__badges badges absolute z-10 flex gap-1 {% if image_object -%}left-4 top-4{%- endif -%}">
           {{- tag_categories -}}
-        {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="absolute inset-4 top-auto flex basis-3/4 flex-col gap-y-2 rounded-md bg-white/[.85] p-4 shadow-md backdrop-blur-sm">
+      <header class="article-card__header relative flex flex-col">
         <div class="article-card__title-wrapper flex flex-col gap-y-1">
           <a
             href="{{ article.url }}"
-            class="article-card__title text-text-default no-underline transition-colors states:text-primary"
+            class="article-card__title text-primary no-underline transition-colors states:text-secondary"
             tabindex="-1">
             <h2 class="label-lg mb-0">
               {{- article.title -}}
             </h2>
           </a>
         </div>
+      </header>
 
+      <div class="article-card__body flex flex-col gap-2">
+        {% comment %} Date and author {% endcomment %}
         {%- if show_date or show_author -%}
           <p class="article-card__meta mb-0 flex flex-wrap gap-1 text-sm leading-6 opacity-50 contrast-more:opacity-100">
             {%- if show_date -%}
-              <span class="article-card__published-at">
+              <span class="article-card__published-at text-sm italic">
                 {{- article_date -}}
               </span>
             {%- endif -%}
@@ -250,16 +252,14 @@
             {%- endif -%}
           </p>
         {%- endif -%}
-      </header>
 
-      <div class="article-card__body">
         {% comment %} Excerpt {% endcomment %}
         {%- if show_excerpt and article.excerpt.size > 0 -%}
           {{- article_excerpt -}}
         {%- endif -%}
 
         {% comment %} Read more {% endcomment %}
-        <a href="{{ article.url }}" class="button button--primary button--xs">
+        <a href="{{ article.url }}" class="button button--outline button--xs w-fit">
           {{- read_more_button -}}
         </a>
       </div>

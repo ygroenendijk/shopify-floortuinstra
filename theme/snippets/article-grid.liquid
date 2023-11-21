@@ -39,6 +39,12 @@
         assign col_classes = 'col-span-12 sm:col-span-6 lg:col-span-4'
         if forloop.first and settings.show_highlight_article and paginate.current_page == 1
           assign highlight = true
+          if current_tags
+            assign highlight = false
+          endif
+        endif
+
+        if highlight
           assign col_classes = 'col-span-12'
         endif
       -%}

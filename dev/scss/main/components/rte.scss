@@ -8,8 +8,7 @@
     @apply max-w-none
     text-inherit
     rte-headings:mb-2
-    rte-headings:mt-8
-    rte-headings:font-bold
+    rte-headings:mt-4
     rte-headings:leading-[1.2]
     rte-headings:text-inherit
     rte-h2:text-primary
@@ -20,7 +19,13 @@
     rte-blockquote:mb-5
     rte-blockquote:mt-0
     rte-strong:text-inherit
-    rte-ul:ps-4;
+    rte-ul:ps-8
+    rte-li:ps-4
+    rte-li:text-sm
+    rte-li:leading-6;
+    .font-secondary:where(:not(strong)) {
+      @apply font-normal;
+    }
 
     ul:not(.list-unstyled) {
       list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 74.1 74.1' xml:space='preserve'%3E%3Ccircle cx='37.1' cy='37.1' r='35.1' fill='none' stroke='%23c01414' stroke-width='2'/%3E%3Ccircle cx='37.1' cy='37.1' r='21.4' fill='%23c01414' stroke='%23c01414'/%3E%3C/svg%3E");

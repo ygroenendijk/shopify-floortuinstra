@@ -26,7 +26,7 @@
   endunless
 
   assign state_classes = 'states:border-primary focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:outline-none focus-visible:ring-offset-2'
-  assign button_classes = 'flex h-8 w-8 touch:h-12 touch:w-12 shrink-0 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent p-0 text-black transition-all no-js:hidden group bg-white states:bg-gray-100 states:border-gray-100' | append: state_classes
+  assign button_classes = 'flex aspect-square h-full w-8 touch:h-full touch:w-12 shrink-0 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent p-0 text-black transition-all no-js:hidden group bg-white states:bg-gray-100 states:border-gray-100' | append: state_classes
   assign icon_class = 'w-3 group-hover:scale-110 pointer-events-none transition-transform ease-linear'
 
   capture button_minus_accessibility_text
@@ -37,7 +37,7 @@
   endcapture
 -%}
 
-<quantity-input class="quantity relative inline-flex h-max rounded-md border border-gray-300">
+<quantity-input class="quantity relative inline-flex h-full items-center rounded-md border border-gray-300">
   <button class="quantity__button {{ button_classes }}" name="minus" type="button">
     <span class="sr-only">
       {{- button_minus_accessibility_text -}}

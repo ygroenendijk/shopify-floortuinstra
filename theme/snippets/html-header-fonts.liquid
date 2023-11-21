@@ -7,6 +7,7 @@
   assign font_bold = settings.font_body | font_modify: 'weight', '600'
   assign font_italic = settings.font_body | font_modify: 'weight', '300'
   assign font_secondary = settings.font_secondary
+  assign font_secondary_bold = settings.font_secondary | font_modify: 'weight', '700'
 -%}
 
 {% comment %}
@@ -27,12 +28,13 @@
   {%- unless settings.font_body.system? -%}
     {{- font_body | font_face: font_display: 'swap' -}}
     {{- font_body | font_modify: 'style', 'italic' | font_face: font_display: 'swap' -}}
-    {{- font_italic | font_face: font_display: 'swap' -}}
     {{- font_italic | font_modify: 'style', 'italic' | font_face: font_display: 'swap' -}}
     {{- font_bold | font_face: font_display: 'swap' -}}
     {{- font_bold | font_modify: 'style', 'italic' | font_face: font_display: 'swap' -}}
     {{- font_secondary | font_face: font_display: 'swap' -}}
     {{- font_secondary | font_modify: 'style', 'italic' | font_face: font_display: 'swap' -}}
+    {{- font_secondary_bold | font_face: font_display: 'swap' -}}
+    {{- font_secondary_bold | font_modify: 'style', 'italic' | font_face: font_display: 'swap' -}}
   {% endunless %}
 
   :root {

@@ -23,8 +23,8 @@
     {%- if block.settings[text_field] != blank -%}
       {%- assign categories = categories | append: ',' | append: block.settings.category -%}
 
-      <div class="quotes__quote relative mx-10 flex flex-col divide-y divide-dashed divide-accent-300 before:absolute
-        before:-left-6 before:-top-1 before:block before:h-6 before:w-6 before:content-empty after:absolute after:-right-6 after:bottom-0 after:block after:h-6 after:w-6 after:content-empty md:before:content-none md:after:content-none
+      <div class="quotes__quote relative mx-10 flex flex-col divide-y divide-dashed divide-accent-300 before:absolute before:-left-6
+        before:-top-1 before:block before:h-6 before:w-6 before:content-empty after:absolute after:-right-6 after:bottom-0 after:block after:h-6 after:w-6 after:content-empty md:mx-0 md:before:content-none md:after:content-none
         " data-quote-item="{{ block.settings.category | handleize }}" {{ block.shopify_attributes }}>
         <div class="quotes__quote-text py-4">
           {{ block.settings[text_field] }}
@@ -66,7 +66,7 @@
     </div>
 
     {% comment %} The quotes {% endcomment %}
-    <div class="quotes grid gap-base md:grid-cols-2 lg:grid-cols-3">
+    <div class="quotes grid gap-x-20 gap-y-base md:grid-cols-2 lg:grid-cols-3">
       {{ quotes }}
     </div>
   {%- endcapture -%}

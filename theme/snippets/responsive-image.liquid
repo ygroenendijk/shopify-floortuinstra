@@ -78,6 +78,11 @@
     assign class = class | remove: 'object-cover'
   endif
 
+  if class contains 'object-top'
+    assign image_fit = image_fit | append: ' object-top'
+    assign class = class | remove: 'object-top'
+  endif
+
   assign is_square = false
   assign is_landscape = false
   assign is_portrait = false
