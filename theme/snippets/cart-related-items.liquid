@@ -90,7 +90,7 @@
           {%- render 'render-price', product: product, use_variant: false -%}
 
           {%- comment -%} The product form, product id will be update by variant.js {%- endcomment -%}
-          <footer class="mt-2 flex flex-wrap items-center gap-2">
+          <footer class="mt-2 flex flex-wrap items-center justify-center gap-2">
             {%- if show_quick_shop -%}
               {% comment %} Render the quickshop wrapper and the trigger because we don't use the hover effect here {% endcomment %}
               {%- render 'quick-shop',
@@ -103,7 +103,7 @@
             {%- endif -%}
 
             {% comment %} Link to PDP {% endcomment %}
-            <a href="{{ product.url }}" class="button button--outline mx-auto rounded-full p-2 touch:p-3">
+            <a href="{{ product.url }}" class="button button--outline rounded-full p-2 touch:p-3">
               {%- render 'icons', icon: 'arrow', icon_class: 'w-5' -%}
               <span class="sr-only">
                 {%- render 'render-translation', namespace: 'products.product', key: 'go_to_product', fallback: 'Go to product page' -%}

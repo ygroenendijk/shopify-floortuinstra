@@ -32,7 +32,7 @@
 
     // Variants
     &--custom {
-      --product-badge-background: theme('colors.blue.DEFAULT');
+      --product-badge-background: theme('colors.blue');
       --product-badge-text: theme('colors.white');
     }
     &--sold-out {

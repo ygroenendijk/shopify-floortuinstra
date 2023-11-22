@@ -12,8 +12,16 @@
   }
   .content-for-layout {
     @apply flex flex-auto flex-col;
-    .shopify-section:only-child {
-      @apply flex flex-auto flex-col items-stretch;
+    .shopify-section {
+      @apply only:flex only:flex-auto only:flex-col only:items-stretch;
+      &:last-child {
+        &:has(.container--background) .container {
+          @apply pb-24 md:pb-container-spacing;
+        }
+        &:has(.container:not(.container--background)) .container {
+          @apply mb-24 md:mb-container-spacing;
+        }
+      }
     }
   }
 

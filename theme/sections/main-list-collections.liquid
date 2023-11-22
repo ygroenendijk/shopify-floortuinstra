@@ -27,8 +27,12 @@
   </ul>
 {%- endcapture -%}
 
+{%- capture title_class -%}
+  {{ section.settings.heading_alignment }} mb-10
+{%- endcapture -%}
+
 {% comment %} Render the content {% endcomment %}
-{%- render 'render-container-content', title: section.settings.title, title_tag: 'h1', title_class: section.settings.heading_alignment, content: container_content -%}
+{%- render 'render-container-content', title: section.settings.title, title_tag: 'h1', title_class: title_class, content: container_content, class: 'my-16' -%}
 
 {% schema %}
   {

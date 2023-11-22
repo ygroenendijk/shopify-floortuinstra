@@ -145,7 +145,7 @@ module.exports = {
             '--tw-prose-quote-borders': theme('colors.primary.600'),
             color: theme('colors.text-default'),
             a: {
-              color: theme('colors.blue.DEFAULT'),
+              color: theme('colors.blue'),
               textDecoration: 'none',
               transition: 'all .2s',
               '&:hover': {
@@ -243,9 +243,7 @@ module.exports = {
         900: '#242B32',
         950: '#181D22',
       },
-      blue: {
-        DEFAULT: '#43727A',
-      },
+      blue: '#43727A',
       info: '#0dcaf0',
       success: '#198754',
       warning: '#ffc107',

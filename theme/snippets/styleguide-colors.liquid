@@ -4,7 +4,7 @@
   assign circle_class_full = 'text-lg mb-0 w-[150px] rounded-full h-fit p-2 text-center'
 
   assign communication_colors = 'info, success, warning, danger' | split: ', '
-  assign color_names = 'primary, secondary, accent, gray' | split: ', '
+  assign color_names = 'primary, secondary, accent, gray, blue' | split: ', '
 -%}
 
 {% comment %} Base {% endcomment %}
@@ -12,6 +12,19 @@
   {% comment %} Communication colors {% endcomment %}
   <div class="{{ color_wrapper_class }}">
     {%- for color in communication_colors -%}
+      {% comment %} For the colors to render, we need to render the class name without using liquid {% endcomment %}
+      {%- liquid
+        case color_option
+          when 'info'
+            assign bg_color = 'bg-info'
+          when 'success'
+            assign bg_color = 'bg-success'
+          when 'warning'
+            assign bg_color = 'bg-warning'
+          when 'danger'
+            assign bg_color = 'bg-danger'
+        endcase
+      -%}
       {%- assign color_capitalized = color | capitalize -%}
 
       <div class="{{ color_wrapper_class }} flex-col items-center justify-center">
@@ -40,6 +53,9 @@
         when 'gray'
           assign bg_color = 'bg-gray'
           assign text_color = 'text-gray-text'
+        when 'blue'
+          assign bg_color = 'bg-transparent'
+          assign text_color = 'text-blue'
       endcase
     -%}
     <div class="{{ color_wrapper_class }}">

@@ -286,7 +286,7 @@
 
         {%- comment -%} Render swiper indication wrapper to show pagination or scrollbar {%- endcomment -%}
         {%- if swiper_indication != '' -%}
-          <div class="content-wrapper px-content-wrapper-padding 2xl:px-0">
+          <div class="swiper__pagination-wrapper content-wrapper min-h-[24px] px-content-wrapper-padding 2xl:px-0">
         {%- endif -%}
 
         {% comment %} Add the placeholders {% endcomment %}
@@ -304,7 +304,7 @@
 
       {%- comment -%} Render swiper navigation {%- endcomment -%}
       {%- if swiper_navigation -%}
-        <div class="content-wrapper absolute inset-x-4 inset-y-0 md:inset-x-8">
+        <div class="swiper__nav-wrapper content-wrapper absolute inset-x-4 inset-y-0 md:inset-x-8">
           <button
             class="swiper-button-prev swiper-button-prev-{{ section.id }} {% if swiper_indication != '' %}translate-y-[-50%]{%- endif -%}"
             aria-label="{% render "render-translation", namespace: "accessibility", key: "previous_slide", fallback: "Previous slide" %}">

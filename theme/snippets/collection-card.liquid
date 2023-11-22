@@ -38,7 +38,7 @@
     class="collection-card group/collection-card flex flex-col gap-y-4 text-center text-current no-underline group-hover/collection-card:underline group-focus-visible/collection-card:underline">
     {% comment %} Collection image {% endcomment %}
     {%- if collection.featured_image -%}
-      <div class="collection-card__image p-4 transition-all group-hover/collection-card:scale-110 group-focus-visible/collection-card:scale-110 sm:p-6 md:p-10">
+      <div class="collection-card__image group-focus-visible/collection-card:scale-11 mx-auto h-[150px] w-[150px] overflow-hidden rounded-full border border-accent transition-all group-hover/collection-card:scale-110 md:h-[200px] md:w-[200px]">
         {%- render 'responsive-image',
           image_object: collection.featured_image,
           alt: image_alt,
@@ -47,7 +47,7 @@
           max_width: 379,
           widths: '130,180,230,280,320',
           aspect_ratio: aspect_ratio,
-          class: 'mx-auto h-full w-full'
+          class: 'mx-auto h-full w-full object-cover'
         -%}
       </div>
     {%- endif -%}

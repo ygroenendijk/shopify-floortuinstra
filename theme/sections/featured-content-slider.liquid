@@ -46,7 +46,7 @@
 
 {%- capture container_footer -%}
   {%- if section.settings.button_text != blank -%}
-    {%- if section.settings.button_color_scheme == 'button--pink' -%}
+    {%- if section.settings.button_color_scheme == 'button--outline-primary' -%}
       <div class="button-divider group last:mb-0">
     {%- endif -%}
     <a
@@ -59,7 +59,7 @@
     >
       {{- section.settings.button_text -}}
     </a>
-    {%- if section.settings.button_color_scheme == 'button--pink' -%}
+    {%- if section.settings.button_color_scheme == 'button--outline-primary' -%}
       </div>
     {%- endif -%}
   {%- endif -%}
@@ -310,8 +310,8 @@
             "label": "Outline white"
           },
           {
-            "value": "button--pink",
-            "label": "Outline pink"
+            "value": "button--outline-primary",
+            "label": "Outline primary"
           },
           {
             "value": "button--link",

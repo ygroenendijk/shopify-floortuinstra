@@ -1,14 +1,14 @@
 {% liquid
   unless text_color
-    assign text_color = 'fill-black group-[.color-scheme--primary]/header-transparent:fill-white group-[.desktop-submenu-is-open]/body:fill-black group-[.header-transparent-text--text-white]/header-transparent:fill-white'
+    assign text_color = 'fill-black group-[.color-scheme--primary]/header-transparent:fill-white group-[.desktop-submenu-is-open]/body:fill-black group-[.header-transparent-text--text-white]/header-transparent:fill-white group-[.color-scheme--black]/color-scheme:fill-white group-[.color-scheme--secondary]/color-scheme:fill-white'
   endunless
 
   unless line_color
-    assign line_color = 'stroke-black group-[.desktop-submenu-is-open]/body:stroke-black group-[.header-transparent-text--text-white]/header-transparent:stroke-white'
+    assign line_color = 'stroke-black group-[.desktop-submenu-is-open]/body:stroke-black group-[.header-transparent-text--text-white]/header-transparent:stroke-white group-[.color-scheme--black]/color-scheme:stroke-white group-[.color-scheme--secondary]/color-scheme:stroke-white'
   endunless
 
   unless bg_color
-    assign bg_color = 'fill-primary group-[.header-transparent-text--text-white]/header-transparent:fill-primary'
+    assign bg_color = 'fill-primary group-[.header-transparent-text--text-white]/header-transparent:fill-primary group-[.color-scheme--primary]/color-scheme:fill-white'
   endunless
 
   unless hide_feet

@@ -65,16 +65,15 @@
 
     // .color-scheme--white
     // .color-scheme--black
+    // .color-scheme--primary
     // .color-scheme--secondary
     &--white,
     &--black,
+    &--primary,
     &--secondary {
-      .button:not(.button--primary):not(.button--secondary):not(.button--outline):not(.button--outline-white):not(.button--gradient):not(.button--link) {
-        --button-hover-text: theme('colors.primary.text');
+      .button:not(.button--primary):not(.button--secondary):not(.button--outline):not(.button--outline-white):not(.button--outline-primary):not(.button--link) {
         --button-border-color: transparent;
         --button-hover-border-color: transparent;
-        --button-background: theme('colors.primary.DEFAULT');
-        --button-hover-background: theme('colors.primary.600');
         &.mobile-menu__toggle-button,
         &.button--outline {
           --button-background: transparent;
@@ -82,19 +81,31 @@
         }
       }
     }
+    &--white,
+    &--black,
+    &--secondary {
+      .button:not(.button--primary):not(.button--secondary):not(.button--outline):not(.button--outline-white):not(.button--outline-primary):not(.button--link) {
+        --button-hover-text: theme('colors.primary.text');
+        --button-background: theme('colors.primary.DEFAULT');
+        --button-hover-background: theme('colors.primary.600');
+      }
+    }
     &--primary {
-      .button {
+      .button:not(.button--outline):not(.button--outline-white):not(.button--outline-primary):not(.button--link) {
         --button-text: theme('colors.white');
         --button-hover-text: theme('colors.primary.300');
-        --button-border-color: transparent;
-        --button-hover-border-color: transparent;
         --button-background: theme('colors.black');
         --button-hover-background: theme('colors.black');
-        &.mobile-menu__toggle-button,
-        &.button--outline {
-          --button-background: transparent;
-          --button-hover-background: var(--color-scheme-text-active-color);
-        }
+      }
+      .button:where(.button--outline, .button--outline-white, .button--outline-primary) {
+        --button-hover-background: theme('colors.black');
+        --button-hover-border-color: theme('colors.black');
+      }
+    }
+    &--secondary {
+      .button:where(.button--outline, .button--outline-white, .button--outline-primary) {
+        --button-hover-background: theme('colors.primary.DEFAULT');
+        --button-hover-border-color: theme('colors.primary.DEFAULT');
       }
     }
     // .header-transparent - used for the header

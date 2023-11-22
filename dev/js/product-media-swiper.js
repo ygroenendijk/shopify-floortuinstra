@@ -96,6 +96,7 @@ class ProductMediaSlider extends HTMLElement {
       a11y: true,
       rewind: true,
       observer: true,
+      autoHeight: true,
       initialSlide: initialSlideIndex,
       modules: [a11y, navigation, thumbs],
       navigation: {
@@ -107,6 +108,7 @@ class ProductMediaSlider extends HTMLElement {
 
     // Create Main slider
     this.swiperMainInstance = new Swiper(this.swiperMain, this.swiperMainOptions);
+    console.log(this.swiperMainInstance);
 
     // Rebuild Swiper in design mode
     if (Shopify.designMode && this.swiperMainInstance) {

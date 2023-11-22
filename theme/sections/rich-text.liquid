@@ -14,13 +14,13 @@
         </div>
         {%- when 'button' -%}
           {% if block.settings.button_link != blank and block.settings.button_label != blank %}
-            {%- if block.settings.button_color_scheme == 'button--pink' -%}
+            {%- if block.settings.button_color_scheme == 'button--outline-primary' -%}
               <div class="button-divider group last:mb-0">
             {%- endif -%}
               <a href="{{ block.settings.button_link }}" class="rich-text__button button button--lg {{ block.settings.button_color_scheme }}" {{ block.shopify_attributes -}}>
                 {{ block.settings.button_label }}
               </a>
-            {%- if block.settings.button_color_scheme == 'button--pink' -%}
+            {%- if block.settings.button_color_scheme == 'button--outline-primary' -%}
               </div>
             {%- endif -%}
           {% elsif request.design_mode %}
@@ -306,7 +306,7 @@
           {
             "type": "select",
             "id": "button_color_scheme",
-            "default": "button--pink",
+            "default": "button--outline-primary",
             "label": "Button type",
             "options": [
               {
@@ -330,8 +330,8 @@
                 "label": "Outline white"
               },
               {
-                "value": "button--pink",
-                "label": "Outline pink"
+                "value": "button--outline-primary",
+                "label": "Outline primary"
               },
               {
                 "value": "button--link",
