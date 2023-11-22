@@ -43,7 +43,7 @@
 
             {% comment %} Date {% endcomment %}
             {%- if block.settings.blog_show_date -%}
-              <p class="article-header__date opacity-50 contrast-more:opacity-100">
+              <p class="article-header__date opacity-70 contrast-more:opacity-100">
                 {{ article.published_at | time_tag: format: 'day_month_year' }}
               </p>
             {%- endif -%}
@@ -53,17 +53,46 @@
         {% comment %} Featured image {% endcomment %}
       {%- when 'featured_image' -%}
         {%- if article.image -%}
-            {%- assign image_classes = 'max-w-full w-full h-auto block mx-auto object-cover ' | append: block.settings.min_ratio_mobile | append: ' ' | append: block.settings.min_ratio_tablet -%}
-          <div class="article-header__featured-image {{ block.settings.min_ratio_mobile }} {{ block.settings.min_ratio_tablet }}" {{ block.shopify_attributes }}>
+          {%- liquid
+            assign image_classes = 'max-w-full w-full h-auto block mx-auto object-cover object-top ' | append: block.settings.min_ratio_mobile | append: ' ' | append: block.settings.min_ratio_tablet
+
+            if block.settings.min_ratio_mobile != block.settings.min_ratio_tablet
+              assign default_aspect_ratio = block.settings.min_ratio_tablet | split: '[' | last | remove: ']'
+              assign default_image_class = image_classes | append: ' hidden md:block ' | append: default_aspect_ratio
+
+              assign mobile_aspect_ratio = block.settings.min_ratio_mobile | split: '[' | last | remove: ']'
+              assign mobile_image_class = image_classes | append: ' md:hidden ' | append: mobile_aspect_ratio
+            endif
+          -%}
+          {%- capture default_image -%}
             {%- render 'responsive-image',
               image_object: article.image,
               alt: article.title,
               max_width: 1360,
               sizes: '(min-width: 1440px) 1360px, 100vw',
-              class: image_classes,
+              aspect_ratio: default_aspect_ratio,
+              class: default_image_class,
               alt: article.title,
               title: article.title
             -%}
+          {%- endcapture -%}
+
+          <div class="article-header__featured-image {{ block.settings.min_ratio_mobile }} {{ block.settings.min_ratio_tablet }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.min_ratio_mobile != block.settings.min_ratio_tablet -%}
+              {%- render 'responsive-image',
+                image_object: article.image,
+                alt: article.title,
+                max_width: 768,
+                sizes: '(min-width: 1440px) 1360px, 100vw',
+                aspect_ratio: mobile_aspect_ratio,
+                class: mobile_image_class,
+                alt: article.title,
+                title: article.title
+              -%}
+              {{ default_image }}
+            {%- else -%}
+              {{ default_image }}
+            {%- endif -%}
           </div>
         {%- endif -%}
     {%- endcase -%}

@@ -40,16 +40,16 @@
         class="
           filter__drawer fixed bottom-0 end-0 top-0 z-modal w-full max-w-sm translate-x-full overflow-y-auto bg-bg-default text-sm opacity-0 transition-all duration-300
 
-          {% comment %} When flex layout is used, make sure the element doesn't overlap the modals {% endcomment %}
+          {% comment %} When layout is used, make sure the element doesn't overlap the modals flex {% endcomment %}
           {% if settings.filter_display == 'flex' -%}
             md:z-30
           {%- endif %}
 
-          {% comment %} If the body group has class filter-is-open, add these styles {% endcomment %}
+          {% comment %} If the body has class filter-is-open, add these styles {% endcomment %}
           group-[.filter-is-open]/body:translate-x-0
           group-[.filter-is-open]/body:opacity-100
 
-          {% comment %} On LG screens, if the group has group/grid, add these styles {% endcomment %}
+          {% comment %} On LG screens, if the has group/grid, add these styles group {% endcomment %}
           group-[.filter]/grid:lg:inset-unset
           group-[.filter]/flex:md:inset-unset
           group-[.filter]/flex:md:relative
@@ -168,4 +168,4 @@
   </collection-filters-form>
 </div>
 
-<script src="{{ 'collection-filters-form.js' | asset_url }}" defer></script>
+{% comment %} <script src="{{ 'collection-filters-form.js' | asset_url }}" defer></script> {% endcomment %}

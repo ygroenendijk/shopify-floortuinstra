@@ -53,6 +53,7 @@
 
       if settings.filter_display != 'grid'
         assign classes = classes | append: ' lg:col-span-3 2xl:col-span-2'
+        assign sizes = '(min-width: 1440px) 217x, (min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 580px) 50vw, 100vw'
       else
         assign classes = classes | append: ' xl:col-span-3'
       endif
@@ -62,7 +63,7 @@
       <li class="{{ classes }}">
         {%- render 'product-card',
           product_object: product,
-          image_max_width: 1440,
+          image_max_width: 1360,
           image_sizes: sizes,
           image_alt: image_alt,
           image_title: image_title
