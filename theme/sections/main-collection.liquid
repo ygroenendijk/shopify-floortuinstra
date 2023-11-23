@@ -13,46 +13,46 @@
   endfor
 -%}
 
-<div id="main-collection" data-main-collection data-id="{{ section.id }}">
+{% comment %} The filters and the products {% endcomment %}
+{%- capture container_content -%}
   {% comment %} The collection header {% endcomment %}
   {%- render 'collection-header', section: section, is_filtered: filtered_collection -%}
 
-  {% comment %} The filters and the products {% endcomment %}
-  {%- capture container_content -%}
-    {%- if collection.products.size == 0 -%}
-      {% comment %} No products found {% endcomment %}
-      <div class="text-center">
-        <h3 class="h4">
-          {%- render 'render-translation', namespace: 'sections.collection_template', key: 'empty', fallback: 'No products found.' -%}
-        </h3>
-        {%- if filtered_collection -%}
-          <p>{{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url }}</p>
-        {%- endif -%}
-      </div>
-    {%- else -%}
-      {%- if settings.filter_display != 'grid' -%}
-        {%- liquid
-            render 'collection-filters', section: section
-            render 'collection-product-grid', section: section
-        -%}
-      {%- else -%}
-        <div class="lg:grid lg:grid-cols-12">
-          <div class="lg:col-span-3">
-            {%- render 'collection-filters', section: section -%}
-          </div>
-          <div class="lg:col-span-9">
-            {%- render 'collection-product-grid', section: section -%}
-          </div>
-        </div>
+  {%- if collection.products.size == 0 -%}
+    {% comment %} No products found {% endcomment %}
+    <div class="text-center">
+      <h3 class="h4">
+        {%- render 'render-translation', namespace: 'sections.collection_template', key: 'empty', fallback: 'No products found.' -%}
+      </h3>
+      {%- if filtered_collection -%}
+        <p>{{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url }}</p>
       {%- endif -%}
+    </div>
+  {%- else -%}
+    {%- if settings.filter_display != 'grid' -%}
+      {%- liquid
+          render 'collection-filters', section: section
+          render 'collection-product-grid', section: section
+      -%}
+    {%- else -%}
+      <div class="lg:grid lg:grid-cols-12">
+        <div class="lg:col-span-3">
+          {%- render 'collection-filters', section: section -%}
+        </div>
+        <div class="lg:col-span-9">
+          {%- render 'collection-product-grid', section: section -%}
+        </div>
+      </div>
     {%- endif -%}
-  {%- endcapture -%}
+  {%- endif -%}
+{%- endcapture -%}
 
-  {%- capture content_class -%}
-    {% if settings.filter_display == 'grid' -%}lg:ps-0{%- else -%}px-0{%- endif -%}
-  {%- endcapture -%}
+{%- capture content_class -%}
+  {% if settings.filter_display == 'grid' -%}lg:ps-0{%- else -%}px-0{%- endif -%}
+{%- endcapture -%}
 
-  {%- render 'render-container-content', content: container_content, content_class: content_class, class: 'my-0' -%}
+<div id="main-collection" data-main-collection data-id="{{ section.id }}">
+  {%- render 'render-container-content', content: container_content, content_class: content_class, class: 'my-16' -%}
 </div>
 
 {% schema %}
@@ -66,49 +66,6 @@
       {
         "type": "paragraph",
         "content": "To change collection descriptions or collection images, [edit your collections.](/admin/collections)"
-      },
-      {
-        "type": "select",
-        "id": "header_color_scheme",
-        "default": "color-scheme color-scheme--secondary",
-        "label": "Color scheme",
-        "options": [
-          {
-            "value": "",
-            "label": "Default"
-          },
-          {
-            "value": "color-scheme color-scheme--primary",
-            "label": "Primary",
-            "group": "Theme"
-          },
-          {
-            "value": "color-scheme color-scheme--secondary",
-            "label": "Secondary",
-            "group": "Theme"
-          },
-          {
-            "value": "color-scheme color-scheme--accent",
-            "label": "Accent",
-            "group": "Theme"
-          },
-          {
-            "value": "color-scheme color-scheme--gray",
-            "label": "Gray",
-            "group": "Standard"
-          },
-          {
-            "value": "color-scheme color-scheme--black",
-            "label": "Black",
-            "group": "Standard"
-          }
-        ]
-      },
-      {
-        "type": "checkbox",
-        "id": "show_collection_image",
-        "default": false,
-        "label": "Show collection image"
       },
       {
         "type": "checkbox",
