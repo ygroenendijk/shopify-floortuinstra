@@ -623,96 +623,51 @@
       },
       {
         "type": "header",
-        "content": "Image aspect ratios"
-      },
-      {
-        "type": "select",
-        "id": "ha_min_ratio_mobile",
-        "label": "Mobile screens",
-        "default": "aspect-[9/16]",
-        "options": [
-          {
-            "value": "",
-            "label": "Default"
-          },
-          {
-            "value": "aspect-[1/1]",
-            "label": "Square"
-          },
-          {
-            "value": "aspect-[2/1]",
-            "label": "2x1",
-            "group": "Landscape"
-          },
-          {
-            "value": "aspect-[4/3]",
-            "label": "4x3",
-            "group": "Landscape"
-          },
-          {
-            "value": "aspect-[5/2]",
-            "label": "5x2",
-            "group": "Landscape"
-          },
-          {
-            "value": "aspect-[16/9]",
-            "label": "16x9",
-            "group": "Landscape"
-          },
-          {
-            "value": "aspect-[3/4]",
-            "label": "3x4",
-            "group": "Portrait"
-          },
-          {
-            "value": "aspect-[9/16]",
-            "label": "9x16",
-            "group": "Portrait"
-          }
-        ]
+        "content": "Image aspect ratios",
+        "info": "For mobile, we use the default size"
       },
       {
         "type": "select",
         "id": "ha_min_ratio_tablet",
         "label": "Tablet screens",
         "info": "Only applies to devices larger than 768 pixels and smaller than 1280 pixels.",
-        "default": "md:aspect-[2/1]",
+        "default": "sm:aspect-[2/1]",
         "options": [
           {
             "value": "",
             "label": "Default (same as mobile)"
           },
           {
-            "value": "md:aspect-[1/1]",
+            "value": "sm:aspect-[1/1]",
             "label": "Square"
           },
           {
-            "value": "md:aspect-[2/1]",
+            "value": "sm:aspect-[2/1]",
             "label": "2x1",
             "group": "Landscape"
           },
           {
-            "value": "md:aspect-[4/3]",
+            "value": "sm:aspect-[4/3]",
             "label": "4x3",
             "group": "Landscape"
           },
           {
-            "value": "md:aspect-[5/2]",
+            "value": "sm:aspect-[5/2]",
             "label": "5x2",
             "group": "Landscape"
           },
           {
-            "value": "md:aspect-[16/9]",
+            "value": "sm:aspect-[16/9]",
             "label": "16x9",
             "group": "Landscape"
           },
           {
-            "value": "aspect-[3/4]",
+            "value": "sm:aspect-[3/4]",
             "label": "3x4",
             "group": "Portrait"
           },
           {
-            "value": "aspect-[9/16]",
+            "value": "sm:aspect-[9/16]",
             "label": "9x16",
             "group": "Portrait"
           }

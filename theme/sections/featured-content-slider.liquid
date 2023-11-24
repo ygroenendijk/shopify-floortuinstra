@@ -46,8 +46,8 @@
 
 {%- capture container_footer -%}
   {%- if section.settings.button_text != blank -%}
-    {%- if section.settings.button_color_scheme == 'button--outline-primary' -%}
-      <div class="button-divider group last:mb-0">
+    {%- if section.settings.button_color_scheme contains 'button--wide' -%}
+      <div class="button-wide group last:mb-0 {{ section.settings.button_color_scheme }}">
     {%- endif -%}
     <a
       {% if section.settings.button_url != blank or object.url != blank %}
@@ -55,11 +55,11 @@
       {% else %}
         disabled
       {% endif %}
-      class="button button--lg {{ section.settings.button_size }} {{ section.settings.button_color_scheme }}"
+      class="button button--lg {{ section.settings.button_size }}"
     >
       {{- section.settings.button_text -}}
     </a>
-    {%- if section.settings.button_color_scheme == 'button--outline-primary' -%}
+    {%- if section.settings.button_color_scheme contains 'button--wide' -%}
       </div>
     {%- endif -%}
   {%- endif -%}
@@ -310,12 +310,23 @@
             "label": "Outline white"
           },
           {
-            "value": "button--outline-primary",
-            "label": "Outline primary"
-          },
-          {
             "value": "button--link",
             "label": "Link"
+          },
+          {
+            "value": "button--wide button--primary",
+            "label": "Outline wide - primary",
+            "group": "Wide"
+          },
+          {
+            "value": "button--wide button--secondary",
+            "label": "Outline wide - secondary",
+            "group": "Wide"
+          },
+          {
+            "value": "button--wide button--blue",
+            "label": "Outline wide - blue",
+            "group": "Wide"
           }
         ]
       },

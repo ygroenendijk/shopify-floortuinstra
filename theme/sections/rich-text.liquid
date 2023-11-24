@@ -2,29 +2,27 @@
   <div class="rich-text {{ section.settings.text_alignment }}">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
-        <div class="space-y-4">
-          {%- when 'heading' -%}
-            <{{ block.settings.heading_element }} class="rich-text__title mb-1 {{ block.settings.heading_color }} {{ block.settings.heading_size }} {{ block.settings.title_width_layout -}}" {{ block.shopify_attributes -}}>
-              {{- block.settings.heading -}}
-            </{{ block.settings.heading_element }}>
-          {%- when 'text' -%}
-            <div class="rich-text__text rte mx-auto {{ block.settings.text_width_layout }}" {{ block.shopify_attributes -}}>
-              {{- block.settings.text | replace: '<h3>', '<h3 class="font-secondary mt-0 mb-1 text-lg">' -}}
-            </div>
-        </div>
+        {%- when 'heading' -%}
+          <{{ block.settings.heading_element }} class="rich-text__title mb-1 {{ block.settings.heading_color }} {{ block.settings.heading_size }} {{ block.settings.title_width_layout -}}" {{ block.shopify_attributes -}}>
+            {{- block.settings.heading -}}
+          </{{ block.settings.heading_element }}>
+        {%- when 'text' -%}
+          <div class="rich-text__text rte mx-auto {{ block.settings.text_width_layout }}" {{ block.shopify_attributes -}}>
+            {{- block.settings.text | replace: '<h3>', '<h3 class="font-secondary mt-0 mb-1 text-lg">' -}}
+          </div>
         {%- when 'button' -%}
           {% if block.settings.button_link != blank and block.settings.button_label != blank %}
-            {%- if block.settings.button_color_scheme == 'button--outline-primary' -%}
-              <div class="button-divider group last:mb-0">
+            {%- if block.settings.button_color_scheme contains 'button--wide' -%}
+              <div class="button-wide group mt-8 last:mb-0 {{ block.settings.button_color_scheme }}" {{ block.shopify_attributes -}}>
             {%- endif -%}
-              <a href="{{ block.settings.button_link }}" class="rich-text__button button button--lg {{ block.settings.button_color_scheme }}" {{ block.shopify_attributes -}}>
+              <a href="{{ block.settings.button_link }}" class="rich-text__button button button--lg">
                 {{ block.settings.button_label }}
               </a>
-            {%- if block.settings.button_color_scheme == 'button--outline-primary' -%}
+            {%- if block.settings.button_color_scheme contains 'button--wide' -%}
               </div>
             {%- endif -%}
           {% elsif request.design_mode %}
-            <button class="rich-text__button button" aria-disabled="true">
+            <button class="rich-text__button button" aria-disabled="true" {{ block.shopify_attributes -}}>
               {{ block.settings.button_label }}
             </button>
           {% endif %}
@@ -158,8 +156,8 @@
             "info": "Change the element of the heading for SEO purposes. Every page should only have one H1.",
             "options": [
               {
-                "value": "",
-                "label": "Default"
+                "value": "h1",
+                "label": "H1"
               },
               {
                 "value": "h2",
@@ -207,8 +205,8 @@
             "info": "This is applied only for visual reasons.",
             "options": [
               {
-                "value": "h1",
-                "label": "H1"
+                "value": "",
+                "label": "Default"
               },
               {
                 "value": "h2",
@@ -306,7 +304,7 @@
           {
             "type": "select",
             "id": "button_color_scheme",
-            "default": "button--outline-primary",
+            "default": "button--wide button--blue",
             "label": "Button type",
             "options": [
               {
@@ -330,12 +328,23 @@
                 "label": "Outline white"
               },
               {
-                "value": "button--outline-primary",
-                "label": "Outline primary"
-              },
-              {
                 "value": "button--link",
                 "label": "Link"
+              },
+              {
+                "value": "button--wide button--primary",
+                "label": "Outline wide - primary",
+                "group": "Wide"
+              },
+              {
+                "value": "button--wide button--secondary",
+                "label": "Outline wide - secondary",
+                "group": "Wide"
+              },
+              {
+                "value": "button--wide button--blue",
+                "label": "Outline wide - blue",
+                "group": "Wide"
               }
             ]
           }

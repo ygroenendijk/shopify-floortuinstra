@@ -101,7 +101,7 @@
   <div class="article-content__footer flex flex-col gap-base">
     {% comment %} Tag list {% endcomment %}
     {%- if article.tags.size > 0 -%}
-      <div class="article-content__tags flex gap-2">
+      <div class="article-content__tags flex items-center gap-2">
         {%- render 'render-translation',  namespace: 'blogs.article', key: 'tags_html', tags: tags, fallback: tags -%}
       </div>
     {%- endif -%}

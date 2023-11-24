@@ -103,6 +103,15 @@
     }
   }
 
+  .button--blue {
+    --button-background: theme('colors.blue');
+    --button-border-color: theme('colors.blue');
+    --button-text: theme('colors.blue');
+    --button-hover-background: theme('colors.white');
+    --button-hover-border-color: theme('colors.black');
+    --button-hover-text: theme('colors.black');
+  }
+
   .button--outline {
     --button-background: transparent;
     --button-border-color: var(--button-text);
@@ -112,19 +121,16 @@
     --button-hover-text: theme('colors.white');
   }
 
-  .button--outline-primary {
-    --button-background: theme('colors.white');
-    --button-border-color: theme('colors.primary.DEFAULT');
-    --button-text: theme('colors.primary.DEFAULT');
-    --button-hover-background: theme('colors.white');
-    --button-hover-border-color: theme('colors.blue');
-    --button-hover-text: theme('colors.blue');
-    @apply mx-auto block w-fit rounded-full;
-  }
-  .button-divider {
-    @apply relative mx-auto my-10 max-w-3xl;
+  .button-wide {
+    @apply relative
+    mx-auto
+    my-10 max-w-3xl text-[var(--button-border-color)];
+    .button {
+      @apply mx-auto block w-fit rounded-full text-[var(--button-border-color)];
+      --button-background: theme('colors.white');
+    }
     &:after {
-      @apply absolute left-0 top-[50%] -z-10 w-full -translate-y-[50%] border-b border-primary content-empty hover:border-blue;
+      @apply absolute left-0 top-[50%] -z-10 w-full -translate-y-[50%] border-b border-[var(--button-border-color)] content-empty hover:border-[var(--button-hover-text)];
     }
   }
 

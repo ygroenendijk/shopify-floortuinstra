@@ -4,7 +4,6 @@
 
 {%- liquid
   assign h1_classes = 'block text-center mb-0'
-  assign h1_classes_bold = h1_classes | append: ' font-bold'
   assign grid_classes = 'grid grid-cols-12 items-center'
   assign col_classes = 'col-span-12 lg:col-span-4'
 -%}
@@ -16,14 +15,14 @@
   </a>
 {%- endcapture -%}
 
-<div class="account-header mb-10 lg:mb-20">
+<div class="account-header mb-8">
   {%- case request.page_type -%}
     {%- when 'customers/account' -%}
-      <h1 class="{{ h1_classes_bold }}">
+      <h1 class="{{ h1_classes }}">
         {%- render 'render-translation', namespace: 'customer.account', key: 'title', fallback: 'Account' -%}
       </h1>
     {%- when 'customers/activate_account' -%}
-      <h1 class="{{ h1_classes_bold }}">
+      <h1 class="{{ h1_classes }}">
         {%- render 'render-translation', namespace: 'customer.activate_account', key: 'title', fallback: 'Activate account' -%}
       </h1>
     {%- when 'customers/addresses' -%}
@@ -32,14 +31,14 @@
           {{ return_link }}
         </div>
         <div class="{{ col_classes }}">
-          <h1 class="{{ h1_classes_bold }}">
+          <h1 class="{{ h1_classes }}">
             {%- render 'render-translation', namespace: 'customer.addresses', key: 'title', fallback: 'Addresses' -%}
           </h1>
         </div>
       </div>
     {%- when 'customers/login' -%}
       <div class="flex justify-center gap-4 px-6 md:gap-10">
-        <h1 class="{{ h1_classes_bold }}">
+        <h1 class="{{ h1_classes }}">
           {%- render 'render-translation', namespace: 'customer.login_page', key: 'title', fallback: 'Login' -%}
         </h1>
       </div>
@@ -49,19 +48,19 @@
           {{ return_link }}
         </div>
         <div class="{{ col_classes }}">
-          <h1 class="{{ h1_classes_bold }}">
+          <h1 class="{{ h1_classes }}">
             {%- render 'render-translation', namespace: 'customer.orders', key: 'details', fallback: 'Order details' -%}
           </h1>
         </div>
       </div>
     {%- when 'customers/register' -%}
       <div class="flex items-center justify-center gap-4 px-6 md:gap-10">
-        <h1 class="{{ h1_classes_bold }}">
+        <h1 class="{{ h1_classes }}">
           {%- render 'render-translation', namespace: 'customer.register', key: 'title', fallback: 'Register' -%}
         </h1>
       </div>
     {%- when 'customers/reset_password' -%}
-      <h1 class="{{ h1_classes_bold }}">
+      <h1 class="{{ h1_classes }}">
         {%- render 'render-translation', namespace: 'customer.reset_password', key: 'title', fallback: 'Reset password' -%}
       </h1>
     {%- else -%}

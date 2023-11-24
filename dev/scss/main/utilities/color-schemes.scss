@@ -71,7 +71,7 @@
     &--black,
     &--primary,
     &--secondary {
-      .button:not(.button--primary):not(.button--secondary):not(.button--outline):not(.button--outline-white):not(.button--outline-primary):not(.button--link) {
+      .button:not(.button--primary):not(.button--secondary):not(.button--outline):not(.button--outline-white):not(.button--wide):not(.button--link) {
         --button-border-color: transparent;
         --button-hover-border-color: transparent;
         &.mobile-menu__toggle-button,
@@ -84,26 +84,26 @@
     &--white,
     &--black,
     &--secondary {
-      .button:not(.button--primary):not(.button--secondary):not(.button--outline):not(.button--outline-white):not(.button--outline-primary):not(.button--link) {
+      .button:not(.button--primary):not(.button--secondary):not(.button--outline):not(.button--outline-white):not(.button--wide):not(.button--link) {
         --button-hover-text: theme('colors.primary.text');
         --button-background: theme('colors.primary.DEFAULT');
         --button-hover-background: theme('colors.primary.600');
       }
     }
     &--primary {
-      .button:not(.button--outline):not(.button--outline-white):not(.button--outline-primary):not(.button--link) {
+      .button:not(.button--outline):not(.button--outline-white):not(.button--wide):not(.button--link) {
         --button-text: theme('colors.white');
         --button-hover-text: theme('colors.primary.300');
         --button-background: theme('colors.black');
         --button-hover-background: theme('colors.black');
       }
-      .button:where(.button--outline, .button--outline-white, .button--outline-primary) {
+      .button:where(.button--outline, .button--outline-white, .button--wide) {
         --button-hover-background: theme('colors.black');
         --button-hover-border-color: theme('colors.black');
       }
     }
     &--secondary {
-      .button:where(.button--outline, .button--outline-white, .button--outline-primary) {
+      .button:where(.button--outline, .button--outline-white, .button--wide) {
         --button-hover-background: theme('colors.primary.DEFAULT');
         --button-hover-border-color: theme('colors.primary.DEFAULT');
       }
