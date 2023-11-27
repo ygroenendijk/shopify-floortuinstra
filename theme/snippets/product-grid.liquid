@@ -41,7 +41,7 @@
     {%- endif -%}
 {%- endif -%}
 
-  <ol
+  <li
     class="collection__grid {{ collection_grid_classes }} m-0 grid grid-cols-12 gap-base {% if settings.filter_display != 'grid' -%}2xl:grid-cols-10{%- endif -%}"
     data-products-wrapper>
     {%- liquid
@@ -60,7 +60,7 @@
     -%}
 
     {%- for product in collection.products -%}
-      <li class="{{ classes }}">
+      <li class="{{ classes }}" style="--animation-delay: {{ forloop.index }}">
         {%- render 'product-card',
           product_object: product,
           image_sizes: sizes,
@@ -69,7 +69,7 @@
         -%}
       </li>
     {%- endfor -%}
-  </ol>
+  </li>
 
   {%- if pagination_type == 'load-more' -%}
     <div class="load-more-wrapper text-center mt-20">

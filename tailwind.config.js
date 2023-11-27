@@ -136,6 +136,20 @@ module.exports = {
         popover: '1070',
         tooltip: '1080',
       },
+      /* Animations
+      ** Based on keyframes
+      */
+      animation: {
+        fadein: 'fadein .25s cubic-bezier(0, 0, 0.3, 1) calc(var(--animation-delay) * 75ms) 1 forwards',
+      },
+      keyframes: ({ theme }) => ({
+        fadein: {
+          '0%': { opacity: 0,
+            transform: 'translateY(20px)' },
+          '100%': { opacity: 1,
+            transform: 'translateY(0)' },
+        },
+      }),
       typography: theme => ({
         DEFAULT: {
           css: {
