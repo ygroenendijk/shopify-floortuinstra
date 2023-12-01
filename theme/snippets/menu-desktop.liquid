@@ -16,7 +16,7 @@
       {
         "closeSiblings": true,
         "onHover": true,
-        "hoverDelay": 300,
+        "hoverDelay": 200,
         "closeOnMouseleave": true
       }
     '>
@@ -181,19 +181,21 @@
                 {%- render 'icons', icon: 'collapsible', icon_class: 'w-4 transition-tranform group-[.collapsible-is-open]/menu-item:rotate-180' -%}
               </a>
               <div
-                class="header__inner-container {% if submenu_layout == 'multi' and images != blank %}inset-x-0 w-full ps-10{% endif %} invisible absolute top-full group-[.collapsible-is-open]/menu-item:visible {{ section.settings.color_scheme }}"
+                class="header__inner-container {% if submenu_layout == 'multi' and images != blank %}inset-x-0 w-full ps-10{% endif %} absolute top-full {{ section.settings.color_scheme }}"
                 data-collapsible-target
                 tabindex="-1">
-                <div class="header__navigation-container content-wrapper p-4 {% if images != blank -%}grid grid-cols-12 gap-x-4 gap-y-0{%- endif -%}">
-                  <ul class="header__menu-list level-2 relative col-span-8 flex flex-col gap-y-2">
-                    {{- submenu -}}
-                  </ul>
+                <div class="header__navigation-container content-wrapper invisible overflow-hidden group-[.collapsible-is-open]/menu-item:visible">
+                  <div class="p-4 {% if images != blank -%}grid grid-cols-12 gap-x-4 gap-y-0{%- endif -%}">
+                    <ul class="header__menu-list level-2 relative col-span-8 flex flex-col gap-y-2">
+                      {{- submenu -}}
+                    </ul>
 
-                  {%- if images != blank -%}
-                    <div class="header__image col-span-4 col-start-9 grid gap-4">
-                      {{- images -}}
-                    </div>
-                  {%- endif -%}
+                    {%- if images != blank -%}
+                      <div class="header__image col-span-4 col-start-9 grid gap-4">
+                        {{- images -}}
+                      </div>
+                    {%- endif -%}
+                  </div>
                 </div>
               </div>
             </li>

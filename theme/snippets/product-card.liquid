@@ -20,6 +20,10 @@
 {% endcomment %}
 
 {%- liquid
+  unless animate == false
+    assign animate = true
+  endunless
+
   # Image logic
   if image_lazy == null
     assign image_lazy = true
@@ -108,7 +112,8 @@
     shadow-lg
     group-[.color-scheme]/color-scheme:bg-white
     group-[.color-scheme]/color-scheme:pb-4
-    group-[.color-scheme]/color-scheme:shadow-gray-200 motion-safe:animate-fadein motion-safe:opacity-0
+    group-[.color-scheme]/color-scheme:shadow-gray-200
+    {% if animate -%}motion-safe:animate-fadein motion-safe:opacity-0{%- endif %}
   "
   data-product-card>
   {%- comment -%} Accesibility text {%- endcomment -%}

@@ -53,7 +53,7 @@
             render 'render-translation',  namespace: 'sections.ervaringen', key: category_handleized, fallback: category
           endcapture
         -%}
-        <button class="button button--primary" data-quote-trigger="{{ category_handleized }}">{{- text_label -}}</button>
+        <button class="button button--primary button--md" data-quote-trigger="{{ category_handleized }}">{{- text_label -}}</button>
       {%- endfor -%}
 
       {% comment %} 'Wis' button {% endcomment %}

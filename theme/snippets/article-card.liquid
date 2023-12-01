@@ -23,6 +23,10 @@
     assign highlight = false
   endunless
 
+  unless animate == false
+    assign animate = true
+  endunless
+
   unless image_aspect_ratio != blank
     assign image_aspect_ratio = ''
   endunless
@@ -182,7 +186,7 @@
 {% endcomment %}
 
 {%- comment -%} Render cart {%- endcomment -%}
-<article class="article-card relative flex flex-col gap-y-4 overflow-hidden rounded-md {{ class }} {% if highlight -%}{{ settings.ha_min_ratio_tablet }} {{ settings.ha_min_ratio_desktop }}{% else %}{{ settings.ac_min_ratio }}{%- endif -%}">
+<article class="article-card relative flex flex-col gap-y-4 overflow-hidden rounded-md {{ class }} {% if highlight -%}{{ settings.ha_min_ratio_tablet }} {{ settings.ha_min_ratio_desktop }}{% else %}{{ settings.ac_min_ratio }} {% if animate -%}motion-safe:animate-fadein motion-safe:opacity-0{%- endif -%}{%- endif -%}">
   {% comment %} Article image and title {% endcomment %}
   <a
     href="{{ article.url }}"
@@ -210,6 +214,9 @@
               # desktop image
               assign aspect_ratio_desktop = settings.ha_min_ratio_desktop | split: '[' | last | remove: ']'
               assign image_classes_desktop = image_classes | append: ' hidden lg:block'
+              if highlight
+                assign image_classes_desktop = image_classes_desktop | append: ' motion-safe:animate-zoomout motion-safe:opacity-0 motion-safe:scale-115'
+              endif
               render 'responsive-image', image_object: image_object, alt: article.title, max_width: 1360, sizes: '(min-width: 1440px) 1360px, 100vw', aspect_ratio: aspect_ratio_desktop, class: image_classes_desktop
             endif
           else

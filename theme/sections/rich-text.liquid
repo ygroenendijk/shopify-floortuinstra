@@ -15,16 +15,12 @@
             {%- if block.settings.button_color_scheme contains 'button--wide' -%}
               <div class="button-wide group mt-8 last:mb-0 {{ block.settings.button_color_scheme }}" {{ block.shopify_attributes -}}>
             {%- endif -%}
-              <a href="{{ block.settings.button_link }}" class="rich-text__button button button--lg">
+              <a href="{{ block.settings.button_link }}" class="rich-text__button button button--lg {% unless block.settings.button_color_scheme contains 'button--wide' -%}mt-6 {{ block.settings.button_color_scheme }}{%- endunless %}">
                 {{ block.settings.button_label }}
               </a>
             {%- if block.settings.button_color_scheme contains 'button--wide' -%}
               </div>
             {%- endif -%}
-          {% elsif request.design_mode %}
-            <button class="rich-text__button button" aria-disabled="true" {{ block.shopify_attributes -}}>
-              {{ block.settings.button_label }}
-            </button>
           {% endif %}
       {%- endcase -%}
     {%- endfor -%}

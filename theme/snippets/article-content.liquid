@@ -1,5 +1,6 @@
 {% comment %} Capture related products {% endcomment %}
 {%- liquid
+  assign wrapper_classes = 'rte max-w-content-width-md mx-auto'
   assign has_products_placeholder = false
   assign render_inline = false
 
@@ -48,11 +49,13 @@
               render 'swiper-content', render_products: true, object_array: products_arr, render_inline: render_inline, swiper_indication: block.settings.swiper_indication, swiper_navigation: block.settings.swiper_navigation, swiper_autoplay: block.settings.swiper_autoplay, swiper_autoplay_delay: block.settings.swiper_autoplay_delay, id: section.id
             else
               # Grid
-              echo grid_classes | prepend: '<div class="' | append: '">'
+              echo grid_classes | prepend: '<ul class="' | append: '">'
               for product_item in products_arr
+                echo '<li style="--animation-delay: ' | append: forloop.index | append: '">'
                 render 'product-card', product_object: product_item, image_max_width: image_max_width, image_sizes: image_sizes, product_card_title_el: 'h3'
+                echo '</li>'
               endfor
-              echo '</div>'
+              echo '</ul>'
             endif
           endcapture
         endif
@@ -74,17 +77,15 @@
   {% comment %} If the article content contains a placeholder for products, render the carousel there instead {% endcomment %}
   {%- if featured_products_content != blank and render_inline -%}
     {%- assign article_parts = article.content | split: has_products_placeholder -%}
-    <div class="mb-10 mt-4">{{ article_parts[0] }}</div>
+    <div class="{{ wrapper_classes }} mb-10 mt-4">{{ article_parts[0] }}</div>
     {{- featured_products_content -}}
-    <div class="mt-10">{{ article_parts[1] }}</div>
+    <div class="{{ wrapper_classes }} mt-10">{{ article_parts[1] }}</div>
   {%- else -%}
     {% comment %} # remove the placeholder and wrap the content {% endcomment %}
-    <div class="mb-10 mt-4">
+    <div class="{{ wrapper_classes }} mb-10 mt-4">
       {{ article.content }}
     </div>
   {%- endif -%}
-
-  <hr>
 
   {%- capture tags -%}
     <ul class="list-unstyled m-0 flex flex-wrap gap-2 p-0">
@@ -98,9 +99,11 @@
     </ul>
   {%- endcapture -%}
 
-  <div class="article-content__footer flex flex-col gap-base">
+  <div class="article-content__footer flex flex-col gap-base {{ wrapper_classes }}">
     {% comment %} Tag list {% endcomment %}
     {%- if article.tags.size > 0 -%}
+      <hr class="m-0">
+
       <div class="article-content__tags flex items-center gap-2">
         {%- render 'render-translation',  namespace: 'blogs.article', key: 'tags_html', tags: tags, fallback: tags -%}
       </div>
@@ -111,7 +114,7 @@
 {%- assign container_class = class | append: ' article-content ' -%}
 
 {%- comment -%} Render the content {%- endcomment -%}
-{%- render 'render-container-content', content: container_content, class: container_class, content_class: 'rte max-w-content-width-md' -%}
+{%- render 'render-container-content', content: container_content, class: container_class, content_class: '' -%}
 
 {% comment %} If there is no placeholder in the content, render the product slider below the content {% endcomment %}
 {%- liquid

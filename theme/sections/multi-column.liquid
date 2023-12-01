@@ -66,6 +66,8 @@
 
   # Collect the title classnames based on settings.
   assign title_class = 'multi-column__title' | append: ' ' | append: section.settings.heading_size | append: ' ' | append: section.settings.heading_alignment
+
+  assign product_count = 0
 -%}
 
 {%- comment -%} Capture the content {%- endcomment -%}
@@ -165,8 +167,9 @@
         {%- endif -%}
 
         {%- when 'product' -%}
+          {%- assign product_count = product_count | plus: 1 -%}
           {%- comment -%} Render column {%- endcomment -%}
-          <div class="multi-columns__column rte flex flex-col md:order-none" {{ block.shopify_attributes }}>
+          <div class="multi-columns__column rte flex flex-col md:order-none" {{ block.shopify_attributes }} style="--animation-delay: {{ product_count }}">
 
             {%- comment -%} Heading {%- endcomment -%}
             {%- if block.settings.heading != blank -%}

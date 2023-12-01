@@ -15,41 +15,40 @@
   case section.settings.container_width
     when 'container--wide'
       assign image_max_width = ''
-      assign image_sizes = '(min-width: 1024px) 25vw, (min-width: 480px) 50vw, 100vw'
+      assign image_sizes = '(min-width: 1024px) 33vw, (min-width: 480px) 50vw, 100vw'
     else
       assign image_max_width = 456
-      assign image_sizes = '(min-width: 1440px) 316px, (min-width: 1024px) 25vw, (min-width: 480px) 50vw, 100vw'
+      assign image_sizes = '(min-width: 1440px) 316px, (min-width: 1024px) 33w, (min-width: 480px) 50vw, 100vw'
   endcase
 -%}
 
 {%- comment -%} Capture content {%- endcomment -%}
 {%- capture container_content -%}
-  <div class="grid grid-cols-1 gap-base sm:grid-cols-2 lg:grid-cols-4">
+  <ul class="grid grid-cols-1 gap-base sm:grid-cols-2 lg:grid-cols-3">
     {%- assign count = 0 -%}
     {%- for article_object in articles_array -%}
-
       {%- liquid
         # Skip current article
         if article_object.id == article.id
           continue
         endif
-
         # Check if the article has the tag that is defined in the settings
-        if tag_to_show
+        if tag_to_show != blank
           unless article_object.tags contains tag_to_show
             continue
           endunless
         endif
-
         # Add 1 to the count for every article that passes the statements
         assign count = count | plus: 1
       -%}
 
-      {%- render 'article-card'
-        article: article_object,
-        image_max_width: image_max_width,
-        image_sizes: image_sizes,
-      -%}
+      <li style="--animation-delay: {{ count }}">
+        {%- render 'article-card'
+          article: article_object,
+          image_max_width: image_max_width,
+          image_sizes: image_sizes,
+        -%}
+      </li>
 
       {% comment %} Break if meet the limit {% endcomment %}
       {%- if count >= articles_count -%}
@@ -64,7 +63,7 @@
         endfor
       -%}
     {%- endfor -%}
-  </div>
+  </ul>
 {%- endcapture -%}
 
 {%- capture container_footer -%}

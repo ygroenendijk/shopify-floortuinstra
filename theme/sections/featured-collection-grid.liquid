@@ -27,7 +27,7 @@
 
 {%- comment -%} Capture content {%- endcomment -%}
 {%- capture container_content -%}
-  <li class="grid grid-cols-2 gap-base lg:grid-cols-4">
+  <ul class="grid grid-cols-2 gap-base lg:grid-cols-4">
     {%- assign count = 0 -%}
     {%- for product_object in products_arr -%}
 
@@ -63,7 +63,7 @@
         endfor
       -%}
     {%- endfor -%}
-  </li>
+  </ul>
 {%- endcapture -%}
 
 {%- capture container_footer -%}

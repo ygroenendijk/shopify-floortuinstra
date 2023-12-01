@@ -197,6 +197,9 @@
 
         # Increase the count for every item that passes the statements so we can make sure the slides don't exceed the max count
         assign count = count | plus: 1
+
+      elsif render_product_cards
+        assign count = count | plus: 1
       endif
     -%}
     <div
@@ -223,9 +226,9 @@
       data-swiper-slide-index="{{ forloop.index }}">
       {%- liquid
         if render_products
-          render 'product-card', product_object: item, image_max_width: image_max_width, image_sizes: image_sizes, product_card_title_el: 'h3'
+          render 'product-card', product_object: item, image_max_width: image_max_width, image_sizes: image_sizes, product_card_title_el: 'h3', animate: false
         elsif render_blog_articles
-          render 'article-card', article: item, image_max_width: image_max_width, image_sizes: image_sizes
+          render 'article-card', article: item, image_max_width: image_max_width, image_sizes: image_sizes, animate: false
         elsif render_product_cards
           echo item
         endif

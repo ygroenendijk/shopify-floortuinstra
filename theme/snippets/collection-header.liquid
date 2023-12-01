@@ -34,11 +34,11 @@
       aria-label="{%- render 'render-translation', namespace: 'accessibility', key: 'collection_menu', fallback: 'Collectie menu' -%}">
       {%- for other_collection in collections -%}
         {%- if other_collection == collection -%}
-          <button class="button button--outline button--sm pointer-events-none">
+          <button class="button button--outline button--md pointer-events-none">
             {{- other_collection.title }}
           </button>
         {%- elsif other_collection.all_products_count > 0 -%}
-          <a href="{{ other_collection.url }}" class="button button--primary button--sm no-underline">
+          <a href="{{ other_collection.url }}" class="button button--primary button--md no-underline">
             {{- other_collection.title }}
           </a>
         {%- endif -%}

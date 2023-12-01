@@ -4,7 +4,7 @@
   assign enable_language_selector = false
 -%}
 
-<footer class="footer pb-4 md:pb-6 {{ section.settings.color_scheme }}">
+<footer class="footer pb-4 md:pb-6 {{ section.settings.color_scheme }} group-[.template-index]/body:mt-[96px]">
   {% comment %} Logo first {% endcomment %}
   <div class="footer__logo mx-auto w-[116px] -translate-y-1/2 rounded-full bg-primary p-2">
     {%- render 'global-logo', classes: 'max-w-[100px]', text_color: 'fill-white', line_color: 'stroke-white', hide_feet: true, bg_color: 'fill-white' -%}

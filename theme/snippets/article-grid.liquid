@@ -49,7 +49,7 @@
         endif
       -%}
 
-      <li class="{{ col_classes }}">
+      <li class="{{ col_classes }}" style="--animation-delay: {{ forloop.index }}">
           {% comment %} Output article card {% endcomment %}
           {%- render 'article-card', article: article, highlight: highlight, section: section -%}
       </li>

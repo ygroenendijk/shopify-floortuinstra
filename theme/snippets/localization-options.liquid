@@ -78,86 +78,99 @@
       </button>
     </noscript>
 
-    <div class="flex flex-col gap-4 no-js:hidden">
+    <collapsible-component
+      class="collapsible not-rte flex flex-col gap-4 no-js:hidden"
+      data-options='
+        {
+          "trapFocus": false,
+          "onHover": true,
+          "hoverDelay": 200,
+          "closeOnMouseleave": true
+        }
+      '>
       <p class="sr-only" id="{{ localPosition }}Label">
         {{ label }}
       </p>
       <div class="localization-form relative">
-        <button
-          type="button"
-          class="localization-form__button {% unless show_icon_only %}button button--outline flex-nowrap gap-4 p-2{% else %}flex items-center gap-2{% endunless %} whitespace-nowrap [&>.icon--chevron-down]:aria-[expanded=true]:rotate-180"
-          aria-expanded="false"
-          aria-controls="{{ localPosition }}List"
-          aria-describedby="{{ localPosition }}Label">
-          {%- if type == 'country' -%}
-            {{- localization.country.currency.iso_code }}
-            {{ localization.country.currency.symbol }} | {{ localization.country.name -}}
-          {%- else -%}
-            {%- liquid
-              if show_icon_only or show_icon
-                assign flag_name = 'flag-' | append: localization.language.iso_code
-                render 'icons', icon: flag_name, icon_class: 'w-5'
-              endif
-            -%}
-            <span
-              {% if show_icon_only -%}
-                class="sr-only"
-              {%- endif -%}>
-              {{- localization.language.endonym_name | capitalize -}}
-            </span>
-          {%- endif -%}
-          {% render 'icons', icon: 'chevron-down', icon_class: 'transition' %}
-        </button>
-        <div
-          class="localization-form__list-wrapper absolute {% if show_icon_only -%}-left-3 right-3 top-full{% else %}color-scheme {{ color_scheme }} top-10 w-full min-w-fit rounded-md border-2 border-inherit p-2{% endif -%}"
-          hidden
-          data-localization-list>
-          <ul
-            id="{{ localPosition }}List"
-            role="list"
-            class="localization-form__list list-unstyled {% if show_icon_only -%}color-scheme ps-3 pt-2 {{ color_scheme }} group-[.header-sticky]/body:bg-[var(--color-scheme-background-color)] group-[.template-index:not(.header-sticky)]/body:bg-transparent{% endif %}">
-            {%- for item in object -%}
+        <div class="collapsible__group group" data-collapsible-group>
+          <button
+            type="button"
+            class="collapsible__trigger localization-form__button {% unless show_icon_only %}button button--outline flex-nowrap gap-4 p-2{% else %}flex items-center gap-2{% endunless %} whitespace-nowrap [&>.icon--chevron-down]:aria-[expanded=true]:rotate-180"
+            data-collapsible-trigger>
+            {%- if type == 'country' -%}
+              {{- localization.country.currency.iso_code }}
+              {{ localization.country.currency.symbol }} | {{ localization.country.name -}}
+            {%- else -%}
               {%- liquid
-                # Skip current language/currency
-                if type == 'country' and localization.country.currency.iso_code == item.currency.iso_code
-                  continue
-                elsif type == 'language' and localization.language.endonym_name == item.endonym_name
-                  continue
+                if show_icon_only or show_icon
+                  assign flag_name = 'flag-' | append: localization.language.iso_code
+                  render 'icons', icon: flag_name, icon_class: 'w-5'
                 endif
               -%}
+              <span
+                {% if show_icon_only -%}
+                  class="sr-only"
+                {%- endif -%}>
+                {{- localization.language.endonym_name | capitalize -}}
+              </span>
+            {%- endif -%}
 
-              <li class="localization-form__item py-2" tabindex="-1">
-                <a
-                  class="localization-form__link focus-inset group flex items-center gap-2 text-sm no-underline {% if item.iso_code == localization[item].iso_code %}localization-form__link--active{% endif %}"
-                  href="#"
-                  {% if item.iso_code == localization.item.iso_code %}
-                    aria-current="true"
-                  {% endif %}
-                  data-value="{{ item.iso_code }}">
-                  {%- if type == 'country' -%}
-                    <span class="localization-form__currency">
-                      {{- item.currency.iso_code }}
-                      {{ item.currency.symbol }} |
-                    </span>
-                    {{- item.name -}}
-                  {%- else -%}
+            <span class="collapsible__trigger-icons">
+              {%- render 'icons', icon: 'collapsible', icon_class: 'w-4 transition-tranform group-[.collapsible-is-open]:rotate-180' -%}
+            </span>
+          </button>
+
+          <div
+            class="collapsible__target absolute top-full {% if show_icon_only -%}-start-6 right-0 w-[calc(100%_+_24px)]{% endif %}"
+            data-collapsible-target>
+            <div class="rte overflow-hidden">
+              <div data-localization-list>
+                <ul class="localization-form__list list-unstyled list-none {% if show_icon_only -%}color-scheme p-0 ps-6 pt-2 {{ color_scheme }} group-[.header-sticky]/body:bg-[var(--color-scheme-background-color)] group-[.template-index:not(.header-sticky)]/body:bg-transparent{% endif %}">
+                  {%- for item in object -%}
                     {%- liquid
-                      if show_icon_only or show_icon
-                        assign flag_name = 'flag-' | append: item.iso_code
-                        render 'icons', icon: flag_name, icon_class: 'w-5 transition group-hover:scale-110'
+                      # Skip current language/currency
+                      if type == 'country' and localization.country.currency.iso_code == item.currency.iso_code
+                        continue
+                      elsif type == 'language' and localization.language.endonym_name == item.endonym_name
+                        continue
                       endif
                     -%}
-                    <span
-                      {% if show_icon_only -%}
-                        class="sr-only"
-                      {%- endif -%}>
-                      {{- item.endonym_name | capitalize -}}
-                    </span>
-                  {%- endif -%}
-                </a>
-              </li>
-            {%- endfor -%}
-          </ul>
+
+                    <li class="localization-form__item py-2" tabindex="-1">
+                      <a
+                        class="localization-form__link focus-inset group flex items-center gap-4 text-sm no-underline {% unless show_icon_only -%}px-3{% endunless %} {% if item.iso_code == localization[item].iso_code %}localization-form__link--active{% endif %}"
+                        href="#"
+                        {% if item.iso_code == localization.item.iso_code %}
+                          aria-current="true"
+                        {% endif %}
+                        data-value="{{ item.iso_code }}">
+                        {%- if type == 'country' -%}
+                          <span class="localization-form__currency">
+                            {{- item.currency.iso_code }}
+                            {{ item.currency.symbol }} |
+                          </span>
+                          {{- item.name -}}
+                        {%- else -%}
+                          {%- liquid
+                            if show_icon_only or show_icon
+                              assign flag_name = 'flag-' | append: item.iso_code
+                              render 'icons', icon: flag_name, icon_class: 'w-5 transition group-hover:scale-110'
+                            endif
+                          -%}
+                          <span
+                            {% if show_icon_only -%}
+                              class="sr-only"
+                            {%- endif -%}>
+                            {{- item.endonym_name | capitalize -}}
+                          </span>
+                        {%- endif -%}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -166,6 +179,6 @@
       {%- else -%}
         <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
       {%- endif -%}
-    </div>
+    </collapsible-component>
   {%- endform -%}
 </localization-form>

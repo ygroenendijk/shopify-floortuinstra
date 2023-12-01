@@ -115,17 +115,17 @@
           {%- endunless -%}
 
           {%- comment -%} Level 2 {%- endcomment -%}
-          <ul
-            class="footer-menu__list level-2 list-none invisible group-[.collapsible-is-open]/level1:visible"
+          <div class="footer-menu__list level-2 invisible group-[.collapsible-is-open]/level1:visible"
             tabindex="-1"
             {{ data_collapsible_target }}>
-            {%- for level_2_link in level_1_link.links -%}
-              {%- liquid
-                # Get link and fix deep link to native filters
-                assign level_2_url = level_2_link.url
-                if level_2_url contains 'collections' and level_2_url contains 'filter'
-                  assign level_2_url = level_2_url | replace: '%3F', '?'
-                endif
+            <ul class="overflow-hidden list-none">
+              {%- for level_2_link in level_1_link.links -%}
+                {%- liquid
+                  # Get link and fix deep link to native filters
+                  assign level_2_url = level_2_link.url
+                  if level_2_url contains 'collections' and level_2_url contains 'filter'
+                    assign level_2_url = level_2_url | replace: '%3F', '?'
+                  endif
 
                 # if link is active
                 assign level_2_is_active = false
@@ -134,19 +134,19 @@
                 endif
               -%}
 
-              {%- if level_2_link.links == blank -%}
-                {%- comment -%} Level 2 without submenu {%- endcomment -%}
-                <li class="footer-menu__item level-2 p-[1px]">
-                  <a
-                    href="{{ level_2_url }}"
-                    class="footer-menu__link level-2 text-sm {{ link_class_with_hover }} {% if level_2_is_active -%}{{ link_active_class }}{%- endif %}"
-                    {% if level_2_link.current %}
-                      aria-current="page"
-                    {% endif %}>
-                    {{- level_2_link.title -}}
-                  </a>
-                </li>
-              {%- else -%}
+                {%- if level_2_link.links == blank -%}
+                  {%- comment -%} Level 2 without submenu {%- endcomment -%}
+                  <li class="footer-menu__item level-2 p-[1px]" style="--animation-delay: {{ forloop.index | plus: 2 }}">
+                    <a
+                      href="{{ level_2_url }}"
+                      class="footer-menu__link level-2 text-sm group-[.collapsible-is-open]/level1:motion-safe:animate-fadein group-[.collapsible-is-open]/level1:motion-safe:opacity-0 {{ link_class_with_hover }} {% if level_2_is_active -%}{{ link_active_class }}{%- endif %}"
+                      {% if level_2_link.current %}
+                        aria-current="page"
+                      {% endif %}>
+                      {{- level_2_link.title -}}
+                    </a>
+                  </li>
+                {%- else -%}
 
                 {%- liquid
                   # Show button as active when child link is available
@@ -192,17 +192,17 @@
                     </button>
                   {%- endunless -%}
 
-                  {%- comment -%} Level 3 {%- endcomment -%}
-                  <ul
-                    class="footer-menu__list level-3 list-inside list-disc ps-3 invisible group-[.collapsible-is-open]/level2:visible"
-                    {{ data_collapsible_target }}>
-                    {%- for level_3_link in level_2_link.links -%}
-                      {%- liquid
-                        # Get link and fix deep link to native filters
-                        assign level_3_link_url = level_3_link.url
-                        if level_3_link_url contains 'collections' and level_3_link_url contains 'filter'
-                          assign level_3_link_url = level_3_link_url | replace: '%3F', '?'
-                        endif
+                    {%- comment -%} Level 3 {%- endcomment -%}
+                    <div class="footer-menu__list level-3 invisible group-[.collapsible-is-open]/level2:visible"
+                      {{ data_collapsible_target }}>
+                      <ul class="overflow-hidden  ps-3 list-inside list-disc">
+                        {%- for level_3_link in level_2_link.links -%}
+                          {%- liquid
+                            # Get link and fix deep link to native filters
+                            assign level_3_link_url = level_3_link.url
+                            if level_3_link_url contains 'collections' and level_3_link_url contains 'filter'
+                              assign level_3_link_url = level_3_link_url | replace: '%3F', '?'
+                            endif
 
                         # If link is active
                         assign level_3_is_active = false
@@ -211,22 +211,24 @@
                         endif
                       -%}
 
-                      <li class="footer-menu__item level-3 py-[1px]">
-                        <a
-                          href="{{ level_3_link_url }}"
-                          class="footer-menu__link {{ link_class_with_hover }} text-sm {% if level_3_is_active -%}{{ link_active_class }}{%- endif %}"
-                          {% if level_3_link.current %}
-                            aria-current="page"
-                          {% endif %}>
-                          {{- level_3_link.title -}}
-                        </a>
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-                </li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
+                          <li class="footer-menu__item level-3 py-[1px]" style="--animation-delay: {{ forloop.index | plus: 2 }}">
+                            <a
+                              href="{{ level_3_link_url }}"
+                              class="footer-menu__link group-[.collapsible-is-open]/level2:motion-safe:animate-fadein group-[.collapsible-is-open]/level2:motion-safe:opacity-0 {{ link_class_with_hover }} text-sm {% if level_3_is_active -%}{{ link_active_class }}{%- endif %}"
+                              {% if level_3_link.current %}
+                                aria-current="page"
+                              {% endif %}>
+                              {{- level_3_link.title -}}
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
         </li>
       {%- endif -%}
     {%- endfor -%}

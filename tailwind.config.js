@@ -141,6 +141,7 @@ module.exports = {
       */
       animation: {
         fadein: 'fadein .25s cubic-bezier(0, 0, 0.3, 1) calc(var(--animation-delay) * 75ms) 1 forwards',
+        zoomout: 'zoomout .5s cubic-bezier(0.5, 1, 0.89, 1) .2s 1 forwards',
       },
       keyframes: ({ theme }) => ({
         fadein: {
@@ -148,6 +149,12 @@ module.exports = {
             transform: 'translateY(20px)' },
           '100%': { opacity: 1,
             transform: 'translateY(0)' },
+        },
+        zoomout: {
+          '0%': { opacity: 0,
+            transform: 'scale(1.15)' },
+          '100%': { opacity: 1,
+            transform: 'scale(1)' },
         },
       }),
       typography: theme => ({
