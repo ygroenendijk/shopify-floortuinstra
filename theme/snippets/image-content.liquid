@@ -135,7 +135,7 @@
   {%- endif %}>
   {% comment %} Banner image {% endcomment %}
   {%- liquid
-    assign image_class = 'h-full w-full object-cover'
+    assign image_class = 'h-full w-full object-cover motion-safe:animate-zoomout motion-safe:opacity-0 motion-safe:scale-115'
     assign image_class_desktop = image_class | append: ' hidden md:block'
     assign image_class_mobile = image_class | append: ' md:hidden'
 

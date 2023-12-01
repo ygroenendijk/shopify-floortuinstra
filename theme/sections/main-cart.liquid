@@ -1,5 +1,5 @@
 {%- capture container_content -%}
-  <cart-items class="group/cart-items cart relative col-span-12 block text-sm lg:col-span-8 lg:col-start-3 {% if cart == empty %} cart-is-empty{% endif %}">
+  <cart-items class="group/cart-items cart relative col-span-12 block lg:col-span-8 lg:col-start-3 {% if cart == empty %} cart-is-empty{% endif %}">
 
     {%- comment -%} Empty cart {%- endcomment -%}
     <div class="cart__warnings hidden flex-col items-center justify-center px-6 py-24 text-center group-[.cart-is-empty]/cart-items:flex">
