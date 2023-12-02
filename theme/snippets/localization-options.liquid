@@ -15,6 +15,10 @@
     assign show_icon_only = false
   endunless
 
+  unless show_label
+    assign show_label = false
+  endunless
+
   unless show_icon
     assign show_icon = false
   endunless
@@ -79,7 +83,7 @@
     </noscript>
 
     <collapsible-component
-      class="collapsible not-rte flex flex-col gap-4 no-js:hidden"
+      class="collapsible not-rte flex flex-col gap-y-2 no-js:hidden"
       data-options='
         {
           "trapFocus": false,
@@ -88,17 +92,16 @@
           "closeOnMouseleave": true
         }
       '>
-      <p class="sr-only" id="{{ localPosition }}Label">
+      <p class="{%- unless show_label %}sr-only{%- endunless %} mb-0 text-sm font-bold" id="{{ localPosition }}Label">
         {{ label }}
       </p>
       <div class="localization-form relative">
         <div class="collapsible__group group" data-collapsible-group>
           <button
             type="button"
-            class="collapsible__trigger localization-form__button {% unless show_icon_only %}button button--outline flex-nowrap gap-4 p-2{% else %}flex items-center gap-2{% endunless %} whitespace-nowrap [&>.icon--chevron-down]:aria-[expanded=true]:rotate-180"
+            class="collapsible__trigger localization-form__button font-normal {% unless show_icon_only %}button button--outline flex-nowrap gap-4 p-2{% else %}flex items-center gap-2{% endunless %} whitespace-nowrap leading-5"
             data-collapsible-trigger>
             {%- if type == 'country' -%}
-              {{- localization.country.currency.iso_code }}
               {{ localization.country.currency.symbol }} | {{ localization.country.name -}}
             {%- else -%}
               {%- liquid
@@ -121,11 +124,11 @@
           </button>
 
           <div
-            class="collapsible__target absolute top-full {% if show_icon_only -%}-start-6 right-0 w-[calc(100%_+_24px)]{% endif %}"
+            class="collapsible__target absolute top-full {% if show_icon_only -%}-start-6 right-0 w-[calc(100%_+_24px)]{%- else -%}w-full{% endif %}"
             data-collapsible-target>
-            <div class="rte overflow-hidden">
+            <div class="rte overflow-hidden group-[.collapsible-is-open]:overflow-visible">
               <div data-localization-list>
-                <ul class="localization-form__list list-unstyled list-none {% if show_icon_only -%}color-scheme p-0 ps-6 pt-2 {{ color_scheme }} group-[.header-sticky]/body:bg-[var(--color-scheme-background-color)] group-[.template-index:not(.header-sticky)]/body:bg-transparent{% endif %}">
+                <ul class="localization-form__list list-unstyled translate-y-2 list-none rounded-md border {{ color_scheme }} {% if show_icon_only -%}color-scheme p-0 ps-6 group-[.header-sticky]/body:bg-[var(--color-scheme-background-color)] group-[.template-index:not(.header-sticky)]/body:bg-transparent{% endif %}">
                   {%- for item in object -%}
                     {%- liquid
                       # Skip current language/currency
@@ -138,18 +141,15 @@
 
                     <li class="localization-form__item py-2" tabindex="-1">
                       <a
-                        class="localization-form__link focus-inset group flex items-center gap-4 text-sm no-underline {% unless show_icon_only -%}px-3{% endunless %} {% if item.iso_code == localization[item].iso_code %}localization-form__link--active{% endif %}"
+                        class="localization-form__link focus-inset group flex items-center gap-4 whitespace-nowrap text-sm no-underline {% unless show_icon_only -%}px-3{% endunless %} {% if item.iso_code == localization[item].iso_code %}localization-form__link--active{% endif %}"
                         href="#"
                         {% if item.iso_code == localization.item.iso_code %}
                           aria-current="true"
                         {% endif %}
                         data-value="{{ item.iso_code }}">
                         {%- if type == 'country' -%}
-                          <span class="localization-form__currency">
-                            {{- item.currency.iso_code }}
-                            {{ item.currency.symbol }} |
-                          </span>
-                          {{- item.name -}}
+                          <span class="localization-form__currency">{{ item.currency.symbol }} |</span>
+                          {{ item.name -}}
                         {%- else -%}
                           {%- liquid
                             if show_icon_only or show_icon
