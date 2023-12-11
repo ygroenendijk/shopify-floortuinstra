@@ -211,10 +211,10 @@
                   </div>
 
                   <span class="font-body" data-cart-loader-active="hidden">
-                    {{- cart.total_price | money_with_currency -}}
+                    {{- cart.total_price | money -}}
                     {% if cart.total_price != cart.original_total_price %}
                       <s class="price--compare">
-                        {{- cart.original_total_price | money_with_currency -}}
+                        {{- cart.original_total_price | money -}}
                       </s>
                     {% endif %}
                   </span>

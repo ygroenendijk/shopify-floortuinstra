@@ -23,7 +23,7 @@
   if use_variant
     assign target = product.selected_or_first_available_variant
   else
-    assign target = product
+    assign target = target | default: product
   endif
 
   assign available = target.available | default: false
@@ -34,7 +34,7 @@
     assign compare_at_price = target.original_price
   endif
 
-  assign money_price = price | money_with_currency
+  assign money_price = price | money
 
   capture sale_price_str
     render 'render-translation', namespace: 'products.product.price', key: 'sale_price', fallback: 'Sale'
@@ -109,7 +109,7 @@
         </dt>
         <dd class=" leading-none">
           <s class="price__item price__item--compare opacity-70 contrast-more:opacity-100">
-            {{ compare_at_price | money_with_currency }}
+            {{ compare_at_price | money }}
           </s>
         </dd>
       </dl>

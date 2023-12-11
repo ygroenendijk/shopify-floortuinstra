@@ -116,7 +116,7 @@
               {%- for discount_allocation in line_item.line_level_discount_allocations -%}
                 <li>
                   {{- discount_allocation.discount_application.title }} (-
-                  {{- discount_allocation.amount | money_with_currency -}}
+                  {{- discount_allocation.amount | money -}}
                   )
                 </li>
               {%- endfor -%}
@@ -138,7 +138,7 @@
                   </span>
                 </dt>
                 <dd>
-                  <s>{{ line_item.original_price | money_with_currency }}</s>
+                  <s>{{ line_item.original_price | money }}</s>
                 </dd>
                 <dt>
                   <span class="sr-only">
@@ -146,7 +146,7 @@
                   </span>
                 </dt>
                 <dd>
-                  <span>{{ line_item.final_price | money_with_currency }}</span>
+                  <span>{{ line_item.final_price | money }}</span>
                 </dd>
               {%- else -%}
                 <dt>
@@ -155,7 +155,7 @@
                   </span>
                 </dt>
                 <dd>
-                  {{ line_item.original_price | money_with_currency }}
+                  {{ line_item.original_price | money }}
                 </dd>
               {%- endif -%}
               {%- if line_item.unit_price_measurement -%}
@@ -184,7 +184,7 @@
                       {%- endif -%}
                       {{ line_item.unit_price_measurement.reference_unit }}
                     {%- endcapture -%}
-                    <span data-unit-price>{{ line_item.unit_price | money_with_currency }}</span>
+                    <span data-unit-price>{{ line_item.unit_price | money }}</span>
                     {{- unit_price_separator -}}
                     {{- unit_price_base_unit -}}
                   </span>
@@ -193,7 +193,7 @@
             </dl>
           {%- else -%}
             <span>
-              {{- line_item.final_price | money_with_currency -}}
+              {{- line_item.final_price | money -}}
             </span>
           {%- endif -%}
         {%- endcapture -%}
@@ -212,7 +212,7 @@
                 </span>
               </dt>
               <dd>
-                <s>{{ line_item.original_line_price | money_with_currency }}</s>
+                <s>{{ line_item.original_line_price | money }}</s>
               </dd>
               <dt>
                 <span class="sr-only">
@@ -220,11 +220,11 @@
                 </span>
               </dt>
               <dd>
-                <span>{{ line_item.final_line_price | money_with_currency }}</span>
+                <span>{{ line_item.final_line_price | money }}</span>
               </dd>
             </dl>
           {%- else -%}
-            <span>{{ line_item.original_line_price | money_with_currency }}</span>
+            <span>{{ line_item.original_line_price | money }}</span>
           {%- endif -%}
         {%- endcapture -%}
         {%- render 'order-row-item', line_item: line_item, type: 'total', content: total_content, wrapper_class: 'lg:text-end' -%}
@@ -271,7 +271,7 @@
       </div>
       <div class="col-span-6 text-right lg:col-span-2">
         <p>
-          {{ order.line_items_subtotal_price | money_with_currency }}
+          {{ order.line_items_subtotal_price | money }}
         </p>
       </div>
     </div>
@@ -290,7 +290,7 @@
           role="cell"
           data-label="{%- render "render-translation", namespace: "customer.order", key: "discount", fallback: "Discount" -%}">
           <p>
-            <span>-{{ discount_application.total_allocated_amount | money_with_currency }}</span>
+            <span>-{{ discount_application.total_allocated_amount | money }}</span>
             <span class="cart-discount">
               {{- discount_application.title -}}
             </span>
@@ -340,7 +340,7 @@
             -%} ({{ shipping_method.title }})
           ">
           <p>
-            {{ shipping_method.price | money_with_currency }}
+            {{ shipping_method.price | money }}
           </p>
         </div>
       </div>
@@ -373,7 +373,7 @@
             -%} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)
           ">
           <p>
-            {{ tax_line.price | money_with_currency }}
+            {{ tax_line.price | money }}
           </p>
         </div>
       </div>
@@ -399,7 +399,7 @@
           -%}
         ">
         <p>
-          {{- order.total_price | money_with_currency -}}
+          {{- order.total_price | money -}}
         </p>
       </div>
     </div>

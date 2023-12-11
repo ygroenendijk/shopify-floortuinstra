@@ -96,7 +96,7 @@
 
                 {% comment %} Total price {% endcomment %}
                 <p class="font-bold">
-                  <span class="sr-only">{{- total_str -}}:</span> {{ order.total_price | money_with_currency }}
+                  <span class="sr-only">{{- total_str -}}:</span> {{ order.total_price | money }}
                 </p>
               </div>
 

@@ -55,8 +55,8 @@
         step="1" data-price-range-max-input>
     </div>
     <div class="range-index flex justify-between" data-price-range-values>
-      <span data-price-range-min>{{ filter.min_value.value | default: 0 | money_with_currency }}</span>
-      <span data-price-range-max>{{ filter.max_value.value | default: filter.range_max | money_with_currency }}</span>
+      <span data-price-range-min>{{ filter.min_value.value | default: 0 | money }}</span>
+      <span data-price-range-max>{{ filter.max_value.value | default: filter.range_max | money }}</span>
     </div>
   </price-range>
 {%- endcapture -%}

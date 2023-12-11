@@ -11,6 +11,10 @@
     assign color_scheme = 'color-scheme--white'
   endunless
 
+  unless relative
+    assign relative = false
+  endunless
+
   unless show_icon_only
     assign show_icon_only = false
   endunless
@@ -99,7 +103,7 @@
         <div class="collapsible__group group" data-collapsible-group>
           <button
             type="button"
-            class="collapsible__trigger localization-form__button font-normal {% unless show_icon_only %}button button--outline flex-nowrap gap-4 p-2{% else %}flex items-center gap-2{% endunless %} whitespace-nowrap leading-5"
+            class="collapsible__trigger localization-form__button gap-2 font-normal {% unless show_icon_only %}button button--outline flex-nowrap p-2{% else %}flex items-center{% endunless %} whitespace-nowrap leading-5"
             data-collapsible-trigger>
             {%- if type == 'country' -%}
               {{ localization.country.currency.symbol }} | {{ localization.country.name -}}
@@ -124,11 +128,11 @@
           </button>
 
           <div
-            class="collapsible__target absolute top-full {% if show_icon_only -%}-start-6 right-0 w-[calc(100%_+_24px)]{%- else -%}w-full{% endif %}"
+            class="collapsible__target {% unless relative %}absolute{% endunless %} top-full {% if show_icon_only -%}-start-4 right-0 w-[calc(100%_+_16px)]{%- else -%}w-full{% endif %}"
             data-collapsible-target>
             <div class="rte overflow-hidden group-[.collapsible-is-open]:overflow-visible">
               <div data-localization-list>
-                <ul class="localization-form__list list-unstyled translate-y-2 list-none rounded-md border {{ color_scheme }} {% if show_icon_only -%}color-scheme p-0 ps-6 group-[.header-sticky]/body:bg-[var(--color-scheme-background-color)] group-[.template-index:not(.header-sticky)]/body:bg-transparent{% endif %}">
+                <ul class="localization-form__list list-unstyled translate-y-2 list-none rounded-md border {{ color_scheme }} {% if show_icon_only -%}color-scheme p-0 px-4 group-[.header-sticky]/body:bg-[var(--color-scheme-background-color)] group-[.template-index:not(.header-sticky)]/body:bg-transparent{% endif %}">
                   {%- for item in object -%}
                     {%- liquid
                       # Skip current language/currency
@@ -141,7 +145,7 @@
 
                     <li class="localization-form__item py-2" tabindex="-1">
                       <a
-                        class="localization-form__link focus-inset group flex items-center gap-4 whitespace-nowrap text-sm no-underline {% unless show_icon_only -%}px-3{% endunless %} {% if item.iso_code == localization[item].iso_code %}localization-form__link--active{% endif %}"
+                        class="localization-form__link focus-inset group flex items-center whitespace-nowrap text-sm no-underline {% unless show_icon_only -%}px-3{% endunless %} {% if show_icon_only or show_icon -%}gap-2{% else %}gap-1{% endif %}"
                         href="#"
                         {% if item.iso_code == localization.item.iso_code %}
                           aria-current="true"
@@ -158,7 +162,7 @@
                             endif
                           -%}
                           <span
-                            {% if show_icon_only -%}
+                            {%- if show_icon_only -%}
                               class="sr-only"
                             {%- endif -%}>
                             {{- item.endonym_name | capitalize -}}

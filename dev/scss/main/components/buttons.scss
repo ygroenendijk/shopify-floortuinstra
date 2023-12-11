@@ -19,8 +19,6 @@
     }
   }
   .button {
-    background: var(--button-background); // hack is needed because tailwind only outputs background-image and that doesn't work with gradients
-
     @apply relative
     inline-flex
     cursor-pointer
