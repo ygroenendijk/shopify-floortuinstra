@@ -116,7 +116,7 @@
               {%- if product.available -%}
                 <div id="inventory-{{ product.id }}" class="product__inventory no-js-hidden">
                   <p
-                    class="mb-0 flex items-center gap-2 text-sm leading-none {% if product.selected_or_first_available_variant.inventory_management != 'shopify' %}hidden{% endif %}"
+                    class="mb-0 flex items-center gap-2 text-sm leading-none"
                     {{ block.shopify_attributes }}
                     role="status">
                     {%- liquid
@@ -155,6 +155,11 @@
                             render "render-translation", namespace: "products.product.inventory", key: "out_of_stock", fallback: "Out of stock"
                           endif
                         endif
+
+                      # inventory not tracked
+                      elsif product.selected_or_first_available_variant.inventory_management == nil
+                        render 'icons', icon: 'warning-green', icon_class: 'w-4'
+                        render "render-translation", namespace: "products.product.inventory", key: "out_of_stock_continue_selling", fallback: "In stock"
                       endif
                     -%}
                   </p>
@@ -256,10 +261,7 @@
                 group-[.is-fixed]/add-to-cart:inset-0
                 group-[.is-fixed]/add-to-cart:top-auto
                 group-[.is-fixed]/add-to-cart:z-fixed group-[.is-fixed]/add-to-cart:bg-white group-[.is-fixed]/add-to-cart:p-4 group-[.is-fixed]/add-to-cart:drop-shadow-[0_1px_15px_rgba(0,0,0,0.15)]" data-product-form-inner>
-                <div class="flex gap-4 md:flex-wrap">
-                  <div class="">
-                    {{ quantity_selector }}
-                  </div>
+
                   <product-form-component class="product-form block flex-auto">
                     {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
                       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
@@ -324,31 +326,37 @@
                         </div>
                       </noscript>
 
-                      <div class="product-form__buttons flex flex-col items-center gap-y-2">
-                        <button
-                          type="submit"
-                          name="add"
-                          class="button button--lg button--primary w-full"
-                          {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
-                          data-add-to-cart-behavior="{{ settings.add_to_cart_behavior }}"
-                          {% render 'klaviyo-tracking', render_data_attributes: true, product_details: product %}
-                        >
-                          {%- render 'icons', icon: 'cart', icon_class: 'w-6' -%}
-                          <span data-add-to-cart-button-text>
-                            {%- if product.selected_or_first_available_variant.available -%}
-                              {%- render 'render-translation', namespace: "products.product", key: "add_to_cart", fallback: "Add to cart" -%}
-                            {%- else -%}
-                              {%- render 'render-translation', namespace: "products.product", key: "sold_out", fallback: "Sold out" -%}
-                            {%- endif -%}
-                          </span>
-                        </button>
-                        {%- if block.settings.show_dynamic_checkout -%}
-                          {{ form | payment_button }}
+                      <div class="flex gap-4 md:flex-wrap {% if block.settings.show_dynamic_checkout -%}mb-4{%- endif -%}">
+                        {%- if quantity_selector != blank -%}
+                          <div>
+                            {{ quantity_selector }}
+                          </div>
                         {%- endif -%}
+                        <div class="product-form__buttons flex flex-auto flex-col items-center gap-y-2">
+                          <button
+                            type="submit"
+                            name="add"
+                            class="button button--lg button--primary w-full"
+                            {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                            data-add-to-cart-behavior="{{ settings.add_to_cart_behavior }}"
+                            {% render 'klaviyo-tracking', render_data_attributes: true, product_details: product %}
+                          >
+                            {%- render 'icons', icon: 'cart', icon_class: 'w-6' -%}
+                            <span data-add-to-cart-button-text>
+                              {%- if product.selected_or_first_available_variant.available -%}
+                                {%- render 'render-translation', namespace: "products.product", key: "add_to_cart", fallback: "Add to cart" -%}
+                              {%- else -%}
+                                {%- render 'render-translation', namespace: "products.product", key: "sold_out", fallback: "Sold out" -%}
+                              {%- endif -%}
+                            </span>
+                          </button>
+                        </div>
                       </div>
+                      {%- if block.settings.show_dynamic_checkout -%}
+                        {{ form | payment_button }}
+                      {%- endif -%}
                     {%- endform -%}
                   </product-form-component>
-                </div>
               </div>
             </div>
           {%- endcase -%}

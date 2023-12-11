@@ -16,7 +16,7 @@ theme/config/settings_data.json
 theme/templates/**/*.json
 theme/sections/*.json
 theme/locales/*.json
-!theme/locales/en-dev.default.json
+!theme/locales/nl-dev.default.json
 
 # Ignore shopifyignore in theme folder, should be only in dev
 theme/.shopifyignore

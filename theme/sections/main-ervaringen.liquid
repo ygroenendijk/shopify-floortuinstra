@@ -50,7 +50,7 @@
         {%- liquid
           assign category_handleized = category | handleize
           capture text_label
-            render 'render-translation',  namespace: 'sections.ervaringen', key: category_handleized, fallback: category
+            render 'render-translation', namespace: 'sections.ervaringen', key: category_handleized, fallback: category
           endcapture
         -%}
         <button class="button button--primary button--md" data-quote-trigger="{{ category_handleized }}">{{- text_label -}}</button>
@@ -60,7 +60,7 @@
       <button class="button button--outline button--sm remove-tag flex hidden items-center gap-2" data-quote-remove>
         {%- liquid
           render 'icons', icon: 'close', icon_class: 'w-4'
-          render 'render-translation',  namespace: 'sections.ervaringen', key: 'wis_filter', fallback: 'Wis filter'
+          render 'render-translation', namespace: 'sections.ervaringen', key: 'wis_filter', fallback: 'Wis filter'
         -%}
       </button>
     </div>

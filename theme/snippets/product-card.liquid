@@ -196,7 +196,7 @@
         {% comment %} ATC button to display the options {% endcomment %}
         {%- if show_quick_shop -%}
           {% comment %} Render quick shop {% endcomment %}
-          {%- render 'quick-shop', product: product_object, quick_shop_render_second_option: quick_shop_render_second_option -%}
+          {%- render 'quick-shop', product: product_object, quick_shop_render_second_option: quick_shop_render_second_option, add_to_cart_behavior: add_to_cart_behavior -%}
         {% endif %}
       </div>
       {% comment %} Render formatted price {% endcomment %}

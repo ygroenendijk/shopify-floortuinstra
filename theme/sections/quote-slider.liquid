@@ -97,11 +97,11 @@
         <div class="quote-slider__image inset-0 md:absolute {{ section.settings.min_ratio_mobile }} {{ section.settings.min_ratio_tablet }}">
           {%- liquid
             # Desktop image
-            render 'responsive-image', image_object: section.settings.image_desktop, class: image_class_desktop, max_width: max_width, lazy: lazy
+            render 'responsive-image', image_object: section.settings.image_desktop, class: image_class_desktop, max_width: max_width, lazy: section.settings.image_lazy
 
             # Mobile image
             if image_mobile != blank
-              render 'responsive-image', image_object: image_mobile, class: image_class_mobile, max_width: 768, lazy: lazy
+              render 'responsive-image', image_object: image_mobile, class: image_class_mobile, max_width: 768, lazy: section.settings.image_lazy
             endif
           -%}
         </div>
@@ -113,7 +113,7 @@
         </div>
 
         {% comment %} Navigation and pagination {% endcomment %}
-        {%- if is_slider and count > 0 -%}
+        {%- if is_slider -%}
           {% comment %} Navigation {% endcomment %}
           {%- if section.settings.swiper_navigation %}
             <button

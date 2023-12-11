@@ -8,17 +8,8 @@
     --button-hover-border-color: theme('colors.secondary.400');
     --button-hover-text: theme('colors.secondary.text');
   }
-  button,
-  .button {
-    @apply disabled:pointer-events-none
-    disabled:cursor-not-allowed
-    disabled:opacity-50;
 
-    svg {
-      @apply fill-current;
-    }
-  }
-  .button {
+  @mixin button() {
     @apply relative
     inline-flex
     cursor-pointer
@@ -49,6 +40,20 @@
     &:hover {
       background: var(--button-hover-background);
     }
+  }
+
+  button,
+  .button {
+    @apply disabled:pointer-events-none
+    disabled:cursor-not-allowed
+    disabled:opacity-50;
+
+    svg {
+      @apply fill-current;
+    }
+  }
+  .button {
+    @include button;
 
     // .button--link
     &--link {
@@ -178,26 +183,8 @@
 
   .shopify-payment-button {
     button {
-      @apply button--secondary
-        relative
-        box-border
-        inline-flex
-        cursor-pointer
-        flex-wrap
-        items-center
-        justify-center
-        gap-2
-        rounded-none
-        border
-        border-none
-        border-[var(--button-border-color,inherit)]
-        bg-[var(--button-background,inherit)]
-        text-sm
-        font-bold
-        leading-normal
-        no-underline
-        transition-colors
-        disabled:hidden #{!important};
+      @include button;
+      @apply disabled:hidden #{!important};
       &:not([disabled]) {
         @apply states:border-[var(--button-hover-border-color,inherit)]
           states:bg-[var(--button-hover-background,inherit)]
@@ -216,8 +203,13 @@
   // Overwrite Shopify styling
   .shopify-payment-button__more-options,
   .shopify-payment-button__button--unbranded {
-    all: unset;
-    @apply rounded-none bg-secondary states:bg-secondary-400 #{!important};
+    @apply border-transparent
+    bg-transparent
+    text-sm
+    font-normal
+    text-secondary
+    underline
+    states:text-secondary-400 #{!important};
   }
 
   /**

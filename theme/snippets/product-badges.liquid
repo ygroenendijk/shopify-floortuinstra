@@ -54,11 +54,21 @@
       endif
 
       assign product_tags = product.tags | downcase
-      if product_tags contains 'badge:'
+
+      # badges can be translated by adding the language iso code as a prefix, like nl_badge: , en_badge: 
+      assign badge_prefix = 'badge'
+      assign badge_prefix_loc = shop.locale | append: '_badge'
+
+      if product_tags contains 'badge'
         for tag in product.tags
-          assign tag_down = tag | downcase
-          if tag_down contains 'badge:'
-            assign badge_text = tag | remove: 'badge:' | strip | capitalize
+          assign tag_down_prefix = tag | downcase | split: ':' | first
+
+          if tag_down_prefix == badge_prefix_loc
+            assign badge_text = tag | remove: badge_prefix_loc | remove: ':' | strip
+            echo flex_badge | replace: 'badge_text', badge_text
+            continue
+          elsif tag_down_prefix == badge_prefix
+            assign badge_text = tag | remove: badge_prefix | remove: ':' | strip
             echo flex_badge | replace: 'badge_text', badge_text
           endif
         endfor

@@ -14,7 +14,7 @@ theme/config/settings_data.json
 # Ignore all templates
 theme/templates/*.json
 theme/locales/*.json
-!theme/locales/en-dev.default.json
+!theme/locales/nl-dev.default.json
 
 # Ignore all external files
 dev/assets

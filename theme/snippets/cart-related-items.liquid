@@ -72,7 +72,7 @@
         {%- liquid
           capture products_array
             echo products_array | append: '///'
-            render 'product-card', product_object: product, product_card_title_el: 'h3', animate: false
+            render 'product-card', product_object: product, product_card_title_el: 'h3', animate: false, add_to_cart_behavior: add_to_cart_behavior
           endcapture
         -%}
       {%- else -%}
@@ -92,11 +92,17 @@
           {%- comment -%} The product form, product id will be update by variant.js {%- endcomment -%}
           <footer class="mt-2 flex flex-wrap items-center justify-center gap-2">
             {%- if show_quick_shop -%}
+              {%- liquid
+                assign add_to_cart_behavior = 'open_cart_drawer'
+                if template == 'cart'
+                  assign add_to_cart_behavior = 'show_cart_notification'
+                endif
+              -%}
               {% comment %} Render the quickshop wrapper and the trigger because we don't use the hover effect here {% endcomment %}
               {%- render 'quick-shop',
                 product: product,
                 quick_shop_render_second_option: quick_shop_render_second_option,
-                add_to_cart_behavior: 'open_cart_drawer',
+                add_to_cart_behavior: add_to_cart_behavior,
                 is_cart_drawer_recommendations: true,
                 unique_identifier: 'drawer'
               -%}
