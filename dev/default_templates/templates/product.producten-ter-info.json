@@ -1,0 +1,51 @@
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+        "menu": "",
+        "show_home_link": true,
+        "show_tagged_link": true,
+        "show_non_link": true,
+        "hide_on_mobile": false,
+        "alignment": "justify-start"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "badges": {
+          "type": "badges",
+          "settings": {
+            "badge_size": ""
+          }
+        },
+        "9d96ec01-1f82-4a66-9007-c81dbb57520c": {
+          "type": "richtext",
+          "settings": {
+            "richtext": "{{ product.metafields.product.korte_beschrijving | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": ["badges", "9d96ec01-1f82-4a66-9007-c81dbb57520c"],
+      "settings": {
+        "enable_sticky_info": true,
+        "enable_video_looping": false
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "color_scheme": "color-scheme color-scheme--gray",
+        "heading": "Gerelateerde producten",
+        "intent": "related",
+        "limit": 8,
+        "swiper_indication": "pagination",
+        "swiper_navigation": true,
+        "swiper_autoplay": false,
+        "swiper_autoplay_delay": 7500
+      }
+    }
+  },
+  "order": ["breadcrumbs", "main", "product-recommendations"]
+}

@@ -9,35 +9,27 @@
 
       <div class="col basis-1/3">
         {% comment %} Collections - note these are only rendered in the predictive search and cannot be rendered on the search page {% endcomment %}
-        {%- if predictive_search.resources.collections.size > 0 and settings.predictive_search_collections -%}
           {%- render 'predictive-search-item',
             type: 'collection',
             results_array: predictive_search.resources.collections
           -%}
-        {%- endif -%}
       </div>
 
       <div class="col basis-1/3">
         {% comment %} Products {% endcomment %}
-        {%- if predictive_search.resources.products.size > 0 and settings.predictive_search_products -%}
           {%- render 'predictive-search-item',
             type: 'product',
             results_array: predictive_search.resources.products
           -%}
-        {%- endif -%}
       </div>
 
       <div class="col basis-1/3">
         {%- liquid
           # Articles
-          if predictive_search.resources.articles.size > 0 and settings.predictive_search_articles
             render 'predictive-search-item', type: 'article', results_array: predictive_search.resources.articles
-          endif
 
           # Pages
-          if predictive_search.resources.pages.size > 0 and settings.predictive_search_pages
             render 'predictive-search-item', type: 'page', results_array: predictive_search.resources.pages
-          endif
         -%}
       </div>
     </div>

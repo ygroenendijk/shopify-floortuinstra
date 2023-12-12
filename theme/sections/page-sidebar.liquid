@@ -2,7 +2,7 @@
 {%- if page != blank -%}
   {%- comment -%} Assign container classes {%- endcomment -%}
   {%- liquid
-    assign container_class = 'page-content my-16'
+    assign container_class = 'page-content'
     if section.settings.container_width != blank
       assign container_class = container_class | append: ' ' | append: section.settings.container_width
     endif
@@ -65,7 +65,7 @@
     title: page.title,
     title_tag: 'h1',
     content: page_content,
-    content_class: 'page-section__content my-10'
+    content_class: 'page-section__content'
   -%}
 {%- endif -%}
 

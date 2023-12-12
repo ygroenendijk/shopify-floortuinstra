@@ -82,6 +82,8 @@
   categoryButtons.forEach((button) =>
     button.addEventListener('click', (event) => {
       const category = event.target.dataset.quoteTrigger;
+      categoryButtons.forEach((button) => button.classList.remove('button--secondary'));
+      event.target.classList.add('button--secondary');
       categoryItems.forEach((item) => {
         item.dataset.quoteItem === category ? item.classList.remove('hidden') : item.classList.add('hidden');
       });
@@ -92,6 +94,7 @@
 
   // Show all quotes
   removeButton.addEventListener('click', (event) => {
+    categoryButtons.forEach((button) => button.classList.remove('button--secondary'));
     categoryItems.forEach((item) => item.classList.remove('hidden'));
     removeButton.classList.add('hidden');
   });

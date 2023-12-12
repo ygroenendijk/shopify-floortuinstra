@@ -103,6 +103,10 @@
     elsif product_object.options_with_values.size > 2
       assign show_quick_shop = false
     endif
+
+    if product_object.price == 0
+      assign show_quick_shop = false
+    endif
   endif
 -%}
 
@@ -200,7 +204,11 @@
         {% endif %}
       </div>
       {% comment %} Render formatted price {% endcomment %}
-      {% render 'render-price', product: product_object %}
+      {%- liquid
+        unless product_object.price == 0
+          render 'render-price', product: product_object
+        endunless
+      -%}
     </div>
 
     {% comment %} Link to PDP {% endcomment %}
