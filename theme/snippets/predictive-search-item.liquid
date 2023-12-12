@@ -9,13 +9,18 @@
       assign image_object = 'image'
       assign title_key = 'blog'
   endcase
+
+  capture type_title
+    render 'render-translation', namespace: 'general.predictive_search', key: title_key, fallback: type
+  endcapture
+  assign type_title = type_title | downcase
 -%}
 
 {% comment %} Render item {% endcomment %}
 <div class="predictive-search__group mb-4">
   <div class="predictive-search__group-header mb-4 flex items-center justify-between">
     <p class="mb-0 text-sm font-bold uppercase text-primary">
-      {%- render 'render-translation', namespace: 'general.predictive_search', key: title_key, fallback: type -%}
+      {{ type_title }}
     </p>
 
     {% comment %} 'See all' link {% endcomment %}
@@ -55,6 +60,6 @@
       {%- endfor -%}
     </ul>
   {%- else -%}
-    <p class="text-sm">{{ 'sections.main_search.no_results_with_type' | t: terms: predictive_search.terms, type: type }}</p>
+    <p class="text-sm">{{ 'sections.main_search.no_results_with_type' | t: terms: predictive_search.terms, type: type_title }}</p>
   {%- endif -%}
 </div>
