@@ -49,13 +49,13 @@
     if product.available
       if product_can_be_preordered
         echo pre_order_badge
-      elsif product_has_compare_at_price
+      elsif product_has_compare_at_price and view != 'cart-drawer'
         echo sale_badge
       endif
 
       assign product_tags = product.tags | downcase
 
-      # badges can be translated by adding the language iso code as a prefix, like nl_badge: , en_badge: 
+      # badges can be translated by adding the language iso code as a prefix, like nl_badge: , en_badge:
       assign badge_prefix = 'badge'
       assign badge_prefix_loc = shop.locale | append: '_badge'
 

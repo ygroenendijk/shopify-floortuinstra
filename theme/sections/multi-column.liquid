@@ -11,7 +11,7 @@
   if section.settings.show_content_dividers
     assign content_class = content_class | append: ' divide-y md:divide-y-0 md:divide-x divide-accent divide-dashed md:px-0'
   else
-    assign content_class = content_class | append: ' gap-8'
+    assign content_class = content_class | append: ' gap-10'
   endif
 
   # Container classes
@@ -61,7 +61,7 @@
   assign content_class = content_class | append: grid_class
 
   if section.settings.odd_even
-    assign content_class = content_class | append: ' md:gap-y-10'
+    assign content_class = content_class | append: ' md:gap-y-10 lg:gap-x-14'
   endif
 
   # Collect the title classnames based on settings.
@@ -103,18 +103,18 @@
           -%}
 
           {%- comment -%} Render column {%- endcomment -%}
-          <div class="multi-columns__column rte flex flex-col {{ block.settings.position_vertical }} {{ block.settings.position_horizontal }} {{ block.settings.mobile_order }} md:order-none {% if section.settings.show_content_dividers %}px-2 py-4 md:py-0{%- endif -%}" {{ block.shopify_attributes }}>
+          <div class="multi-columns__column flex flex-col {{ block.settings.position_vertical }} {{ block.settings.position_horizontal }} {{ block.settings.mobile_order }} md:order-none {% if section.settings.show_content_dividers %}px-2 py-4 md:py-0{%- endif -%}" {{ block.shopify_attributes }}>
             {%- comment -%} Column inner width and text align {%- endcomment -%}
-            <div class="flex flex-col gap-y-4 {% if section.settings.odd_even -%}{% cycle 'md:flex-row', 'md:flex-row-reverse' %} items-center gap-x-base xl:flex-col{%- endif %}">
+            <div class="flex max-w-[-webkit-fill-available] flex-col {% unless section.settings.show_content_dividers %}gap-y-4{% endunless %} {% if section.settings.odd_even -%}{% cycle 'md:flex-row', 'md:flex-row-reverse' %} items-center gap-x-base xl:flex-col{%- endif %}">
 
-              <div class="multi-columns__text rte {{ block.settings.text_align }}">
-                {%- comment -%} Heading {%- endcomment -%}
-                {%- if block.settings.heading != blank -%}
-                  <{{ block.settings.heading_element }} class="mt-0 {{ block.settings.heading_size }}">
-                    {{- block.settings.heading -}}
-                  </{{ block.settings.heading_element }}>
-                {%- endif -%}
+              {%- comment -%} Heading {%- endcomment -%}
+              {%- if block.settings.heading != blank -%}
+                <{{ block.settings.heading_element }} class="m-0 {{ block.settings.heading_size }} {{ block.settings.heading_alignment }}">
+                  {{- block.settings.heading -}}
+                </{{ block.settings.heading_element }}>
+              {%- endif -%}
 
+              <div class="multi-columns__text rte break-words {{ block.settings.text_align }}">
                 {%- liquid
                   # Text
                   if block.settings.text != blank
@@ -128,7 +128,7 @@
 
                   # Mobile Image
                   if image_mobile != blank
-                    render 'responsive-image', image_object: image_mobile, aspect_ratio: block.settings.image_ratio_mobile, class: 'multi-columns__image md:hidden object-cover w-full', max_width: 768, 
+                    render 'responsive-image', image_object: image_mobile, aspect_ratio: block.settings.image_ratio_mobile, class: 'multi-columns__image md:hidden object-cover w-full', max_width: 768,
                   endif
 
                   # First button
@@ -169,7 +169,7 @@
         {%- when 'product' -%}
           {%- assign product_count = product_count | plus: 1 -%}
           {%- comment -%} Render column {%- endcomment -%}
-          <div class="multi-columns__column rte flex flex-col md:order-none" {{ block.shopify_attributes }} style="--animation-delay: {{ product_count }}">
+          <div class="multi-columns__column flex flex-col md:order-none" {{ block.shopify_attributes }} style="--animation-delay: {{ product_count }}">
 
             {%- comment -%} Heading {%- endcomment -%}
             {%- if block.settings.heading != blank -%}
@@ -221,6 +221,10 @@
           {
             "value": "container--md",
             "label": "Medium"
+          },
+          {
+            "value": "container--lg",
+            "label": "Large"
           },
           {
             "value": "container--wide",
@@ -629,6 +633,26 @@
               {
                 "value": "h6",
                 "label": "H6"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "heading_alignment",
+            "label": "Heading alignment",
+            "default": "text-center",
+            "options": [
+              {
+                "value": "text-start",
+                "label": "Left"
+              },
+              {
+                "value": "text-center",
+                "label": "Center"
+              },
+              {
+                "value": "text-end",
+                "label": "Right"
               }
             ]
           },

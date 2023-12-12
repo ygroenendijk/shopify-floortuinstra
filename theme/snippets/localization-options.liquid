@@ -103,7 +103,7 @@
         <div class="collapsible__group group" data-collapsible-group>
           <button
             type="button"
-            class="collapsible__trigger localization-form__button gap-2 font-normal {% unless show_icon_only %}button button--outline flex-nowrap p-2{% else %}flex items-center{% endunless %} whitespace-nowrap leading-5"
+            class="collapsible__trigger localization-form__button gap-2 font-normal {% unless show_icon_only %}button button--outline w-full flex-nowrap p-2{% else %}flex items-center{% endunless %} whitespace-nowrap leading-5"
             data-collapsible-trigger>
             {%- if type == 'country' -%}
               {{ localization.country.currency.symbol }} | {{ localization.country.name -}}
@@ -128,7 +128,7 @@
           </button>
 
           <div
-            class="collapsible__target {% unless relative %}absolute{% endunless %} top-full {% if show_icon_only -%}-start-4 right-0 w-[calc(100%_+_16px)]{%- else -%}w-full{% endif %}"
+            class="collapsible__target {% unless relative %}absolute{% endunless %} top-full {% if show_icon_only -%}end-0 md:-start-4 md:w-[calc(100%_+_16px)]{%- else -%}w-full{% endif %}"
             data-collapsible-target>
             <div class="rte overflow-hidden group-[.collapsible-is-open]:overflow-visible">
               <div data-localization-list>

@@ -31,7 +31,7 @@
   <div class="">
     {%- liquid
       capture badges
-        render 'product-badges', product: item.product
+        render 'product-badges', product: item.product, view: view
       endcapture
     -%}
     {% if badges != blank %}
@@ -44,7 +44,7 @@
       title="{{ item.product.title }}"
       tabindex="-1">
       {%- if item.image -%}
-        {%- render 'responsive-image', image_object: item.image, alt: item.title, widths: image_sizes, aspect_ratio: aspect_ratio, class: class -%}
+        {%- render 'responsive-image', image_object: item.image, alt: item.title, widths: image_sizes, aspect_ratio: aspect_ratio, class: 'hover:scale-105 transition-transform' -%}
       {%- endif -%}
     </a>
   </div>
@@ -56,7 +56,7 @@
       </p>
     {%- endif -%}
     {%- comment -%} Title and Price and item errors {%- endcomment -%}
-    <div class="cart-item__title {% if settings.show_cart_remove -%}pe-12{%- endif -%}">
+    <div class="cart-item__title {% if settings.show_cart_remove -%}pe-12{%- endif %} {% if view == 'cart-drawer' %}text-sm{%- endif -%}">
       {%- comment -%} Title {%- endcomment -%}
       <a
         href="{{ item.product.url }}"
