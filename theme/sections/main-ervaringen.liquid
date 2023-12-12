@@ -9,30 +9,20 @@
   }
 </style>
 
-{%- liquid
-  assign language = localization.language.iso_code
-  assign text_field = 'text_' | append: language
-  assign title_field = 'title_' | append: language
-  if language == 'nl'
-    assign title_field = 'title'
-  endif
--%}
-
 {%- capture quotes -%}
   {%- for block in section.blocks -%}
-    {%- if block.settings[text_field] != blank -%}
+    {%- if block.settings.text_nl != blank -%}
       {%- assign categories = categories | append: ',' | append: block.settings.category -%}
 
       <div class="quotes__quote relative mx-10 flex flex-col divide-y divide-dashed divide-accent before:absolute before:-left-6
         before:-top-1 before:block before:h-6 before:w-6 before:content-empty after:absolute after:-right-6 after:bottom-0 after:block after:h-6 after:w-6 after:content-empty md:mx-0 md:before:content-none md:after:content-none
         " data-quote-item="{{ block.settings.category | handleize }}" {{ block.shopify_attributes }}>
         <div class="quotes__quote-text py-4">
-          {{ block.settings[text_field] }}
+          {{ block.settings.text_nl }}
         </div>
 
-        {%- assign title = block.settings[title_field] | default: block.settings.title -%}
         <div class="quotes__quote-name py-4 text-end">
-          {{ title }}
+          {{ block.settings.title }}
         </div>
       </div>
     {%- endif -%}

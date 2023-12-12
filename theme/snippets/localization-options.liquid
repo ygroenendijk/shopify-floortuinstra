@@ -132,7 +132,7 @@
             data-collapsible-target>
             <div class="rte overflow-hidden group-[.collapsible-is-open]:overflow-visible">
               <div data-localization-list>
-                <ul class="localization-form__list list-unstyled translate-y-2 list-none rounded-md border {{ color_scheme }} {% if show_icon_only -%}color-scheme p-0 px-4 group-[.header-sticky]/body:bg-[var(--color-scheme-background-color)] group-[.template-index:not(.header-sticky)]/body:bg-transparent{% endif %}">
+                <ul class="localization-form__list list-unstyled translate-y-2 list-none rounded-md border {{ color_scheme }} {% if show_icon_only -%}color-scheme p-0 px-4 group-[.header-sticky]/body:bg-[var(--color-scheme-background-color)]{% endif %}">
                   {%- for item in object -%}
                     {%- liquid
                       # Skip current language/currency

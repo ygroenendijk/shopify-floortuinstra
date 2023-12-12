@@ -213,7 +213,7 @@
   -%}
 
   {% comment %} Always render the wrapper so we can adjust the content {% endcomment %}
-  <div id="cartRelated" data-id="{{ section.id }}">
+  <div id="cartRelated" data-id="{{ section.id }}" class="-mb-24">
     <div class="cart-related-items">
       {%- liquid
         if object_array != blank

@@ -25,7 +25,7 @@
     endcapture
 
     # Container class
-    assign container_class = 'product-recommendations block overflow-hidden'
+    assign container_class = 'product-recommendations block overflow-hidden -mb-24'
     if section.settings.color_scheme != blank
       assign container_class = container_class | append: ' container--background my-0 group/color-scheme ' | append: section.settings.color_scheme
     endif
