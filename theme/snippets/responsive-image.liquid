@@ -195,15 +195,13 @@
       if width_int > max_width
         assign width = max_width
       endif
-
-      assign image_url = image_object | image_url: width: width, crop: crop
       assign new_widths = new_widths | append: ',' | append: width
     else
-      assign image_url = image_object | image_url: width: image_object.width, crop: crop
       assign new_widths = new_widths | append: ',' | append: image_object.width
     endif
 
-    assign image_url = image_object | image_url: width: image_object.width
+    assign image_url = image_object | image_url: width: width, crop: crop
+    assign height = width | divided_by: image_ratio | round
 
     if width_int > max_width
       break
@@ -214,12 +212,6 @@
 -%}
 
 {%- capture image_element -%}
-  {%- liquid
-    if width > 2560
-      assign width = 2560
-    endif
-    assign height = width | divided_by: image_ratio | round
-  -%}
   {% comment %} We force lazy loading parameter {% endcomment %}
   {%- if lazy != blank -%}
     {{ image_url | image_tag:
