@@ -41,12 +41,6 @@
         "delay": {{ section.settings.swiper_autoplay_delay | default: 7500 }}
       },
     {%- endif %}
-    {%- if section.settings.swiper_navigation %}
-      "navigation": {
-        "nextEl": ".swiper-button-next-{{ section.id }}",
-        "prevEl": ".swiper-button-prev-{{ section.id }}"
-      },
-    {%- endif %}
     {%- if section.settings.swiper_pagination %}
       "pagination": {
         "el": ".swiper-pagination-{{ section.id }}",
@@ -114,22 +108,6 @@
 
         {% comment %} Navigation and pagination {% endcomment %}
         {%- if is_slider -%}
-          {% comment %} Navigation {% endcomment %}
-          {%- if section.settings.swiper_navigation %}
-            <button
-              class="swiper-button-prev swiper-button-prev-{{ section.id }} "
-              aria-label="{% render "render-translation", namespace: "accessibility", key: "previous_slide", fallback: "Previous slide" %}"
-            >
-              {%- render 'icons', icon: 'chevron-left', icon_class: 'w-5' -%}
-            </button>
-            <button
-              class="swiper-button-next swiper-button-next-{{ section.id }} "
-              aria-label="{% render "render-translation", namespace: "accessibility", key: "next_slide", fallback: "Next slide" %}"
-            >
-              {%- render 'icons', icon: 'chevron-right', icon_class: 'w-5' -%}
-            </button>
-          {%- endif %}
-
           {% comment %} Pagination {% endcomment %}
           {%- if section.settings.swiper_pagination %}
             <div class="swiper-pagination swiper-pagination-{{ section.id }} flex justify-center"></div>
@@ -264,12 +242,6 @@
       {
         "type": "header",
         "content": "Swiper settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "swiper_navigation",
-        "label": "Navigation",
-        "default": false
       },
       {
         "type": "checkbox",

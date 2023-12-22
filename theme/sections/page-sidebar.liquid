@@ -18,7 +18,9 @@
       </div>
 
       {%- if section.blocks.size > 0 -%}
-        <div class="sidebar md:col-span-5 2xl:col-span-4 {{ section.settings.sidebar_pos }}">
+        <div class="sidebar md:col-span-5 2xl:col-span-4 {{ section.settings.sidebar_pos }} {% if section.settings.sidebar_sticky -%}md:sticky md:top-10 md:self-start group-[.header-sticky:not(.header-hidden)]/body:md:top-20
+
+        {%- endif -%}">
 
           {%- if section.settings.sidebar_heading != blank -%}
             <h2 class="sidebar__title {{ section.settings.sidebar_heading_size }} {{ section.settings.sidebar_heading_color }}">
@@ -38,7 +40,7 @@
                 {%- if block.settings.text != blank and block.settings.image != blank -%}
                   <div class="flex gap-4">
                     {%- if block.settings.image != blank -%}
-                      <div class="shrink-0">
+                      <div class="shrink-0 basis-[120px]">
                         {%- render 'responsive-image', image_object: block.settings.image, alt: block.settings.heading, widths: '120, 240' -%}
                       </div>
                     {%- endif -%}
@@ -122,6 +124,12 @@
       {
         "type": "header",
         "content": "Sidebar content"
+      },
+      {
+        "type": "checkbox",
+        "id": "sidebar_sticky",
+        "label": "Sticky sidebar",
+        "default": true
       },
       {
         "type": "text",
